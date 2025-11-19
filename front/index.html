@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Frontend séparé</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+</head>
+<body>
+    <h1>Upload d'image ? API Flask</h1>
+
+    <label for="fileInput">Votre image à analyser</label>
+    <input type="file" id="fileInput" accept="image/*"/>
+    <button onclick="sendImage()">Envoyer</button>
+
+    <h2>Résultat :</h2>
+    <img id="fileInit" alt="Image donnée"/>
+    <img id="result" alt="Image analysée"/>
+
+</body>
+</html>
