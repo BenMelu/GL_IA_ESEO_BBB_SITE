@@ -8,3 +8,13 @@ img {
     display: block; 
     margin-top: 1rem
 }
+
+#fileInit{
+    max-width: 400px;
+    display: none; 
+    margin-top: 1rem
+}
+
+#fileInit.visible{
+    display: block;
+}
