@@ -5,16 +5,72 @@ body {
 
 img {
     max-width: 400px;
-    display: block; 
-    margin-top: 1rem
-}
-
-#fileInit{
-    max-width: 400px;
-    display: none; 
-    margin-top: 1rem
-}
-
-#fileInit.visible{
     display: block;
+    margin-top: 1rem
+}
+
+#fileInit {
+    max-width: 400px;
+    display: none;
+    margin-top: 1rem
+}
+
+#fileInit.visible {
+    display: block;
+}
+
+/* Onglets principaux */
+.tabs {
+    display: flex;
+    background: #333;
+}
+
+.tabs button {
+    flex: 1;
+    padding: 15px;
+    background: #333;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.tabs button.active {
+    background: #666;
+}
+
+/* Contenu principal */
+.tab-content {
+    display: none;
+    padding: 20px;
+    background: #f4f4f4;
+    min-height: 200px;
+}
+
+/* Sous-onglets */
+.subtabs {
+    display: flex;
+    background: #555;
+    margin-top: 10px;
+}
+
+.subtabs button {
+    flex: 1;
+    padding: 10px;
+    background: #555;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.subtabs button.active {
+    background: #888;
+}
+
+.subtab-content {
+    display: none;
+    padding: 15px;
+    background: #fff;
+    margin-top: 5px;
+    border: 1px solid #ddd;
 }

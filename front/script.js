@@ -36,3 +36,28 @@ async function sendImage() {
     document.getElementById("result").src = URL.createObjectURL(blob);
     
 }
+
+/* Onglets principaux */
+document.querySelectorAll(".tab-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+        document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+
+        document.querySelectorAll(".tab-content").forEach(c => c.style.display = "none");
+        document.getElementById(btn.dataset.tab).style.display = "block";
+    });
+});
+
+/* Sous-onglets (géré globalement) */
+document.querySelectorAll(".subtab-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+
+        const parent = btn.closest(".tab-content");
+
+        parent.querySelectorAll(".subtab-btn").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+
+        parent.querySelectorAll(".subtab-content").forEach(c => c.style.display = "none");
+        parent.querySelector("#" + btn.dataset.subtab).style.display = "block";
+    });
+});
