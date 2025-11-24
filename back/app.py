@@ -1,22 +1,31 @@
-from flask import Flask, request, jsonify, send_file
+from flask import Flask, request, jsonify, send_file, make_response
 from flask_cors import CORS
-from PIL import Image, ImageOps, ImageFilter
 import cv2
+import tensorflow as tf
+import os.path
+import numpy as np
 import io
-import imghdr
+import magic
+from json import dumps
 
 app = Flask(__name__)
-CORS(app) # autorise le frontend à appeler cette API
+CORS(app,expose_headers=["X-Process-Texts"]) # autorise le frontend à appeler cette API
 
-ALLOWED = {"png", "jpg", "jpeg", "gif"}
+PATH=os.path.dirname(os.path.realpath(__file__))
+ALLOWED = {"image/png", "image/jpg", "image/jpeg", "image/gif"}
+model=tf.keras.models.load_model(PATH+"/modelMNIST.keras")
 
-def process_image(img: Image.Image) -> Image.Image:
-    img = img.convert("RGBA")
-    img.thumbnail((1024, 1024))
-    img=ImageOps.grayscale(img).convert('RGBA')
-    #img = ImageOps.autocontrast(img)
-    #img = img.filter(ImageFilter.UnsharpMask(radius=1, percent=120, threshold=3))
-    return img
+def process_image(img: np.ndarray) -> tuple[np.ndarray, str]:
+    pred_norm=cv2.resize(img, dsize=(28, 28), interpolation=cv2.INTER_CUBIC)
+    pred_norm = cv2.bitwise_not(pred_norm)
+    test=np.array([pred_norm])
+    y_pred=model.predict(test,verbose=0)
+    y_pred_classes = np.argmax(y_pred, axis=1)
+    texts={
+        "classe":np.array2string(y_pred_classes[0]),
+        "precision":np.array2string(np.argmax(y_pred, axis=0)*100)
+    }
+    return pred_norm, texts
 
 @app.route("/process", methods=["POST"])
 def process():
@@ -26,17 +35,18 @@ def process():
     file = request.files["file"]
 
     file_bytes = file.read()
-    if imghdr.what(None, file_bytes) not in ALLOWED:
+    if magic.from_buffer(file_bytes, mime=True) not in ALLOWED:
         return jsonify({"error": "Fichier non valide"}), 400
 
-    img = Image.open(io.BytesIO(file_bytes))
-    processed = process_image(img)
+    np_img = np.frombuffer(file_bytes, np.uint8)
+    img = cv2.imdecode(np_img, cv2.IMREAD_GRAYSCALE)
+    processed,text_fields = process_image(img)
 
-    output = io.BytesIO()
-    processed.save(output, format="PNG")
-    output.seek(0)
-
-    return send_file(output, mimetype="image/png")
+    _, buffer = cv2.imencode('.png', processed)
+    output = io.BytesIO(buffer.tobytes())
+    reponse = make_response(send_file(output, mimetype="image/png"))
+    reponse.headers["X-Process-Texts"] = dumps(text_fields)
+    return reponse
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)

@@ -31,9 +31,29 @@ async function sendImage() {
         return;
     }
 
+    const jsonHeader = res.headers.get("X-Process-Texts");
+    if (!jsonHeader) {
+        console.error("Header X-Process-Texts manquant !");
+        return;
+    }
+    console.log("Header brut =", jsonHeader);
+    let texts;
+    try {
+        texts = JSON.parse(jsonHeader);
+    } catch (e) {
+        console.error("Impossible de parser le JSON :", jsonHeader);
+        return;
+    }
+    console.log("Objet JSON =", texts);  // ← Vérification
+
+    // ---- ACCÈS AUX CHAMPS ----
+    console.log("classe =", texts.classe);
+    console.log("precision =", texts.precision);
+
     const blob = await res.blob();
-    
-    document.getElementById("result").src = URL.createObjectURL(blob);
+    document.getElementById("resultCl").textContent=texts.classe;
+    document.getElementById("resultPr").textContent=texts.precision;
+    document.getElementById("resultIMG").src = URL.createObjectURL(blob);
     
 }
 

@@ -13,7 +13,7 @@
     <!-- ONGLET PRINCIPAL -->
     <div class="tabs">
         <button class="tab-btn active" data-tab="propos">A propos</button>
-        <button class="tab-btn" data-tab="demo">Démonstration</button>
+        <button class="tab-btn" data-tab="demo">Démonstrations</button>
         <button class="tab-btn" data-tab="activite">Activités</button>
     </div>
     <!-- CONTENU A PROPOS-->
@@ -31,12 +31,14 @@
             <button class="subtab-btn active" data-subtab="d1">Démo 1</button>
             <button class="subtab-btn" data-subtab="d2">Démo 2</button>
             <button class="subtab-btn" data-subtab="d3">Démo 3</button>
-            <button class="subtab-btn" data-subtab="d3">Démo 4</button>
+            <button class="subtab-btn" data-subtab="d4">Flux Caméra de la voiture</button>
         </div>
 
-        <div id="d1" class="subtab-content" >Contenu de la Démo 1</div>
+        <div id="d1" class="subtab-content" >
+            <h1>IA de régression</h1>
+        </div>
         <div id="d2" class="subtab-content">
-            <h1>Upload d'image ? API Flask</h1>
+            <h1>IA de classification biclasse</h1>
 
             <label for="fileInput">Votre image à analyser</label>
             <input type="file" id="fileInput" accept="image/*" />
@@ -44,10 +46,26 @@
 
             <h2>Résultat :</h2>
             <img id="fileInit" alt="Image donnée" />
-            <img id="result" alt="Image analysée" />
+            <img id="resultIMG" alt="Image analysée" />
+            <span id="resultCl"> C'est ici que la classe de l'image va etre prédite</span>
+            <span id="resultPr"> C'est ici que la précision de la prédiction va etre écrite</span>
         </div>
-        <div id="d3" class="subtab-content">Contenu de la Démo 3</div>
-        <div id="d3" class="subtab-content">Contenu de la Démo 4</div>
+        <div id="d3" class="subtab-content">
+            <h1>IA de classification multiclasse</h1>
+
+            <label for="fileInput">Votre image à analyser</label>
+            <input type="file" id="fileInput" accept="image/*" />
+            <button onclick="sendImage()">Envoyer</button>
+
+            <h2>Résultat :</h2>
+            <img id="fileInit" alt="Image donnée" />
+            <img id="resultIMG" alt="Image analysée" />
+            <span id="resultCl"> C'est ici que la classe de l'image va etre prédite</span>
+            <span id="resultPr"> C'est ici que la précision de la prédiction va etre écrite</span>
+        </div>
+        <div id="d4" class="subtab-content">
+            <h1>Flux vidéo de la caméra de la voirure</h1>
+        </div>
     </div>
 
     <!-- CONTENU ACTIVITÉ -->
@@ -61,10 +79,10 @@
             <button class="subtab-btn" data-subtab="a4">Activité 4</button>
         </div>
 
-        <div id="a1" class="subtab-content" >Contenu de l’activité 1</div>
-        <div id="a2" class="subtab-content">Contenu de l’activité 2</div>
-        <div id="a3" class="subtab-content">Contenu de l’activité 3</div>
-        <div id="a4" class="subtab-content">Contenu de l’activité 4</div>
+        <div id="a1" class="subtab-content" >Contenu de l'activité 1</div>
+        <div id="a2" class="subtab-content">Contenu de l'activité 2</div>
+        <div id="a3" class="subtab-content">Contenu de l'activité 3</div>
+        <div id="a4" class="subtab-content">Contenu de l'activité 4</div>
 
 </body>
 
