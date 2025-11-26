@@ -4,7 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Frontend séparé</title>
+    <title>Pedag'ESEO</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
+    <link rel="manifest" href="assets/favicon/site.webmanifest">
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
 </head>
@@ -14,10 +18,10 @@
     <div class="tabs">
         <button class="tab-btn active" data-tab="propos">A propos</button>
         <button class="tab-btn" data-tab="demo">Démonstrations</button>
-        <button class="tab-btn" data-tab="activite">Activités</button>
+        <button class="tab-btn" data-tab="activite">Ateliers et Activités</button>
     </div>
     <!-- CONTENU A PROPOS-->
-    <div id="propos" class="tab-content">
+    <div id="propos" class="tab-content active">
         <span>
             Ceci est le site de l'ESEO permettant de participer au activité pédagogique sur l'IA pour Collège et Lycée.
             Ce site, les modèles d'IA ainsi que les activité ont été réalisées par Couplan Ghyslain et Lilian Lemercier.
@@ -25,7 +29,7 @@
     </div>
     <!-- CONTENU DÉMO -->
     <div id="demo" class="tab-content">
-        <h2>Section Démo</h2>
+        <h2>Section Démonstrations</h2>
 
         <div class="subtabs">
             <button class="subtab-btn active" data-subtab="d1">Démo 1</button>
@@ -34,7 +38,7 @@
             <button class="subtab-btn" data-subtab="d4">Flux Caméra de la voiture</button>
         </div>
 
-        <div id="d1" class="subtab-content" >
+        <div id="d1" class="subtab-content active">
             <h1>IA de régression</h1>
         </div>
         <div id="d2" class="subtab-content">
@@ -42,26 +46,30 @@
 
             <label for="fileInput">Votre image à analyser</label>
             <input type="file" id="fileInput" accept="image/*" />
-            <button onclick="sendImage()">Envoyer</button>
+            <button onclick="sendImage(2)">Envoyer</button>
 
             <h2>Résultat :</h2>
-            <img id="fileInit" alt="Image donnée" />
-            <img id="resultIMG" alt="Image analysée" />
-            <span id="resultCl"> C'est ici que la classe de l'image va etre prédite</span>
-            <span id="resultPr"> C'est ici que la précision de la prédiction va etre écrite</span>
+            <img id="fileInitD2" alt="Image donnée" />
+            <img id="resultIMGD2" class="demo" alt="Image analysée" />
+            <span id="resultClD2"> C'est ici que la classe de l'image va etre prédite</span>
+            <span id="resultPrD2"> C'est ici que la précision de la prédiction va etre écrite</span>
         </div>
         <div id="d3" class="subtab-content">
             <h1>IA de classification multiclasse</h1>
 
             <label for="fileInput">Votre image à analyser</label>
             <input type="file" id="fileInput" accept="image/*" />
-            <button onclick="sendImage()">Envoyer</button>
+            <button onclick="sendImage(3)">Envoyer</button>
 
             <h2>Résultat :</h2>
-            <img id="fileInit" alt="Image donnée" />
-            <img id="resultIMG" alt="Image analysée" />
-            <span id="resultCl"> C'est ici que la classe de l'image va etre prédite</span>
-            <span id="resultPr"> C'est ici que la précision de la prédiction va etre écrite</span>
+            <img id="fileInitD3" alt="Image donnée" />
+            <img id="resultIMGD3" class="demo" alt="Image analysée" />
+            <span>L'image envoyée est détéctée comme un </span>
+            <span id="resultClD3"> X </span>
+            <br>
+            <span>Cette prédiction est sure à </span>
+            <span id="resultPrD3"> X</span>
+            <span>%</span>
         </div>
         <div id="d4" class="subtab-content">
             <h1>Flux vidéo de la caméra de la voirure</h1>
@@ -70,18 +78,115 @@
 
     <!-- CONTENU ACTIVITÉ -->
     <div id="activite" class="tab-content">
-        <h2>Section Activité</h2>
+        <h2>Section Ateliers et Activités</h2>
 
         <div class="subtabs">
-            <button class="subtab-btn active" data-subtab="a1">Activité 1</button>
-            <button class="subtab-btn" data-subtab="a2">Activité 2</button>
-            <button class="subtab-btn" data-subtab="a3">Activité 3</button>
-            <button class="subtab-btn" data-subtab="a4">Activité 4</button>
+            <button class="subtab-btn active" data-subtab="a1">Atelier Collèges</button>
+            <button class="subtab-btn" data-subtab="a2">Atelier Lycées</button>
+            <button class="subtab-btn" data-subtab="a3">Activité Entrainement et Utilisation</button>
+            <button class="subtab-btn" data-subtab="a4">Activité Programmation</button>
         </div>
 
-        <div id="a1" class="subtab-content" >Contenu de l'activité 1</div>
+        <div id="a1" class="subtab-content active">Contenu de l'activité 1</div>
         <div id="a2" class="subtab-content">Contenu de l'activité 2</div>
-        <div id="a3" class="subtab-content">Contenu de l'activité 3</div>
+        <div id="a3" class="subtab-content">
+            <h1>Activité : Entraînement d'une IA de classification d'images</h1>
+            <p>Cette activité permet de découvrir comment une IA est entraînée et pourquoi choisir les bonnes données
+                est important. Elle est très guidée et permet de voir comment les données influencent l'apprentissage
+                d'une IA.</p>
+            <ul>
+                <li>Aller sur le site : <a
+                        href="https://pixees.fr/classcodeiai/app/tuto1/">https://pixees.fr/classcodeiai/app/tuto1/</a>
+                </li>
+                <li>Aller dans la partie « Expérimenter »</li>
+                <li>Passer les vidéos</li>
+                <li>Étapes 2 à 4 : sélectionner 2 catégories avec une dizaine d'images chacune</li>
+                <li>Étape 5 : test avec des images des bonnes catégories</li>
+                <li>Étape 7 : test avec des images des mauvaises catégories → mauvaises détections</li>
+                <li>Étape 9 : test avec images des bonnes catégories mais dans un contexte différent → mauvaises
+                    détections</li>
+                <li>Aller dans la partie « Créer »</li>
+                <li>Passer les vidéos</li>
+                <li>Étapes 2 à 4 : sélectionner 2 catégories avec une dizaine d'images chacune</li>
+                <li>Étape 5 : tester : vous avez fait votre propre IA</li>
+                <li>« Ça sert à quoi » → Activité Adacraft</li>
+            </ul>
+
+
+            <h1>Activité : Utilisation d'une IA</h1>
+            <p>Dans cette activité, vous allez découvrir un cas pratique : créer un programme qui utilise les
+                prédictions d'une IA de Computer Vision pour modifier unaffichage.</p>
+            <ul>
+                <li>Aller sur le site : <a
+                        href="https://fr.vittascience.com/ia/images">https://fr.vittascience.com/ia/images</a></li>
+            </ul>
+
+
+            <h2>Partie Modèle IA</h2>
+            <p>La partie données permet d'utiliser des images pour entraîner votre IA.</p>
+            <p>Pour cela : ajouter des catégories et leur affecter des images dans la partie « Données ».</p>
+            <img src="assets/act3/donnees.png" alt="Illustration données IA" />
+
+
+            <p>Une fois la catégorie créée, renommer la catégorie via le crayon. Trois façons d'ajouter des images :</p>
+            <ul>
+                <li>Utiliser la caméra</li>
+                <li>Utiliser les catégories existantes</li>
+                <li>Téléverser des images</li>
+            </ul>
+            <img src="assets/act3/categorie.png" alt="Ajout d'images" />
+
+
+            <p>Lorsque toutes les catégories sont prêtes, cliquer sur « Entraîner le modèle ».</p>
+            <img src="assets/act3/entrainement.png" alt="Entraîner le modèle" />
+
+
+            <p>Tester le modèle dans la partie « Aperçu ».</p>
+            <img src="assets/act3/apercu.png" alt="Aperçu du modèle" />
+
+
+            <p>Après téléversement d'une image, les prédictions s'affichent. Vous pouvez aussi visualiser le réseau.</p>
+            <img src="assets/act3/resultat.png" alt="Réseau de neurones" />
+
+
+            <p>Une fois satisfait, passer à la partie programmation via « AdaCraft ».</p>
+            <img src="assets/act3/adacraft.png" alt="Accès AdaCraft" />
+
+
+            <h2>Partie Programmation</h2>
+            <p>La partie la plus utilisée de cette page web est la partie blocs. A la gauche de la page se trouve les
+                différents blocs qui peuvent être utilisé pour programmer ainsi que leur catégorie. Au milieu se trouve
+                votre environnement de travail : c'est ici que vous allez assembler les blocs pour faire un code
+                fonctionnel.</p>
+            <p>Blocs essentiels :</p>
+            <ul>
+                <li>« sélectionner et initialiser le modèle de la mémoire locale du navigateur »</li>
+                <li>« lancer la détection de la caméra » (ou « lancer la détection sur fichier/URL »)</li>
+            </ul>
+            <img src="assets/act3/code.png" alt="Blocs IA" />
+
+
+            <p>En haut à droite : le résultat du code. Le drapeau vert permet de lancer le programme.</p>
+            <img src="assets/act3/affichage.png" alt="Affichage du résultat" />
+
+
+            <p>En bas à droite : gestion de l'arrière-plan et des objets.</p>
+            <img src="assets/act3/objets.png" alt="Ajout d'objet et changement d'arrière arrière-plan" />
+            <p>Tout en haut à droite, vous pouvez appuyer sur la note de musique pour rajouter des sons, sur le pinceau pour pouvoir modifier les objets et changer leur apparence, et le "< / >" pour revenir sur la partie code.</p>
+            <img src="assets/act3/vue.png" alt="Changement de vue" />
+
+            <h2>Exemples de programmes</h2>
+            <p>Maintenant que les fonctionnalités principales du site sont expliquées, c'est à vous de faire votre propre projet! </p>
+</span>
+            <ul>
+                <li><strong>Tri des poubelles</strong> : trois poubelles sont affichées, en fonction de la photo donnée, un objet glisse vers la bonne poubelle.</li>
+                <li><strong>Voiture autonome</strong> : la voiture tourne et avance selon les panneaux détectés.</li>
+                <li><strong>Météo</strong> : affichage météo selon l'image détectée (soleil, pluie, etc.).</li>
+                <li><strong>Shifumi</strong> : Comparer le signe de mains fait avec une variable aléatoire, gérer toute les comparaisons.
+                </li>
+            </ul>
+        </div>
+
         <div id="a4" class="subtab-content">Contenu de l'activité 4</div>
 
 </body>

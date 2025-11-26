@@ -14,14 +14,27 @@ fileIn.addEventListener("change", () => {
 });
 
 
-async function sendImage() {
+async function sendImage(onglet) {
     const file = fileIn.files[0];
     if (!file) return alert("Choisissez une image");
 
     const formData = new FormData();
     formData.append("file", file);
-
-    const res = await fetch("http://localhost:5000/process", {
+    let lienRes;
+    console.log(onglet);
+    if(onglet!==2 && onglet!==3){
+        alert("Mauvais onglet detecter");
+        return;
+    }
+    switch(onglet){
+        case 2:
+            lienRes="http://localhost:5000/process?ml=2";
+            break;
+        case 3:
+            lienRes="http://localhost:5000/process?ml=3";
+            break;
+    }
+    const res = await fetch(lienRes, {
         method: "POST",
         body: formData
     });
@@ -36,7 +49,6 @@ async function sendImage() {
         console.error("Header X-Process-Texts manquant !");
         return;
     }
-    console.log("Header brut =", jsonHeader);
     let texts;
     try {
         texts = JSON.parse(jsonHeader);
@@ -44,16 +56,15 @@ async function sendImage() {
         console.error("Impossible de parser le JSON :", jsonHeader);
         return;
     }
-    console.log("Objet JSON =", texts);  // ← Vérification
 
     // ---- ACCÈS AUX CHAMPS ----
     console.log("classe =", texts.classe);
     console.log("precision =", texts.precision);
 
     const blob = await res.blob();
-    document.getElementById("resultCl").textContent=texts.classe;
-    document.getElementById("resultPr").textContent=texts.precision;
-    document.getElementById("resultIMG").src = URL.createObjectURL(blob);
+    document.getElementById("resultClD2").textContent=texts.classe;
+    document.getElementById("resultPrD2").textContent=texts.precision;
+    document.getElementById("resultIMGD2").src = URL.createObjectURL(blob);
     
 }
 
@@ -63,8 +74,8 @@ document.querySelectorAll(".tab-btn").forEach(btn => {
         document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
         btn.classList.add("active");
 
-        document.querySelectorAll(".tab-content").forEach(c => c.style.display = "none");
-        document.getElementById(btn.dataset.tab).style.display = "block";
+        document.querySelectorAll(".tab-content").forEach(c => c.classList.remove("active"));
+        document.getElementById(btn.dataset.tab).classList.add("active");
     });
 });
 
@@ -77,7 +88,7 @@ document.querySelectorAll(".subtab-btn").forEach(btn => {
         parent.querySelectorAll(".subtab-btn").forEach(b => b.classList.remove("active"));
         btn.classList.add("active");
 
-        parent.querySelectorAll(".subtab-content").forEach(c => c.style.display = "none");
-        parent.querySelector("#" + btn.dataset.subtab).style.display = "block";
+        parent.querySelectorAll(".subtab-content").forEach(c => c.classList.remove("active"));
+        parent.querySelector("#" + btn.dataset.subtab).classList.add("active");
     });
 });

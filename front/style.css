@@ -5,11 +5,15 @@ body {
 
 img {
     max-width: 400px;
-    width: 400px;
-    height: 400px;
     display: block;
     margin-top: 1rem;
+    
+}
+
+.demo{
     image-rendering: pixelated;
+    width: 400px;
+    height: 400px;
 }
 
 #fileInit {
@@ -50,6 +54,11 @@ img {
     min-height: 200px;
 }
 
+.tab-content.active {
+    display: block;
+}
+
+
 /* Sous-onglets */
 .subtabs {
     display: flex;
@@ -76,4 +85,8 @@ img {
     background: #fff;
     margin-top: 5px;
     border: 1px solid #ddd;
+}
+
+.subtab-content.active {
+    display: block;
 }

@@ -13,40 +13,54 @@ CORS(app,expose_headers=["X-Process-Texts"]) # autorise le frontend à appeler c
 
 PATH=os.path.dirname(os.path.realpath(__file__))
 ALLOWED = {"image/png", "image/jpg", "image/jpeg", "image/gif"}
-model=tf.keras.models.load_model(PATH+"/modelMNIST.keras")
+modelT=tf.keras.models.load_model(PATH+"/modelTita.keras")
+modelCH=tf.keras.models.load_model(PATH+"/IA_chats_chiens.keras")
+modelM=tf.keras.models.load_model(PATH+"/modelMNIST.keras")
 
-def process_image(img: np.ndarray) -> tuple[np.ndarray, str]:
-    pred_norm=cv2.resize(img, dsize=(28, 28), interpolation=cv2.INTER_CUBIC)
-    pred_norm = cv2.bitwise_not(pred_norm)
-    test=np.array([pred_norm])
-    y_pred=model.predict(test,verbose=0)
+def process_image(img: np.ndarray,multiclass: bool) -> tuple[np.ndarray, str]:
+    match multiclass:
+        case True:
+            pred_norm=cv2.resize(img, dsize=(28, 28), interpolation=cv2.INTER_CUBIC)
+            pred_norm = cv2.bitwise_not(pred_norm)
+            test=np.array([pred_norm])
+            y_pred=modelM.predict(test,verbose=0)
+        case False:
+            pred_norm=cv2.resize(img, dsize=(250, 250), interpolation=cv2.INTER_LANCZOS4)
+            pred_norm = cv2.bitwise_not(pred_norm)
+            test=np.array([pred_norm])
+            y_pred=modelCH.predict(test,verbose=0)
     y_pred_classes = np.argmax(y_pred, axis=1)
     texts={
         "classe":np.array2string(y_pred_classes[0]),
-        "precision":np.array2string(np.argmax(y_pred, axis=0)*100)
+        "precision":np.array2string(np.round(y_pred.max(),2)*100)
     }
     return pred_norm, texts
 
 @app.route("/process", methods=["POST"])
 def process():
-    if "file" not in request.files:
-        return jsonify({"error": "Aucun fichier envoyé"}), 400
-
-    file = request.files["file"]
-
-    file_bytes = file.read()
-    if magic.from_buffer(file_bytes, mime=True) not in ALLOWED:
-        return jsonify({"error": "Fichier non valide"}), 400
-
-    np_img = np.frombuffer(file_bytes, np.uint8)
-    img = cv2.imdecode(np_img, cv2.IMREAD_GRAYSCALE)
-    processed,text_fields = process_image(img)
-
-    _, buffer = cv2.imencode('.png', processed)
-    output = io.BytesIO(buffer.tobytes())
-    reponse = make_response(send_file(output, mimetype="image/png"))
-    reponse.headers["X-Process-Texts"] = dumps(text_fields)
-    return reponse
+    onglet_actif = int(request.args.get("ml"))
+    print(onglet_actif)
+    if onglet_actif==1:
+        return
+    else:
+        if "file" not in request.files:
+                return jsonify({"error": "Aucun fichier envoyé"}), 400
+        file = request.files["file"]
+        file_bytes = file.read()
+        if magic.from_buffer(file_bytes, mime=True) not in ALLOWED:
+            return jsonify({"error": "Fichier non valide"}), 400
+        np_img = np.frombuffer(file_bytes, np.uint8)
+        img = cv2.imdecode(np_img, cv2.IMREAD_GRAYSCALE)
+        match onglet_actif:
+            case 2:
+                processed,text_fields = process_image(img,multiclass=False)
+            case 3:
+                processed,text_fields = process_image(img,multiclass=True)
+        _, buffer = cv2.imencode('.png', processed)
+        output = io.BytesIO(buffer.tobytes())
+        reponse = make_response(send_file(output, mimetype="image/png"))
+        reponse.headers["X-Process-Texts"] = dumps(text_fields)
+        return reponse
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
