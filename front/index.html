@@ -44,21 +44,25 @@
         <div id="d2" class="subtab-content">
             <h1>IA de classification biclasse</h1>
 
-            <label for="fileInput">Votre image à analyser</label>
-            <input type="file" id="fileInput" accept="image/*" />
+            <label for="fileInputD2">Votre image à analyser</label>
+            <input type="file" class="image-upload" id="fileInputD2" accept="image/*" data-preview="fileInitD2" />
             <button onclick="sendImage(2)">Envoyer</button>
 
             <h2>Résultat :</h2>
             <img id="fileInitD2" alt="Image donnée" />
             <img id="resultIMGD2" class="demo" alt="Image analysée" />
-            <span id="resultClD2"> C'est ici que la classe de l'image va etre prédite</span>
-            <span id="resultPrD2"> C'est ici que la précision de la prédiction va etre écrite</span>
+            <span>L'image envoyée est détéctée comme un </span>
+            <span id="resultClD2"> X </span>
+            <br>
+            <span>Cette prédiction est sure à </span>
+            <span id="resultPrD2"> X</span>
+            <span>%</span>
         </div>
         <div id="d3" class="subtab-content">
             <h1>IA de classification multiclasse</h1>
 
-            <label for="fileInput">Votre image à analyser</label>
-            <input type="file" id="fileInput" accept="image/*" />
+            <label for="fileInputD3">Votre image à analyser</label>
+            <input type="file" class="image-upload" id="fileInputD3" accept="image/*" data-preview="fileInitD3" />
             <button onclick="sendImage(3)">Envoyer</button>
 
             <h2>Résultat :</h2>
@@ -87,8 +91,130 @@
             <button class="subtab-btn" data-subtab="a4">Activité Programmation</button>
         </div>
 
-        <div id="a1" class="subtab-content active">Contenu de l'activité 1</div>
-        <div id="a2" class="subtab-content">Contenu de l'activité 2</div>
+        <div id="a1" class="subtab-content active">
+            <h2>PREMIERE CHOSE A FAIRE</h2>
+            <p>Leur demander ce qu'ils connaissent de l'IA.</p>
+            <h2>CONNAISSANCES ~17'</h2>
+            <p>o Identifier les utilisations actuelles de l'IA<br>
+                → Aujourd'hui, l'IA est très démocratisée, mais où est-ce que l'on peut en trouver ? Eh bien, un peu
+                partout : bien sur tous les chatbots qui permettent de répondre plus ou moins à nos questions. Mais l'IA
+                est aussi présente dans d'autre endroits, comme dans la météo où l'IA permet de prévoir le temps et la
+                température avec plusieurs jours d'avance ou encore dans la vidéo-surveillance où on arrive à détecter
+                les visages des gens.</p>
+            <p>o Petit historique de l'IA<br>
+                → Mais l'IA n'est pas toute récente. Elle ne date pas d'il y a 10. Le mot “intelligence artificielle” a
+                été créé en 1956 à la conférence de Dartmouth.<br>
+                Il y a ensuite eu un développement en dent de scie avec des passages où l'IA était vue comme
+                révolutionnaire puis d'autres où elle était vue comme inutile. En 1997, l'IA Deep Blue bat Garry
+                Kasparov, le champion du monde des échecs. Cela signe une relance pour l'IA. C'est seulement avec
+                ChatGpt en 2022 que l'IA s'ouvre au grand public et devient omniprésente.</p>
+            <p>o Décrire pourquoi on a créé des IA<br>
+                → On a créé des IA pour répondre à des besoins spécifiques, et ce pour remplacer l'humain dans certaines
+                tâches dans laquelle elle excelle. Comme les prises de décisions ou les tâches rébarbatives du
+                quotidien. Et ce car on n'a pas encore réussi à créer une IA qui peut faire plusieurs choses en même
+                temps comme Jarvis dans IronMan.</p>
+            <p>o Définir ce que fait une IA<br>
+                → Une IA ne fait qu'une seule chose, elle prédit.</p>
+            <p>o Lister les types de prédictions qui existent<br>
+                → Par exemple une IA peut prédire un nombre comme le prix d'une maison, mais aussi une classe
+                d'appartenance comme ordinateur portable ou ordinateur fixe, elle peut générer des mots ou des images
+                qui sont une prédiction de quel caractère ou pixel il faut afficher, et bien d'autres choses comme
+                prédire une action à faire.</p>
+            <p>o Lister les différents types d'IA qui existe et leur domaine spécifique<br>
+                → Les différents types d'IA qui répondent à ces types de prédictions sont les IA de vision par
+                ordinateur pour tout ce qui est analyse d'image, les LLM (Large Language Model) qui sont un type d'IA
+                génératives, les IA de régression pour prédire des nombres, et le renforcement learning qui peut être
+                utilisé pour les jeux.</p>
+            <p>o Expliquer comment apprennent les IA<br>
+                → Pour qu'une IA effectue le travail qu'on lui demande, c'est comme les humains. Il faut qu'elle
+                apprenne à le faire. Pour cela, on va lui donner une grande quantité de données avec des réponses. Si on
+                veut qu'elle détecte les escargots des limaces, on va lui donner beaucoup d'images d'escargots et de
+                limaces avec indiqué si ce sont des escargots ou des limaces. En fonction de si sa prédiction est
+                correcte ou non, elle va se corriger elle-même en ajustant ses paramètres pour s'améliorer.</p>
+            <p>o “qu'est-ce qu'une donnée”<br>
+                → Tout est une donnée, le fait d'avoir ou pas des cheveux est une donnée, aller à l'école est une
+                donnée, absolument tout est une donnée</p>
+            <p>o Lister les différents types de données<br>
+                → Les vidéos, les images, les nombres, les sons, les mots, les ondes, tout est une donnée</p>
+            <p>o Combien de données à besoin une IA ?<br>
+                → Une IA a besoin du plus de données possibles. Plus y'en a mieux c'est. Idéalement il faut des données
+                assez variées, comme pour l'exemple des escargots il faudrait des images d'escargots de différentes
+                couleurs, de différents angles de prise de vue, différents moments de la journée. Plus la donnée est
+                complexe, plus il va en falloir. Par exemple une image est plus complexe qu'un simple chiffre. Seulement
+                plus on a besoin de donnée, plus ça coûte cher.</p>
+
+
+            <p>o Les vigilances face à l'IA<br>
+                → L'IA, bien que très utile notamment avec les IA génératives, peut communiquer de fausses informations.
+                Son but est de vous répondre, pas de vous donner la bonne réponse. Veillez à bien vérifier vos sources.
+                De plus, les données que vous écrivez à une IA vont être récupérer pour entraîner les IA de demain.
+                N'envoyez donc pas de contenu sensible à une IA comme vous ne posteriez une photo nue de vous en story.
+            </p>
+
+
+            <p>o Les impacts écologiques<br>
+                → Les IA ont besoin de beaucoup de ressources physiques comme les processeurs graphiques (cartes
+                graphiques ou GPU) pour s'entraîner et fonctionner. Cela nécessite des matières premières et de l'eau
+                pour les refroidir. Elles consomment donc aussi de l'électricité. En 2024, la consommation électrique de
+                l'IA a atteint 0.24% de la consommation électrique mondiale. C'est pour l'instant peu et ça n'a pas fini
+                de monter mais cela reste tout de même modéré et pas aussi terrible que l'annonce certain média.</p>
+
+
+            <h2>DEMO</h2>
+            <p>Faire les démos du site internet 5'</p>
+
+
+            <h2>COMPRÉHENSION ~5'</h2>
+            <p>Maintenant petit exercice pour voir si vous avez compris l'utilisation qu'on peut avoir d'une IA, des
+                petits cas vont être donnés et il va falloir dire si l'IA sera intéressante à utiliser dans ce cas-là,
+                ce que va recevoir et ce que va prédire l'IA , quel type de modèle pourrait être utilisé ainsi que le
+                degré de précision qui serai nécessaire.</p>
+
+
+            <p>Premier cas : A partie d'une trentaine de critères bien définis ( la surface habitable, le nombre de
+                chambres, de salle de bain, l'emplacement etc.), prédire le prix d'une maison.<br>
+                → Oui l'utilisation de l'IA est intéressante puisque sans cela il faudrait regarder pour chaque critère
+                la différence de prix à la main ce qui pourrait prendre vraiment beaucoup de temps. Alors qu'avec une
+                IA, elle va reconnaitre les tendances toute seule permettant une estimation plus précise. L'IA va donc
+                prendre des tableurs comprenant les critères des maisons déjà estimer ainsi que leur prix et va prédire
+                le prix de nouvelles maisons en fonctions des critères inscrits qui est donc un nombre, le modèle est
+                donc un modèle de régression. La précision demandé est pas forcément énorme puisqu'on a juste besoin
+                d'avoir un prix estimé au milliers d'euros près.</p>
+
+
+            <p>Deuxième cas : Calculer le carré de plusieurs nombres entier.<br>
+                → L'utilisation de l'IA n'est pas nécessaire car la fonction carré n'étant pas linéaire, il faudrait
+                beaucoup de données pour que le modèle fonctionne bien, et une calculatrice y arrive très bien en
+                utilisant largement moins de ressources.</p>
+
+
+            <p>Troisième cas : Détecter un cancer du sein grâce à des radiographies des seins.<br>
+                → Pour reconnaitre des objets aussi petits que des tumeurs, l'aide de l'IA peut être très utile car l'IA
+                va mieux réussir à repérer s'il y a un problème. L'IA devrait prendre des image pour prédire si une
+                tumeur est détectée ou non, c'est donc un problème de vision par ordinateur. Pour ce modèle, la
+                prédiction doit être la plus précise possible pour pouvoir sauver des vies.</p>
+
+
+            <p>Quatrième cas : Vous êtes dans un pays scandinave (il fait très froid) mais vous ne connaissez pas la
+                langue et vous voulez savoir ce qu'il y a d'écrit sur une lettre qu'on vous a donné.<br>
+                → Vous pouvez recopier le texte dans google traduction mais il fait froid donc une IA qui traduit
+                automatiquement à partir d'une photo est bien plus pratique. Cette IA-là va analyser une image pour en
+                détecter des mots et une fois fait, traduire ces mêmes mots dans votre langues, elle utilisera donc un
+                mélange de Computer Vision et de LLM. La précision doit être assez forte car une mauvaise traduction
+                pourrait changer complétement le sens de la lettre.</p>
+
+
+            <h2>APPLICATION</h2>
+            <p>o Pratiquer la création d'une IA de reconnaissance d'images<br>
+                o Pratiquer la création d'une IA LLM<br>
+                o Pratiquer l'utilisation d'une IA de reconnaissance d'images<br>
+                Pour les créneaux de 1h: faire l'activité LLM ou l'activité computer vision, au pire ils continueront la
+                deuxième activité chez eux pour ceux qui le veulent<br>
+                Pour les créneaux de 2h : faire l'activité LLM et l'activité computer vision</p>
+        </div>
+        <div id="a2" class="subtab-content">
+
+        </div>
         <div id="a3" class="subtab-content">
             <h1>Activité : Entraînement d'une IA de classification d'images</h1>
             <p>Cette activité permet de découvrir comment une IA est entraînée et pourquoi choisir les bonnes données
@@ -111,8 +237,6 @@
                 <li>Étape 5 : tester : vous avez fait votre propre IA</li>
                 <li>« Ça sert à quoi » → Activité Adacraft</li>
             </ul>
-
-
             <h1>Activité : Utilisation d'une IA</h1>
             <p>Dans cette activité, vous allez découvrir un cas pratique : créer un programme qui utilise les
                 prédictions d'une IA de Computer Vision pour modifier unaffichage.</p>
@@ -158,31 +282,41 @@
                 différents blocs qui peuvent être utilisé pour programmer ainsi que leur catégorie. Au milieu se trouve
                 votre environnement de travail : c'est ici que vous allez assembler les blocs pour faire un code
                 fonctionnel.</p>
-            <p>Blocs essentiels :</p>
+            <p>Les deux instructions les plus importantes sont :</p>
             <ul>
                 <li>« sélectionner et initialiser le modèle de la mémoire locale du navigateur »</li>
-                <li>« lancer la détection de la caméra » (ou « lancer la détection sur fichier/URL »)</li>
+                <li>« lancer la détection de la caméra » (ou « lancer la détection sur fichier/URL » si vous n'avez pas de caméra.)</li>
             </ul>
+            <p>Ce sont ces deux instructions qui permettent d'utiliser le modèle d'IA précédemment entrainé.</p>
             <img src="assets/act3/code.png" alt="Blocs IA" />
-
-
-            <p>En haut à droite : le résultat du code. Le drapeau vert permet de lancer le programme.</p>
+            <p>En haut à droite de la page web se trouve le résultat de votre code. En effet, c'est ici que vous pouvez
+                retrouver les « objets » qui vont réagir en fonction du code.
+                L'icone de drapeau vert permet de lancer le code.
+            </p>
             <img src="assets/act3/affichage.png" alt="Affichage du résultat" />
-
-
-            <p>En bas à droite : gestion de l'arrière-plan et des objets.</p>
+            <p>En bas à droite de la page web, vous pouvez modifier l'arrière-plan ainsi que choisir quels objets vont
+                être afficher. C'est aussi en sélectionnant les objets que l'on peut choisir quel code affecte ces
+                objets.</p>
             <img src="assets/act3/objets.png" alt="Ajout d'objet et changement d'arrière arrière-plan" />
-            <p>Tout en haut à droite, vous pouvez appuyer sur la note de musique pour rajouter des sons, sur le pinceau pour pouvoir modifier les objets et changer leur apparence, et le "< / >" pour revenir sur la partie code.</p>
+            <p>Tout en haut à droite, vous pouvez appuyer sur la note de musique pour rajouter des sons, sur le pinceau
+                pour pouvoir modifier les objets et changer leur apparence, et le "
+                < />" pour revenir sur la partie
+                code.
+            </p>
             <img src="assets/act3/vue.png" alt="Changement de vue" />
 
             <h2>Exemples de programmes</h2>
-            <p>Maintenant que les fonctionnalités principales du site sont expliquées, c'est à vous de faire votre propre projet! </p>
-</span>
+            <p>Maintenant que les fonctionnalités principales du site sont expliquées, c'est à vous de faire votre
+                propre projet! <br>
+                Si vous avez des idées en tête, vous pouvez les réaliser, et si vous n'en avez pas, voici quelques exemples de programmes qui peuvent être réalisés./p>
+            </span>
             <ul>
-                <li><strong>Tri des poubelles</strong> : trois poubelles sont affichées, en fonction de la photo donnée, un objet glisse vers la bonne poubelle.</li>
+                <li><strong>Tri des poubelles</strong> : trois poubelles sont affichées, en fonction de la photo donnée,
+                    un objet glisse vers la bonne poubelle.</li>
                 <li><strong>Voiture autonome</strong> : la voiture tourne et avance selon les panneaux détectés.</li>
                 <li><strong>Météo</strong> : affichage météo selon l'image détectée (soleil, pluie, etc.).</li>
-                <li><strong>Shifumi</strong> : Comparer le signe de mains fait avec une variable aléatoire, gérer toute les comparaisons.
+                <li><strong>Shifumi</strong> : Comparer le signe de mains fait avec une variable aléatoire, gérer toute
+                    les comparaisons.
                 </li>
             </ul>
         </div>

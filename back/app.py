@@ -26,20 +26,18 @@ def process_image(img: np.ndarray,multiclass: bool) -> tuple[np.ndarray, str]:
             y_pred=modelM.predict(test,verbose=0)
         case False:
             pred_norm=cv2.resize(img, dsize=(250, 250), interpolation=cv2.INTER_LANCZOS4)
-            pred_norm = cv2.bitwise_not(pred_norm)
             test=np.array([pred_norm])
             y_pred=modelCH.predict(test,verbose=0)
     y_pred_classes = np.argmax(y_pred, axis=1)
     texts={
         "classe":np.array2string(y_pred_classes[0]),
-        "precision":np.array2string(np.round(y_pred.max(),2)*100)
+        "precision":np.array2string(np.round(y_pred.max()*100,2))
     }
     return pred_norm, texts
 
 @app.route("/process", methods=["POST"])
 def process():
     onglet_actif = int(request.args.get("ml"))
-    print(onglet_actif)
     if onglet_actif==1:
         return
     else:

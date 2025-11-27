@@ -1,5 +1,4 @@
-const fileIn = document.getElementById("fileInput");
-const preview= document.getElementById("fileInit");
+/*const fileIn = document.getElementById("fileInput");
 
 fileIn.addEventListener("change", () => {
     const file = fileIn.files[0];
@@ -11,10 +10,34 @@ fileIn.addEventListener("change", () => {
         preview.src = e.target.result;
     };
     reader.readAsDataURL(file);
+});*/
+document.querySelectorAll('.image-upload').forEach(input => {
+    input.addEventListener('change', function () {
+        const file = this.files[0];
+        const previewId = this.dataset.preview;
+        const preview = document.getElementById(previewId);
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            preview.classList.add("visible");
+            preview.src = e.target.result;
+        }
+        reader.readAsDataURL(file);
+
+    });
 });
 
-
 async function sendImage(onglet) {
+    let fileIn;
+    switch(onglet){
+        case 2:
+            fileIn = document.getElementById("fileInputD2");
+            break;
+        case 3:
+            fileIn = document.getElementById("fileInputD3");   
+            break;
+    }
     const file = fileIn.files[0];
     if (!file) return alert("Choisissez une image");
 
@@ -22,16 +45,16 @@ async function sendImage(onglet) {
     formData.append("file", file);
     let lienRes;
     console.log(onglet);
-    if(onglet!==2 && onglet!==3){
+    if (onglet !== 2 && onglet !== 3) {
         alert("Mauvais onglet detecter");
         return;
     }
-    switch(onglet){
+    switch (onglet) {
         case 2:
-            lienRes="http://localhost:5000/process?ml=2";
+            lienRes = "http://localhost:5000/process?ml=2";
             break;
         case 3:
-            lienRes="http://localhost:5000/process?ml=3";
+            lienRes = "http://localhost:5000/process?ml=3";
             break;
     }
     const res = await fetch(lienRes, {
@@ -56,16 +79,21 @@ async function sendImage(onglet) {
         console.error("Impossible de parser le JSON :", jsonHeader);
         return;
     }
-
-    // ---- ACCÈS AUX CHAMPS ----
-    console.log("classe =", texts.classe);
-    console.log("precision =", texts.precision);
-
     const blob = await res.blob();
-    document.getElementById("resultClD2").textContent=texts.classe;
-    document.getElementById("resultPrD2").textContent=texts.precision;
-    document.getElementById("resultIMGD2").src = URL.createObjectURL(blob);
-    
+    switch (onglet) {
+        case 2:
+            document.getElementById("resultClD2").textContent = texts.classe;
+            document.getElementById("resultPrD2").textContent = texts.precision;
+            document.getElementById("resultIMGD2").src = URL.createObjectURL(blob);
+            break;
+        case 3:
+            document.getElementById("resultClD3").textContent = texts.classe;
+            document.getElementById("resultPrD3").textContent = texts.precision;
+            document.getElementById("resultIMGD3").src = URL.createObjectURL(blob);
+            break;
+    }
+
+
 }
 
 /* Onglets principaux */

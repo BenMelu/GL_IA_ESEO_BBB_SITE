@@ -16,13 +16,11 @@ img {
     height: 400px;
 }
 
-#fileInit {
-    max-width: 400px;
+#fileInitD2,#fileInitD3 {
     display: none;
-    margin-top: 1rem
 }
 
-#fileInit.visible {
+#fileInitD2.visible,#fileInitD3.visible {
     display: block;
 }
 
