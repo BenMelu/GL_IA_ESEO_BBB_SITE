@@ -88,3 +88,28 @@ img {
 .subtab-content.active {
     display: block;
 }
+
+.comp-answ {
+    overflow: hidden;              /* Empêche le contenu de dépasser */
+    max-height: 0;                 /* Caché au début */
+    opacity: 0;                    /* Invisible */
+    transition: max-height 0.5s ease, opacity 0.5s ease;
+}
+
+.comp-answ.visible {
+    max-height: 200px;             /* Hauteur suffisante pour contenir le texte */
+    opacity: 1;                    /* Visible */
+}
+
+.comp-answ-btn {
+    padding: 10px;
+    background: #888;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.comp-answ-btn.active {
+    background: #555;
+}
+

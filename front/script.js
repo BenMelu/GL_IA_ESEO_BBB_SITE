@@ -120,3 +120,13 @@ document.querySelectorAll(".subtab-btn").forEach(btn => {
         parent.querySelector("#" + btn.dataset.subtab).classList.add("active");
     });
 });
+
+/*Réponses aux parties compréhension*/
+document.querySelectorAll(".comp-answ-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+
+        const target = document.getElementById(btn.dataset.hiddendiv);
+        btn.classList.toggle("active");
+        target.classList.toggle("visible");
+    });
+});
