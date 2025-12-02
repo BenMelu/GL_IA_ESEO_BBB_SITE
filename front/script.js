@@ -1,16 +1,5 @@
-/*const fileIn = document.getElementById("fileInput");
 
-fileIn.addEventListener("change", () => {
-    const file = fileIn.files[0];
-    if (!file) return;
 
-    const reader = new FileReader();
-    reader.onload = (e) => {
-        preview.classList.add("visible");
-        preview.src = e.target.result;
-    };
-    reader.readAsDataURL(file);
-});*/
 document.querySelectorAll('.image-upload').forEach(input => {
     input.addEventListener('change', function () {
         const file = this.files[0];
@@ -26,6 +15,23 @@ document.querySelectorAll('.image-upload').forEach(input => {
         reader.readAsDataURL(file);
 
     });
+});
+
+document.getElementById("answerD1").addEventListener("submit", function(e) {
+    e.preventDefault();
+    let formData = new FormData(this);
+    lienRes = "http://localhost:5000/process?ml=1";
+    const res = fetch(lienRes, {
+        method: "POST",
+        body: formData
+    });
+
+    if (!res.ok) {
+        alert("Erreur serveur");
+        return;
+    }
+    texts=res.json;
+    document.getElementById("resultTaD1").textContent = texts.valeur;
 });
 
 async function sendImage(onglet) {
@@ -46,7 +52,7 @@ async function sendImage(onglet) {
     let lienRes;
     console.log(onglet);
     if (onglet !== 2 && onglet !== 3) {
-        alert("Mauvais onglet detecter");
+        alert("Mauvais onglet detecté");
         return;
     }
     switch (onglet) {
@@ -92,8 +98,7 @@ async function sendImage(onglet) {
             document.getElementById("resultIMGD3").src = URL.createObjectURL(blob);
             break;
     }
-
-
+    return;
 }
 
 /* Onglets principaux */
@@ -107,7 +112,7 @@ document.querySelectorAll(".tab-btn").forEach(btn => {
     });
 });
 
-/* Sous-onglets (géré globalement) */
+/* Sous-onglets */
 document.querySelectorAll(".subtab-btn").forEach(btn => {
     btn.addEventListener("click", () => {
 

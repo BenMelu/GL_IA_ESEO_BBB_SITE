@@ -37,9 +37,8 @@ def process_image(img: np.ndarray,multiclass: bool) -> tuple[np.ndarray, str]:
     }
     return pred_norm, texts
 
-def process_form():
-
-    X_pred=0
+def process_form(df: pd.DataFrame):
+    X_pred=df.astype('float64',False)
     scaler = joblib.load("scaler.save")
     X_pred_norm = scaler.transform(X_pred)
     pred=modelT.predict(X_pred_norm)
@@ -52,7 +51,10 @@ def process_form():
 def process():
     onglet_actif = int(request.args.get("ml"))
     if onglet_actif==1:
-        return
+        data = request.form.to_dict()   # Récupère les données du formulaire
+        df = pd.DataFrame([data])
+        text=process_form(df)
+        return jsonify(text)
     else:
         if "file" not in request.files:
                 return jsonify({"error": "Aucun fichier envoyé"}), 400

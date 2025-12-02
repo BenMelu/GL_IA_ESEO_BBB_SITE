@@ -40,6 +40,41 @@
 
         <div id="d1" class="subtab-content active">
             <h1>IA de régression</h1>
+            <form action="/process?ml=1" method="POST" id="answerD1">
+                <label for="Pclass">Dans quelle classe voyager vous?</label><br>
+                <label for="first">1re classe :</label>
+                <input type="radio" id="first" name="Pclass" value=1>
+                <label for="second">2e classe :</label>
+                <input type="radio" id="second" name="Pclass" value=2>
+                <label for="third">3e classe :</label>
+                <input type="radio" id="third" name="Pclass" value=3><br>
+
+                <label for="Sex">Dans quelle classe voyager vous?</label><br>
+                <label for="homme">Homme :</label>
+                <input type="radio" id="homme" name="Sex" value=0>
+                <label for="femme">Femme :</label>
+                <input type="radio" id="femme" name="Sex" value=1><br>
+                
+                <label for="Age"></label><br>
+
+                <label for="SibSp"></label><br>
+
+                <label for="Parch"></label><br>
+
+                <label for="Fare"></label><br>
+
+                <label for="Embarked">De quel ville estes vous partis?</label><br>
+                <label for="S">Southampton :</label>
+                <input type="radio" id="S" name="Embarked" value=0>
+                <label for="C">Cherbourg :</label>
+                <input type="radio" id="C" name="Embarked" value=1>
+                <label for="Q">Queenstown :</label>
+                <input type="radio" id="Q" name="Embarked" value=2><br>
+
+                <label for="LWeight"></label><br>
+
+                <button type="submit">Envoyer</button>
+            </form>
         </div>
         <div id="d2" class="subtab-content">
             <h1>IA de classification biclasse</h1>
@@ -76,7 +111,7 @@
             <span>%</span>
         </div>
         <div id="d4" class="subtab-content">
-            <h1>Flux vidéo de la caméra de la voirure</h1>
+            <h1>Flux vidéo de la caméra de la voiture</h1>
         </div>
     </div>
 
@@ -517,7 +552,8 @@
         <div id="a4" class="subtab-content">
             <h2>KAGGLE NOTEBOOKS</h2>
 
-            <p>En arrivant sur le site <a href="https://www.kaggle.com/code">https://www.kaggle.com/code</a> , vous allez retrouver ceci :</p>
+            <p>En arrivant sur le site <a href="https://www.kaggle.com/code">https://www.kaggle.com/code</a> , vous
+                allez retrouver ceci :</p>
             <img src="assets/act4/acceuil.png" alt="Acceuil de Kaggle" />
 
             <p>On peut y voir plusieurs choses. Le panneau déroulant à gauche, où vous pouvez retrouver à la fin tous
@@ -658,7 +694,8 @@
             <p>Ceci est un groupe de deux couches. La première, la layers.Con2D(), est la couche de convolution, la
                 seconde, la layers.MaxPooling2D() permet d'avoir de meilleurs résultats. Elles fonctionnent toujours par
                 deux. Pour améliorer votre modèle, vous pouvez lui ajouter une ou plusieurs couches de convolution +
-                pooling et/ou augmenter le nombre de neurone par couche. Attention, seules les couches de concolutions possèdent des neurones. Vous
+                pooling et/ou augmenter le nombre de neurone par couche. Attention, seules les couches de concolutions
+                possèdent des neurones. Vous
                 pouvez les modifier en modifiant ce paramètre :</p>
 
             <pre>tf.keras.layers.Con2D(<strong>NOMBRE DE NEURONES</strong>, 3, activation='relu')</pre>
@@ -726,7 +763,8 @@
 
             <p><strong>IA_NOM_PRENOM.keras</strong></p>
 
-            <p>Pour cela allez sur <a href="https://wetransfer.com/">https://wetransfer.com/</a> . Vous allez trouver cette fenêtre. Ajouter votre fichier
+            <p>Pour cela allez sur <a href="https://wetransfer.com/">https://wetransfer.com/</a> . Vous allez trouver
+                cette fenêtre. Ajouter votre fichier
                 .keras. Entrez le mail du destinataire écrit plus haut, et votre mail de formation ESEO dans
                 l'expéditeur (type : formation1.ia@eseo.fr).</p>
 
@@ -735,7 +773,8 @@
             <p>Vous pouvez aussi vous ajouter en tant que destinataire si vous voulez récupérer votre IA. Mettez le
                 Titre ”IA” dans ”Titre”. Vous pouvez ensuite envoyer le mail.<br>
                 Félicitations ! Vous avez fini l'activité, on espère qu'elle vous aura plu. Vous pouvez toujours la
-                retrouver chez vous sur <a href="https://www.kaggle.com/code">https://www.kaggle.com/code</a> , elle est ouverte au public et accessible par tous.
+                retrouver chez vous sur <a href="https://www.kaggle.com/code">https://www.kaggle.com/code</a> , elle est
+                ouverte au public et accessible par tous.
             </p>
 
             <h2>IMPORTANT</h2>
