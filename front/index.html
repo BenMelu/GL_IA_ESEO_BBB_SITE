@@ -515,6 +515,241 @@
             </ul>
         </div>
         <div id="a4" class="subtab-content">
+            <h2>KAGGLE NOTEBOOKS</h2>
+
+            <p>En arrivant sur le site <a href="https://www.kaggle.com/code">https://www.kaggle.com/code</a> , vous allez retrouver ceci :</p>
+            <img src="assets/act4/acceuil.png" alt="Acceuil de Kaggle" />
+
+            <p>On peut y voir plusieurs choses. Le panneau déroulant à gauche, où vous pouvez retrouver à la fin tous
+                les travaux que vous avez fait dans l'espace “Your Work”. Et l'espace central, qui montre vos
+                statistiques. En haut de cet espace central vous avez une barre de recherche.<br>
+                Cliquez dessus et tapez : “ACTIVITE IA LYCEE”.</p>
+
+            <img src="assets/act4/recherche.png" alt="Recherche de l'activité" />
+
+            <p>Si vous en voyez plusieurs, sélectionnez celle en majuscule et qui ne comporte aucun chiffre avec la
+                photo de profil du logo de l'ESEO.</p>
+
+            <p>Cela va vous amener sur cette page :</p>
+            <img src="assets/act4/notebook.png" alt="Page d'acceuil de l'activité" />
+
+            <p>C'est le travail de l'activité. Vous allez ensuite cliquer sur “Copy and Edit” en haut à droite. Cela va
+                copier et créer cette activité dans votre espace personnel pour vous permettre de la modifier. Vous
+                allez la retrouver dans l'espace “Your Work”. Vous allez donc arriver sur cette page :</p>
+
+            <img src="assets/act4/environnement.png" alt="Environnement de programmation" />
+
+            <p>C'est l'espace de programmation. Il est divisé en plusieurs parties. Le panneau déroulant à gauche,
+                toujours le même, l'espace central dédié au code et juste au-dessus, les onglets de navigation pour
+                paramétrer cet espace. A droite se trouve un panneau déroulant. Dans ce panneau nous utiliserons la
+                Table des matières pour naviguer plus facilement.<br>
+                Vous y trouverez aussi “Session options”.</p>
+
+            <img src="assets/act4/session.png" alt="Options de sessions" />
+
+            <p>Vous allez configurer les paramètres de la session comme sur l'image sur la gauche si ce n'est pas déjà
+                fait (n'oubliez pas d'activer internet)</p>
+
+            <p>Pour lancer la session de programmation, vous allez cliquer sur le bouton on/off en haut à droite de la
+                page :</p>
+            <img src="assets/act4/onOff.png" alt="Démarage de la session" />
+
+            <p>Votre Session est prête à l'emploi, vous allez pouvoir démarrer l'activité !</p>
+
+            <h2>UTILISATION D'UN NOTEBOOK</h2>
+            <p>Un notebook est un environnement de travail spécifique et modulable. Ce n'est pas comme un environnement
+                classique où vous tapez votre code dans un gros paragraphe. Ici, vous pouvez segmenter votre code. Le
+                code de l'activité est par exemple segmenté en 8 parties. Les parties vont être représentées par des
+                blocs, que vous pouvez créer, supprimer ou modifier. Pour cette activité il n'y aura besoin ni de créer
+                ni de supprimer des blocs.</p>
+            <p>Il y a deux types de blocs. Les blocs de texte, pour par exemple mettre des annotations comme des titres
+                ou des explications, et des blocs de code. Les boutons + code et + markdown servent à ajouter une
+                cellule de texte ou de code après la cellule sélectionnée (on ne va pas les utiliser)</p>
+
+            <img src="assets/act4/age.png" alt="Exemple de cellule" />
+
+            <h3>Comment ça marche concrètement ?</h3>
+            <h4>1. Lancer une cellule de code</h4>
+            <ul>
+                <li>Cliquez dedans, votre curseur de souris s'affiche pour écrire</li>
+                <li>Appuiez sur les touches Shift + Entrée (ou cliquez sur le bouton ▶ en haut)</li>
+            </ul>
+            <p>→ Le code s'exécute et le résultat s'affiche juste en dessous.</p>
+
+            <img src="assets/act4/librairie.png" alt="Première cellule du notebook" />
+
+            <h4>2. Dans quel ordre faut-il exécuter les cellules ?</h4>
+            <p>Très important : l'ordre dans lequel les cellules sont exécutées compte énormément !<br>
+                Le notebook garde en mémoire tout ce qui a exécuté avant, dans l'ordre où ça a été exécuté (pas
+                forcément l'ordre où cela apparait dans le fichier).</p>
+
+            <p>Exemple simple :</p>
+            <ul>
+                <li>Cellule 1 : age = 16</li>
+                <li>Cellule 2 : print(age + 5)</li>
+            </ul>
+
+            <img src="assets/act4/age.png" alt="Cellule de création de variable" />
+            <img src="assets/act4/printAge.png" alt="Cellule d'affichage" />
+
+            <p>Si vous exécutez d'abord la cellule 2 sans avoir exécuté la cellule 1 → erreur ! La variable age n'existe
+                pas encore.<br>
+                Donc la règle d'or : on exécute les cellules de haut en bas (comme quand on lit un livre de gauche à
+                droite).</p>
+
+            <h4>3. Que se passe-t-il si je modifie une cellule déjà exécutée ?</h4>
+            <p>Si vous changez le code dans une cellule, il faut relancer cette cellule (Shift + Entrée) et souvent, il
+                faut aussi relancer toutes les cellules qui dépendent d'elle (celles qui sont en dessous et qui
+                utilisent les variables ou fonctions modifiées).</p>
+
+            <h2>EXPLICATION DU CODE</h2>
+            <p>Dans le code, chaque partie est précédée d'un titre.<br>
+                Il y a au total 8 parties.</p>
+
+            <h3>1. LES LIBRAIRIES</h3>
+            <p>La première est comme son nom l'indique, là où les librairies sont importées. Vous pouvez en rajouter au
+                besoin. La première fois que vous allez lancer la cellule elle peut afficher des erreurs.</p>
+            <img src="assets/act4/AttributeError.png" alt="Image" />
+            <p>Il suffit d'attendre la fin de son exécution et de la relancer, cela devrait les corriger.</p>
+
+            <h3>2. LE GPU</h3>
+            <p>La seconde partie concerne la partie GPU. Elle ne permet pas son utilisation, ceci est fait dans les
+                paramètres, mais c'est une vérification pour constater qu'un GPU est bien utilisé.<br>
+                Si vous avez ce résultat :</p>
+
+            <img src="assets/act4/foundGpu.png" alt="Image" />
+
+            <p>Cela veut dire qu'il ne trouve pas le GPU, vous devez donc vérifier que vous avez sélectionné ACCELERATOR
+                : GPU P100 dans les paramètres de session cités plus haut dans la section “KAGGLE NOTEBOOKS” de cette
+                activité.<br>
+                Sinon vous devriez obtenir ceci ou équivalent :</p>
+
+            <img src="assets/act4/physicaldevice.png" alt="Image" />
+
+            <h3>3. LE DATASET</h3>
+            <p>La troisième partie est importante. C'est ici que nous allons importer notre set de donnée qui va servir
+                à entraîner l'IA.<br>
+                La fonction tfds.load() va nous permettre d'importer un dataset fourni par la bibliothèque
+                tensorflow_datasets. La fonction preprocess() va nous permettre de mettre les images contenues dans ce
+                dataset à la bonne taille.<br>
+                Cette cellule peut prendre du temps à s'executer. Veillez néanmoins à bien activer internet dans vos
+                paramètres de session (voir plus haut) au risque de ne pas pouvoir importer le dataset.</p>
+
+            <h3>4. DONNEES DU DATASET</h3>
+            <p>Ceci va servir à afficher les informations du dataset pour les plus curieux d'entre vous.</p>
+
+            <h3>5. LE MODELE D'IA</h3>
+            <p>Venons-en maintenant à la partie la plus intéressante, celle où vous allez créer votre propre modèle.
+                Cela est possible grâce à la fonction Sequential() de la bibliothèque keras. Il est important de noter
+                que dans cette partie, chaque ligne de code est une couche.<br>
+                Ici, le modèle servira à analyser et classer des images. Vous pouvez observer 4 paragraphes dans la
+                fonction Sequential(). Ces 4 paragraphes donc vous le représenter en 4 portions schématisées ci-dessous.
+            </p>
+
+            <img src="assets/act4/schema.png" alt="Image" />
+
+            <h4>1.</h4>
+            <img src="assets/act4/rescaling.png" alt="Image" />
+            <p>La couche de Rescaling. Vous n'allez pas y toucher.</p>
+
+            <h4>2. Les couches de convolution + pooling.</h4>
+            <img src="assets/act4/conv.png" alt="Image" />
+
+            <p>Ceci est un groupe de deux couches. La première, la layers.Con2D(), est la couche de convolution, la
+                seconde, la layers.MaxPooling2D() permet d'avoir de meilleurs résultats. Elles fonctionnent toujours par
+                deux. Pour améliorer votre modèle, vous pouvez lui ajouter une ou plusieurs couches de convolution +
+                pooling et/ou augmenter le nombre de neurone par couche. Attention, seules les couches de concolutions possèdent des neurones. Vous
+                pouvez les modifier en modifiant ce paramètre :</p>
+
+            <pre>tf.keras.layers.Con2D(<strong>NOMBRE DE NEURONES</strong>, 3, activation='relu')</pre>
+
+            <p>Vous remarquerez que le modèle présent dans l'activité possède déjà deux couches de convolution +
+                pooling.</p>
+
+            <p><strong>ATTENTION ! Vous pouvez rencontrer certaines erreurs.</strong></p>
+
+            <p>ERREUR 1 :</p>
+            <img src="assets/act4/valueError.png" alt="Image" />
+
+            <p>Dans ce cas vous avez dépassé le nombre de couche de convolution maximum, enlever une ou deux couches et
+                réessayer.</p>
+
+            <p>ERREUR 2 :</p>
+            <img src="assets/act4/ressourceError.png" alt="Image" />
+            <p>ou</p>
+            <img src="assets/act4/originalError.png" alt="Image" />
+
+            <p>Ici c'est que vous utilisez trop de ressources. Il faut donc commencer par réduire le nombre de neurones
+                dans les couches de convolution. Redémarrez ensuite la session avec le bouton On/Off en haut. Si
+                l'erreur persiste, continuez de réduire le nombre de neurones par couches ou enlevez une couche de
+                neurones.</p>
+
+            <h3>6. L'ENTRAINEMENT</h3>
+            <p>C'est en lançant cette cellule que votre IA va apprendre et s'améliorer. Il va être au passage affiché
+                les résultats de votre IA après chaque epoch.</p>
+
+            <img src="assets/act4/Epoch.png" alt="Image" />
+
+            <p>Par exemple en zoomant ici sur l'epoch numéro 2, il est affiché une barre de progression, et les
+                résultats de l'accuracy (nombre d'images correctement prédites en proportion) et la loss (erreur de l'IA
+                quant à ses prédictions). Le but étant d'avoir l'accuracy la plus haute avec la loss la plus basse
+                possible. Si vous pensez que votre modèle d'IA peut apprendre plus car il n'a pas encore fait de
+                surapprentissage, vous pouvez augmenter le nombre d'epoch.</p>
+
+            <h3>7. SAUVEGARDE DE VOTRE MODELE</h3>
+            <p>Dans cette partie vous allez pouvoir enregistrer votre IA. Vous trouverez plus d'explication dans la
+                section “ENREGISTRER SON IA” de l'activité.</p>
+
+            <h3>8. AFFICHAGE DES RESULTATS</h3>
+            <p>C'est ici que vous allez pouvoir analyser plus en détail les résultats de votre IA. Pour cela des graphes
+                vont s'afficher indiquant l'évolution des performances de votre IA au cours de son apprentissage. Vous
+                n'êtes cependant pas obligé de lancer cette cellule après chaque apprentissage de modèle car les
+                résultats sont déjà affichés pendant l'apprentissage. Ils sont juste plus détaillés et plus visuels ici.
+            </p>
+
+            <h2>ENREGISTRER SON IA</h2>
+            <p>Si vous pensez que votre modèle d'IA est bon, vous pouvez l'enregistrer. Vous allez lancer la portion de
+                code “Sauvegarde du modèle”. Cela va créer un fichier .keras contenant votre IA. Ce fichier va
+                s'afficher dans le panneau déroulant de droite dans la section “Output”.<br>
+                Vous pouvez en enregistrer plusieurs mais n'oubliez pas de changer le nom du fichier que vous
+                enregistrez pour ne pas écraser le précédent.</p>
+
+            <img src="assets/act4/working.png" alt="Image" />
+
+            <p>Attention, c'est normal si le fichier met du temps à s'afficher dans “Output”. Cliquez sur le bouton
+                refresh, il devrait apparaître. Vous pouvez ensuite le télécharger sur votre ordinateur en cliquant sur
+                les trois petits points puis sur “download”.</p>
+
+            <h2>FIN DE L'ACTIVITE</h2>
+            <p>A la fin de l'activité, vous allez envoyer à l'adresse mail mail.ia@eseo.fr votre fichier .keras qui
+                contient votre meilleure IA. Vous le nommerez :</p>
+
+            <p><strong>IA_NOM_PRENOM.keras</strong></p>
+
+            <p>Pour cela allez sur <a href="https://wetransfer.com/">https://wetransfer.com/</a> . Vous allez trouver cette fenêtre. Ajouter votre fichier
+                .keras. Entrez le mail du destinataire écrit plus haut, et votre mail de formation ESEO dans
+                l'expéditeur (type : formation1.ia@eseo.fr).</p>
+
+            <img src="assets/act4/wetransfer.png" alt="Image" />
+
+            <p>Vous pouvez aussi vous ajouter en tant que destinataire si vous voulez récupérer votre IA. Mettez le
+                Titre ”IA” dans ”Titre”. Vous pouvez ensuite envoyer le mail.<br>
+                Félicitations ! Vous avez fini l'activité, on espère qu'elle vous aura plu. Vous pouvez toujours la
+                retrouver chez vous sur <a href="https://www.kaggle.com/code">https://www.kaggle.com/code</a> , elle est ouverte au public et accessible par tous.
+            </p>
+
+            <h2>IMPORTANT</h2>
+            <p>1) Le programme qui testera votre activité à la fin prendra en compte les IA qui analysent des images de
+                250x250 pixels. Veuillez ne pas changer ces deux champs au risque de que l'IA ne fonctionne pas. Ils
+                sont respectivement dans les sections : “Importation du dataset et création des splits” et “Création du
+                modèle”.</p>
+
+            <img src="assets/act4/resize.png" alt="Image" />
+            <img src="assets/act4/rescaling.png" alt="Image" />
+
+            <p>2) Vous devez toujours relancer la partie création du modèle avant de lancer l'entraînement de l'IA,
+                sinon cela continuera d'entraîner l'IA précédente sans en améliorer les performances, l'utilité est donc
+                limitée.</p>
 
         </div>
 

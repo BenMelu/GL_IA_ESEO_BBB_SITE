@@ -7,6 +7,8 @@ import numpy as np
 import io
 import magic
 from json import dumps
+import pandas as pd
+import joblib
 
 app = Flask(__name__)
 CORS(app,expose_headers=["X-Process-Texts"]) # autorise le frontend à appeler cette API
@@ -34,6 +36,17 @@ def process_image(img: np.ndarray,multiclass: bool) -> tuple[np.ndarray, str]:
         "precision":np.array2string(np.round(y_pred.max()*100,2))
     }
     return pred_norm, texts
+
+def process_form():
+
+    X_pred=0
+    scaler = joblib.load("scaler.save")
+    X_pred_norm = scaler.transform(X_pred)
+    pred=modelT.predict(X_pred_norm)
+    texts={
+        "tauxSurvie":np.round(pred[0][0]*100,2)
+        }
+    return texts
 
 @app.route("/process", methods=["POST"])
 def process():
