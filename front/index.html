@@ -47,34 +47,43 @@
                 <label for="second">2e classe :</label>
                 <input type="radio" id="second" name="Pclass" value=2>
                 <label for="third">3e classe :</label>
-                <input type="radio" id="third" name="Pclass" value=3><br>
+                <input type="radio" id="third" name="Pclass" value=3><br><br>
 
-                <label for="Sex">Dans quelle classe voyager vous?</label><br>
+                <label for="Sex">Etes vous un homme ou une femme?</label><br>
                 <label for="homme">Homme :</label>
                 <input type="radio" id="homme" name="Sex" value=0>
                 <label for="femme">Femme :</label>
-                <input type="radio" id="femme" name="Sex" value=1><br>
+                <input type="radio" id="femme" name="Sex" value=1><br><br>
                 
-                <label for="Age"></label><br>
+                <label for="Age">Quel age avez vous?</label><br>
+                <input type="number" id="Age" name="Age"><br><br>
 
-                <label for="SibSp"></label><br>
+                <label for="SibSp">Avec combien de frères, soeurs et/ou partnaires voyager vous?</label><br>
+                <input type="number" id="SibSp" name="SibSp"><br><br>
 
-                <label for="Parch"></label><br>
+                <label for="Parch">Avec combien de membres de votre famille autres voyager vous?</label><br>
+                <input type="number" id="Parch" name="Parch"><br><br>
 
-                <label for="Fare"></label><br>
+                <label for="Fare">Quel est le prix de votre billets?</label><br>
+                <input type="number" id="Fare" step=0.01 name="Fare"><br><br>
 
-                <label for="Embarked">De quel ville estes vous partis?</label><br>
+                <label for="Embarked">De quel ville etes vous partis?</label><br>
                 <label for="S">Southampton :</label>
                 <input type="radio" id="S" name="Embarked" value=0>
                 <label for="C">Cherbourg :</label>
                 <input type="radio" id="C" name="Embarked" value=1>
                 <label for="Q">Queenstown :</label>
-                <input type="radio" id="Q" name="Embarked" value=2><br>
+                <input type="radio" id="Q" name="Embarked" value=2><br><br>
 
-                <label for="LWeight"></label><br>
+                <label for="LWeight">Quel est le poids de votre bagage?</label><br>
+                <input type="number" id="LWeight" step=0.01 name="LWeight"><br><br>
 
                 <button type="submit">Envoyer</button>
-            </form>
+            </form><br>
+
+            <span>Avec ces informations, votre taux de survie lors du naufrage du Titanic serai de </span>
+            <span id="resultTaD1"> X</span>
+            <span>%</span>
         </div>
         <div id="d2" class="subtab-content">
             <h1>IA de classification biclasse</h1>
@@ -112,6 +121,7 @@
         </div>
         <div id="d4" class="subtab-content">
             <h1>Flux vidéo de la caméra de la voiture</h1>
+            <img src="http://localhost:5000/video_feed" width="800" alt="Flux vidéo de la caméra">
         </div>
     </div>
 

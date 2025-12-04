@@ -1,6 +1,7 @@
-from flask import Flask, request, jsonify, send_file, make_response
+from flask import Flask, request, jsonify, send_file, make_response, Response
 from flask_cors import CORS
 import cv2
+import ultralytics as u
 import tensorflow as tf
 import os.path
 import numpy as np
@@ -9,15 +10,82 @@ import magic
 from json import dumps
 import pandas as pd
 import joblib
+import threading
+import time
 
 app = Flask(__name__)
 CORS(app,expose_headers=["X-Process-Texts"]) # autorise le frontend à appeler cette API
 
+
 PATH=os.path.dirname(os.path.realpath(__file__))
+PATH_MODEL=PATH+"/weights"
 ALLOWED = {"image/png", "image/jpg", "image/jpeg", "image/gif"}
+URL_ESP="http://192.168.137.55:81/stream"
+
+
 modelT=tf.keras.models.load_model(PATH+"/modelTita.keras")
 modelCH=tf.keras.models.load_model(PATH+"/IA_chats_chiens.keras")
 modelM=tf.keras.models.load_model(PATH+"/modelMNIST.keras")
+model=u.YOLO(PATH_MODEL+"/best.pt")
+
+latest_frame = None
+lock = threading.Lock()
+
+def camera_thread():
+    global latest_frame
+
+    while True:
+        print("Connexion au flux ESP32...")
+        cap = cv2.VideoCapture(URL_ESP)
+
+        if not cap.isOpened():
+            print("Impossible d'ouvrir le flux, nouvel essai dans 2 sec")
+            time.sleep(2)
+            continue
+
+        print("Flux ESP32 connecté.")
+
+        while True:
+            ret, frame = cap.read()
+
+            if not ret:
+                print("Frame perdue: essaie de reconnexion...")
+                cap.release()
+                time.sleep(1)
+                break
+
+            # Exemple de traitement (à remplacer)
+            img=cv2.resize(frame, (800, 600))
+            detection=model(img,stream=True,verbose=False)
+            for bbox in detection[0].boxes:
+                x1,y1,x2,y2=bbox.xyxy[0]
+                class_name=detection[0].names[int(bbox.cls[0])]
+                conf = float(bbox.conf[0])
+                cv2.rectangle(img,(int(x1),int(y1)),(int(x2),int(y2)),(0,0,255),3)
+                cv2.putText(img,f"{class_name}: {conf:.2f}",(int(x1), max(int(y1) - 5, 10)), cv2.FONT_HERSHEY_SIMPLEX,5, (0,0,255), 3)
+
+            # Stockage thread-safe
+            with lock:
+                latest_frame = img
+
+def generate_frames():
+    global latest_frame
+
+    while True:
+        if latest_frame is None:
+            time.sleep(0.01)
+            continue
+
+        with lock:
+            frame = latest_frame.copy()
+
+        ret, jpeg = cv2.imencode('.jpg', frame)
+        if not ret:
+            continue
+
+        yield (b'--frame\r\n'
+               b'Content-Type: image/jpeg\r\n\r\n' + 
+               jpeg.tobytes() + b'\r\n')
 
 def process_image(img: np.ndarray,multiclass: bool) -> tuple[np.ndarray, str]:
     match multiclass:
@@ -39,13 +107,17 @@ def process_image(img: np.ndarray,multiclass: bool) -> tuple[np.ndarray, str]:
 
 def process_form(df: pd.DataFrame):
     X_pred=df.astype('float64',False)
-    scaler = joblib.load("scaler.save")
+    scaler = joblib.load("back/scalerTita.save")
     X_pred_norm = scaler.transform(X_pred)
     pred=modelT.predict(X_pred_norm)
     texts={
-        "tauxSurvie":np.round(pred[0][0]*100,2)
+        "tauxSurvie":np.array2string(np.round(pred[0][0]*100,2))
         }
     return texts
+
+@app.route("/video_feed")
+def video_feed():
+    return Response(generate_frames(),mimetype='multipart/x-mixed-replace; boundary=frame')
 
 @app.route("/process", methods=["POST"])
 def process():
@@ -76,4 +148,6 @@ def process():
         return reponse
 
 if __name__ == "__main__":
+    t = threading.Thread(target=camera_thread, daemon=True)
+    t.start()
     app.run(host="0.0.0.0", port=5000, debug=True)

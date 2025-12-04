@@ -17,21 +17,21 @@ document.querySelectorAll('.image-upload').forEach(input => {
     });
 });
 
-document.getElementById("answerD1").addEventListener("submit", function(e) {
+document.getElementById("answerD1").addEventListener("submit", async function(e) {
     e.preventDefault();
     let formData = new FormData(this);
     lienRes = "http://localhost:5000/process?ml=1";
-    const res = fetch(lienRes, {
+    const res =await fetch(lienRes, {
         method: "POST",
         body: formData
     });
-
+    console.log(res)
     if (!res.ok) {
         alert("Erreur serveur");
         return;
     }
-    texts=res.json;
-    document.getElementById("resultTaD1").textContent = texts.valeur;
+    texts=await res.json();
+    document.getElementById("resultTaD1").textContent = texts.tauxSurvie;
 });
 
 async function sendImage(onglet) {
