@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify, send_file, make_response, Response, render_template
 from flask_cors import CORS
+from flask_socketio import SocketIO
 import cv2
 import ultralytics as u
 import tensorflow as tf
@@ -12,11 +13,10 @@ import pandas as pd
 import joblib
 import threading
 import time
-import socketio
 
 app = Flask(__name__)
 CORS(app,expose_headers=["X-Process-Texts"]) # autorise le frontend à appeler cette API
-
+socketio = SocketIO(app, cors_allowed_origins="*")
 
 PATH=os.path.dirname(os.path.realpath(__file__))
 PATH=PATH+"/back"
@@ -172,5 +172,5 @@ def process():
 def index():
     return render_template("index.html")
 
-"""if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=True)"""
+if __name__ == "__main__":
+    socketio.run(app,host="0.0.0.0", port=8080, debug=True)

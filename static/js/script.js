@@ -20,7 +20,7 @@ document.querySelectorAll('.image-upload').forEach(input => {
 document.getElementById("answerD1").addEventListener("submit", async function(e) {
     e.preventDefault();
     let formData = new FormData(this);
-    lienRes = "http://localhost:5000/process?ml=1";
+    lienRes = "https://bbbiaatelier-447946806594.europe-west1.run.app/process?ml=1";
     const res =await fetch(lienRes, {
         method: "POST",
         body: formData
@@ -57,10 +57,10 @@ async function sendImage(onglet) {
     }
     switch (onglet) {
         case 2:
-            lienRes = "http://localhost:5000/process?ml=2";
+            lienRes = "https://bbbiaatelier-447946806594.europe-west1.run.app/process?ml=2";
             break;
         case 3:
-            lienRes = "http://localhost:5000/process?ml=3";
+            lienRes = "https://bbbiaatelier-447946806594.europe-west1.run.app/process?ml=3";
             break;
     }
     const res = await fetch(lienRes, {
