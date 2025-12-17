@@ -5,12 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Pedag'ESEO</title>
-    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
-    <link rel="manifest" href="assets/favicon/site.webmanifest">
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script>
+    <link rel="apple-touch-icon" sizes="180x180" href="/static/assets/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/static/assets/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/static/ssets/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/static/assets/favicon/site.webmanifest">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
 </head>
 
 <body>
@@ -121,7 +122,7 @@
         </div>
         <div id="d4" class="subtab-content">
             <h1>Flux vidéo de la caméra de la voiture</h1>
-            <img src="http://localhost:5000/video_feed" width="800" alt="Flux vidéo de la caméra">
+            <img id="fluxVideoCam" width="800" alt="Flux vidéo de la caméra">
         </div>
     </div>
 
@@ -359,7 +360,7 @@
                 la couche L1 pour avoir son résultat, qui va ensuite être utilisé pour les neurones de la couche L3 et
                 ainsi de suite jusqu'à la couche de sortie.</p>
 
-            <p><img src="assets/act2/reseaux.png" alt="Schéma d'un réseau de neurones" /></p>
+            <p><img src="/static/assets/act2/reseaux.png" alt="Schéma d'un réseau de neurones" /></p>
 
             <p>Lors de l'entrainement, les paramètres des fonctions se modifient en fonction de la bonne prédiction ou
                 non, des données d'entrainement Les calculs de paramètres des fonctions sont trop complexes pour les
@@ -492,7 +493,7 @@
             <h2>Partie Modèle IA</h2>
             <p>La partie "Données" permet d'utiliser des images pour entraîner votre IA.</p>
             <p>Pour cela : ajouter des catégories et leur affecter des images dans la partie « Données ».</p>
-            <img src="assets/act3/donnees.png" alt="Illustration données IA" />
+            <img src="/static/assets/act3/donnees.png" alt="Illustration données IA" />
             <p>Une fois la catégorie créée, renommer la catégorie via le crayon. Il y a trois façons d'ajouter des
                 images :</p>
             <ul>
@@ -500,20 +501,20 @@
                 <li>Utiliser les catégories existantes (icone de 6 carrés)</li>
                 <li>Téléverser des images (icone de téléchargement)</li>
             </ul>
-            <img src="assets/act3/categorie.png" alt="Ajout d'images" />
+            <img src="/static/assets/act3/categorie.png" alt="Ajout d'images" />
             <p>Lorsque toutes les catégories sont prêtes, cliquer sur « Entraîner le modèle » dans la partie
                 Entrainement du site web.</p>
-            <img src="assets/act3/entrainement.png" alt="Entraîner le modèle" />
+            <img src="/static/assets/act3/entrainement.png" alt="Entraîner le modèle" />
             <p>Dans la partie « Aperçu », vous pouvez tester le modèle en ajoutant des images commelors de la création
                 des catégories.</p>
-            <img src="assets/act3/apercu.png" alt="Aperçu du modèle" />
+            <img src="/static/assets/act3/apercu.png" alt="Aperçu du modèle" />
             <p>Après téléversement d'une image, les prédictions s'affichent. <br>
                 Vous pouvez visualiser comment la prédiction a été faite en cliquant sur le bouton « Visualiser le
                 réseau de neurones » qui se trouve dans la partie Entrainement de la page Web.</p>
-            <img src="assets/act3/resultat.png" alt="Réseau de neurones" />
+            <img src="/static/assets/act3/resultat.png" alt="Réseau de neurones" />
             <p>Une fois que votre modèle d'IA vous convient, vous pouvez passer à la partie programmation en cliquant
                 sur le bouton AdaCraft.</p>
-            <img src="assets/act3/adacraft.png" alt="Accès AdaCraft" />
+            <img src="/static/assets/act3/adacraft.png" alt="Accès AdaCraft" />
             <h2>Partie Programmation</h2>
             <p>La partie la plus utilisée de cette page web est la partie blocs. A la gauche de la page se trouve les
                 différents blocs qui peuvent être utilisé pour programmer ainsi que leur catégorie. Au milieu se trouve
@@ -526,22 +527,22 @@
                     de caméra.)</li>
             </ul>
             <p>Ce sont ces deux instructions qui permettent d'utiliser le modèle d'IA précédemment entrainé.</p>
-            <img src="assets/act3/code.png" alt="Blocs IA" />
+            <img src="/static/assets/act3/code.png" alt="Blocs IA" />
             <p>En haut à droite de la page web se trouve le résultat de votre code. En effet, c'est ici que vous pouvez
                 retrouver les « objets » qui vont réagir en fonction du code.
                 L'icone de drapeau vert permet de lancer le code.
             </p>
-            <img src="assets/act3/affichage.png" alt="Affichage du résultat" />
+            <img src="/static/assets/act3/affichage.png" alt="Affichage du résultat" />
             <p>En bas à droite de la page web, vous pouvez modifier l'arrière-plan ainsi que choisir quels objets vont
                 être afficher. C'est aussi en sélectionnant les objets que l'on peut choisir quel code affecte ces
                 objets.</p>
-            <img src="assets/act3/objets.png" alt="Ajout d'objet et changement d'arrière arrière-plan" />
+            <img src="/static/assets/act3/objets.png" alt="Ajout d'objet et changement d'arrière arrière-plan" />
             <p>Tout en haut à droite, vous pouvez appuyer sur la note de musique pour rajouter des sons, sur le pinceau
                 pour pouvoir modifier les objets et changer leur apparence, et le "
                 < />" pour revenir sur la partie
                 code.
             </p>
-            <img src="assets/act3/vue.png" alt="Changement de vue" />
+            <img src="/static/assets/act3/vue.png" alt="Changement de vue" />
 
             <h2>Exemples de programmes</h2>
             <p>Maintenant que les fonctionnalités principales du site sont expliquées, c'est à vous de faire votre
@@ -564,26 +565,26 @@
 
             <p>En arrivant sur le site <a href="https://www.kaggle.com/code">https://www.kaggle.com/code</a> , vous
                 allez retrouver ceci :</p>
-            <img src="assets/act4/acceuil.png" alt="Acceuil de Kaggle" />
+            <img src="/static/assets/act4/acceuil.png" alt="Acceuil de Kaggle" />
 
             <p>On peut y voir plusieurs choses. Le panneau déroulant à gauche, où vous pouvez retrouver à la fin tous
                 les travaux que vous avez fait dans l'espace “Your Work”. Et l'espace central, qui montre vos
                 statistiques. En haut de cet espace central vous avez une barre de recherche.<br>
                 Cliquez dessus et tapez : “ACTIVITE IA LYCEE”.</p>
 
-            <img src="assets/act4/recherche.png" alt="Recherche de l'activité" />
+            <img src="/static/assets/act4/recherche.png" alt="Recherche de l'activité" />
 
             <p>Si vous en voyez plusieurs, sélectionnez celle en majuscule et qui ne comporte aucun chiffre avec la
                 photo de profil du logo de l'ESEO.</p>
 
             <p>Cela va vous amener sur cette page :</p>
-            <img src="assets/act4/notebook.png" alt="Page d'acceuil de l'activité" />
+            <img src="/static/assets/act4/notebook.png" alt="Page d'acceuil de l'activité" />
 
             <p>C'est le travail de l'activité. Vous allez ensuite cliquer sur “Copy and Edit” en haut à droite. Cela va
                 copier et créer cette activité dans votre espace personnel pour vous permettre de la modifier. Vous
                 allez la retrouver dans l'espace “Your Work”. Vous allez donc arriver sur cette page :</p>
 
-            <img src="assets/act4/environnement.png" alt="Environnement de programmation" />
+            <img src="/static/assets/act4/environnement.png" alt="Environnement de programmation" />
 
             <p>C'est l'espace de programmation. Il est divisé en plusieurs parties. Le panneau déroulant à gauche,
                 toujours le même, l'espace central dédié au code et juste au-dessus, les onglets de navigation pour
@@ -591,14 +592,14 @@
                 Table des matières pour naviguer plus facilement.<br>
                 Vous y trouverez aussi “Session options”.</p>
 
-            <img src="assets/act4/session.png" alt="Options de sessions" />
+            <img src="/static/assets/act4/session.png" alt="Options de sessions" />
 
             <p>Vous allez configurer les paramètres de la session comme sur l'image sur la gauche si ce n'est pas déjà
                 fait (n'oubliez pas d'activer internet)</p>
 
             <p>Pour lancer la session de programmation, vous allez cliquer sur le bouton on/off en haut à droite de la
                 page :</p>
-            <img src="assets/act4/onOff.png" alt="Démarage de la session" />
+            <img src="/static/assets/act4/onOff.png" alt="Démarage de la session" />
 
             <p>Votre Session est prête à l'emploi, vous allez pouvoir démarrer l'activité !</p>
 
@@ -612,7 +613,7 @@
                 ou des explications, et des blocs de code. Les boutons + code et + markdown servent à ajouter une
                 cellule de texte ou de code après la cellule sélectionnée (on ne va pas les utiliser)</p>
 
-            <img src="assets/act4/age.png" alt="Exemple de cellule" />
+            <img src="/static/assets/act4/age.png" alt="Exemple de cellule" />
 
             <h3>Comment ça marche concrètement ?</h3>
             <h4>1. Lancer une cellule de code</h4>
@@ -622,7 +623,7 @@
             </ul>
             <p>→ Le code s'exécute et le résultat s'affiche juste en dessous.</p>
 
-            <img src="assets/act4/librairie.png" alt="Première cellule du notebook" />
+            <img src="/static/assets/act4/librairie.png" alt="Première cellule du notebook" />
 
             <h4>2. Dans quel ordre faut-il exécuter les cellules ?</h4>
             <p>Très important : l'ordre dans lequel les cellules sont exécutées compte énormément !<br>
@@ -635,8 +636,8 @@
                 <li>Cellule 2 : print(age + 5)</li>
             </ul>
 
-            <img src="assets/act4/age.png" alt="Cellule de création de variable" />
-            <img src="assets/act4/printAge.png" alt="Cellule d'affichage" />
+            <img src="/static/assets/act4/age.png" alt="Cellule de création de variable" />
+            <img src="/static/assets/act4/printAge.png" alt="Cellule d'affichage" />
 
             <p>Si vous exécutez d'abord la cellule 2 sans avoir exécuté la cellule 1 → erreur ! La variable age n'existe
                 pas encore.<br>
@@ -655,7 +656,7 @@
             <h3>1. LES LIBRAIRIES</h3>
             <p>La première est comme son nom l'indique, là où les librairies sont importées. Vous pouvez en rajouter au
                 besoin. La première fois que vous allez lancer la cellule elle peut afficher des erreurs.</p>
-            <img src="assets/act4/AttributeError.png" alt="Image" />
+            <img src="/static/assets/act4/AttributeError.png" alt="Image" />
             <p>Il suffit d'attendre la fin de son exécution et de la relancer, cela devrait les corriger.</p>
 
             <h3>2. LE GPU</h3>
@@ -663,14 +664,14 @@
                 paramètres, mais c'est une vérification pour constater qu'un GPU est bien utilisé.<br>
                 Si vous avez ce résultat :</p>
 
-            <img src="assets/act4/foundGpu.png" alt="Image" />
+            <img src="/static/assets/act4/foundGpu.png" alt="Image" />
 
             <p>Cela veut dire qu'il ne trouve pas le GPU, vous devez donc vérifier que vous avez sélectionné ACCELERATOR
                 : GPU P100 dans les paramètres de session cités plus haut dans la section “KAGGLE NOTEBOOKS” de cette
                 activité.<br>
                 Sinon vous devriez obtenir ceci ou équivalent :</p>
 
-            <img src="assets/act4/physicaldevice.png" alt="Image" />
+            <img src="/static/assets/act4/physicaldevice.png" alt="Image" />
 
             <h3>3. LE DATASET</h3>
             <p>La troisième partie est importante. C'est ici que nous allons importer notre set de donnée qui va servir
@@ -692,14 +693,14 @@
                 fonction Sequential(). Ces 4 paragraphes donc vous le représenter en 4 portions schématisées ci-dessous.
             </p>
 
-            <img src="assets/act4/schema.png" alt="Image" />
+            <img src="/static/assets/act4/schema.png" alt="Image" />
 
             <h4>1.</h4>
-            <img src="assets/act4/rescaling.png" alt="Image" />
+            <img src="/static/assets/act4/rescaling.png" alt="Image" />
             <p>La couche de Rescaling. Vous n'allez pas y toucher.</p>
 
             <h4>2. Les couches de convolution + pooling.</h4>
-            <img src="assets/act4/conv.png" alt="Image" />
+            <img src="/static/assets/act4/conv.png" alt="Image" />
 
             <p>Ceci est un groupe de deux couches. La première, la layers.Con2D(), est la couche de convolution, la
                 seconde, la layers.MaxPooling2D() permet d'avoir de meilleurs résultats. Elles fonctionnent toujours par
@@ -716,15 +717,15 @@
             <p><strong>ATTENTION ! Vous pouvez rencontrer certaines erreurs.</strong></p>
 
             <p>ERREUR 1 :</p>
-            <img src="assets/act4/valueError.png" alt="Image" />
+            <img src="/static/assets/act4/valueError.png" alt="Image" />
 
             <p>Dans ce cas vous avez dépassé le nombre de couche de convolution maximum, enlever une ou deux couches et
                 réessayer.</p>
 
             <p>ERREUR 2 :</p>
-            <img src="assets/act4/ressourceError.png" alt="Image" />
+            <img src="/static/assets/act4/ressourceError.png" alt="Image" />
             <p>ou</p>
-            <img src="assets/act4/originalError.png" alt="Image" />
+            <img src="/static/assets/act4/originalError.png" alt="Image" />
 
             <p>Ici c'est que vous utilisez trop de ressources. Il faut donc commencer par réduire le nombre de neurones
                 dans les couches de convolution. Redémarrez ensuite la session avec le bouton On/Off en haut. Si
@@ -735,7 +736,7 @@
             <p>C'est en lançant cette cellule que votre IA va apprendre et s'améliorer. Il va être au passage affiché
                 les résultats de votre IA après chaque epoch.</p>
 
-            <img src="assets/act4/Epoch.png" alt="Image" />
+            <img src="/static/assets/act4/Epoch.png" alt="Image" />
 
             <p>Par exemple en zoomant ici sur l'epoch numéro 2, il est affiché une barre de progression, et les
                 résultats de l'accuracy (nombre d'images correctement prédites en proportion) et la loss (erreur de l'IA
@@ -761,7 +762,7 @@
                 Vous pouvez en enregistrer plusieurs mais n'oubliez pas de changer le nom du fichier que vous
                 enregistrez pour ne pas écraser le précédent.</p>
 
-            <img src="assets/act4/working.png" alt="Image" />
+            <img src="/static/assets/act4/working.png" alt="Image" />
 
             <p>Attention, c'est normal si le fichier met du temps à s'afficher dans “Output”. Cliquez sur le bouton
                 refresh, il devrait apparaître. Vous pouvez ensuite le télécharger sur votre ordinateur en cliquant sur
@@ -778,7 +779,7 @@
                 .keras. Entrez le mail du destinataire écrit plus haut, et votre mail de formation ESEO dans
                 l'expéditeur (type : formation1.ia@eseo.fr).</p>
 
-            <img src="assets/act4/wetransfer.png" alt="Image" />
+            <img src="/static/assets/act4/wetransfer.png" alt="Image" />
 
             <p>Vous pouvez aussi vous ajouter en tant que destinataire si vous voulez récupérer votre IA. Mettez le
                 Titre ”IA” dans ”Titre”. Vous pouvez ensuite envoyer le mail.<br>
@@ -793,8 +794,8 @@
                 sont respectivement dans les sections : “Importation du dataset et création des splits” et “Création du
                 modèle”.</p>
 
-            <img src="assets/act4/resize.png" alt="Image" />
-            <img src="assets/act4/rescaling.png" alt="Image" />
+            <img src="/static/assets/act4/resize.png" alt="Image" />
+            <img src="/static/assets/act4/rescaling.png" alt="Image" />
 
             <p>2) Vous devez toujours relancer la partie création du modèle avant de lancer l'entraînement de l'IA,
                 sinon cela continuera d'entraîner l'IA précédente sans en améliorer les performances, l'utilité est donc

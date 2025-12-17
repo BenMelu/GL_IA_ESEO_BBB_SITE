@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, send_file, make_response, Response
+from flask import Flask, request, jsonify, send_file, make_response, Response, render_template
 from flask_cors import CORS
 import cv2
 import ultralytics as u
@@ -12,12 +12,14 @@ import pandas as pd
 import joblib
 import threading
 import time
+import socketio
 
 app = Flask(__name__)
 CORS(app,expose_headers=["X-Process-Texts"]) # autorise le frontend à appeler cette API
 
 
 PATH=os.path.dirname(os.path.realpath(__file__))
+PATH=PATH+"/back"
 PATH_MODEL=PATH+"/weights"
 ALLOWED = {"image/png", "image/jpg", "image/jpeg", "image/gif"}
 URL_ESP="http://192.168.137.55:81/stream"
@@ -27,6 +29,8 @@ modelT=tf.keras.models.load_model(PATH+"/modelTita.keras")
 modelCH=tf.keras.models.load_model(PATH+"/IA_chats_chiens.keras")
 modelM=tf.keras.models.load_model(PATH+"/modelMNIST.keras")
 model=u.YOLO(PATH_MODEL+"/best.pt")
+
+camera_started = False
 
 latest_frame = None
 lock = threading.Lock()
@@ -68,24 +72,22 @@ def camera_thread():
             with lock:
                 latest_frame = img
 
-def generate_frames():
-    global latest_frame
+        time.sleep(0.01)
 
+def broadcast_frames():
     while True:
-        if latest_frame is None:
-            time.sleep(0.01)
-            continue
-
         with lock:
-            frame = latest_frame.copy()
+            frame = latest_frame.copy() if latest_frame is not None else None
 
-        ret, jpeg = cv2.imencode('.jpg', frame)
-        if not ret:
+        if frame is None:
+            time.sleep(0.05)
             continue
 
-        yield (b'--frame\r\n'
-               b'Content-Type: image/jpeg\r\n\r\n' + 
-               jpeg.tobytes() + b'\r\n')
+        ret, buffer = cv2.imencode(".jpg", frame)
+        if ret:
+            socketio.emit("video_frame", buffer.tobytes())
+
+        time.sleep(0.03)
 
 def process_image(img: np.ndarray,multiclass: bool) -> tuple[np.ndarray, str]:
     match multiclass:
@@ -107,7 +109,7 @@ def process_image(img: np.ndarray,multiclass: bool) -> tuple[np.ndarray, str]:
 
 def process_form(df: pd.DataFrame):
     X_pred=df.astype('float64',False)
-    scaler = joblib.load("back/scalerTita.save")
+    scaler = joblib.load("/back/scalerTita.save")
     X_pred_norm = scaler.transform(X_pred)
     pred=modelT.predict(X_pred_norm)
     texts={
@@ -115,8 +117,25 @@ def process_form(df: pd.DataFrame):
         }
     return texts
 
+
+@app.before_request
+def start_camera():
+    global camera_started
+    if not camera_started:
+        t = threading.Thread(target=camera_thread, daemon=True)
+        t.start()
+        camera_started = True
+    return "Camera started"
+
 @app.route("/video_feed")
 def video_feed():
+    global camera_started
+
+    if not camera_started:
+        t = threading.Thread(target=camera_thread, daemon=True)
+        t.start()
+        camera_started = True
+
     return Response(generate_frames(),mimetype='multipart/x-mixed-replace; boundary=frame')
 
 @app.route("/process", methods=["POST"])
@@ -147,7 +166,10 @@ def process():
         reponse.headers["X-Process-Texts"] = dumps(text_fields)
         return reponse
 
-if __name__ == "__main__":
-    t = threading.Thread(target=camera_thread, daemon=True)
-    t.start()
-    app.run(host="0.0.0.0", port=5000, debug=True)
+
+@app.route("/")
+def index():
+    return render_template("index.html")
+
+"""if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000, debug=True)"""
