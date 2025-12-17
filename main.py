@@ -118,16 +118,17 @@ def process_form(df: pd.DataFrame):
     return texts
 
 
-@app.before_request
+@socketio.on("connect")
 def start_camera():
     global camera_started
     if not camera_started:
         t = threading.Thread(target=camera_thread, daemon=True)
         t.start()
+        threading.Thread(target=broadcast_frames, daemon=True).start()
         camera_started = True
     return "Camera started"
 
-@app.route("/video_feed")
+"""@app.route("/video_feed")
 def video_feed():
     global camera_started
 
@@ -136,7 +137,7 @@ def video_feed():
         t.start()
         camera_started = True
 
-    return Response(generate_frames(),mimetype='multipart/x-mixed-replace; boundary=frame')
+    return Response(generate_frames(),mimetype='multipart/x-mixed-replace; boundary=frame')"""
 
 @app.route("/process", methods=["POST"])
 def process():
