@@ -22,13 +22,13 @@ PATH=os.path.dirname(os.path.realpath(__file__))
 PATH=PATH+"/back"
 PATH_MODEL=PATH+"/weights"
 ALLOWED = {"image/png", "image/jpg", "image/jpeg", "image/gif"}
-URL_ESP="http://192.168.137.55:81/stream"
+URL_ESP="http://192.168.137.177:81/stream"
 
 
 modelT=tf.keras.models.load_model(PATH+"/modelTita.keras")
 modelCH=tf.keras.models.load_model(PATH+"/IA_chats_chiens.keras")
 modelM=tf.keras.models.load_model(PATH+"/modelMNIST.keras")
-model=u.YOLO(PATH_MODEL+"/best.pt")
+"""model=u.YOLO(PATH_MODEL+"/best.pt")
 
 camera_started = False
 
@@ -87,7 +87,7 @@ def broadcast_frames():
         if ret:
             socketio.emit("video_frame", buffer.tobytes())
 
-        time.sleep(0.03)
+        time.sleep(0.03)"""
 
 def process_image(img: np.ndarray,multiclass: bool) -> tuple[np.ndarray, str]:
     match multiclass:
@@ -96,13 +96,19 @@ def process_image(img: np.ndarray,multiclass: bool) -> tuple[np.ndarray, str]:
             pred_norm = cv2.bitwise_not(pred_norm)
             test=np.array([pred_norm])
             y_pred=modelM.predict(test,verbose=0)
+            text_class=np.array2string(y_pred_classes[0])
         case False:
             pred_norm=cv2.resize(img, dsize=(250, 250), interpolation=cv2.INTER_LANCZOS4)
             test=np.array([pred_norm])
             y_pred=modelCH.predict(test,verbose=0)
+            if np.argmax(y_pred, axis=1)==0:
+                text_class="chat"
+            else:
+                text_class="chien"
     y_pred_classes = np.argmax(y_pred, axis=1)
+    
     texts={
-        "classe":np.array2string(y_pred_classes[0]),
+        "classe":text_class,
         "precision":np.array2string(np.round(y_pred.max()*100,2))
     }
     return pred_norm, texts
@@ -118,7 +124,7 @@ def process_form(df: pd.DataFrame):
     return texts
 
 
-@socketio.on("connect")
+"""@socketio.on("connect")
 def start_camera():
     global camera_started
     if not camera_started:
@@ -128,7 +134,7 @@ def start_camera():
         camera_started = True
     return "Camera started"
 
-"""@app.route("/video_feed")
+@app.route("/video_feed")
 def video_feed():
     global camera_started
 
