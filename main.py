@@ -16,11 +16,12 @@ import joblib
 
 app = Flask(__name__)
 CORS(app,expose_headers=["X-Process-Texts"]) # autorise le frontend à appeler cette API
-socketio = SocketIO(app, cors_allowed_origins="*")
+#socketio = SocketIO(app, cors_allowed_origins="*")
 
 PATH=os.path.dirname(os.path.realpath(__file__))
 PATH=PATH+"/back"
 PATH_MODEL=PATH+"/weights"
+PATH_SCALER= os.path.join(PATH, "scalerTita.save")
 ALLOWED = {"image/png", "image/jpg", "image/jpeg", "image/gif"}
 URL_ESP="http://192.168.137.177:81/stream"
 
@@ -96,7 +97,7 @@ def process_image(img: np.ndarray,multiclass: bool) -> tuple[np.ndarray, str]:
             pred_norm = cv2.bitwise_not(pred_norm)
             test=np.array([pred_norm])
             y_pred=modelM.predict(test,verbose=0)
-            text_class=np.array2string(y_pred_classes[0])
+            text_class=np.array2string(np.argmax(y_pred, axis=1)[0])
         case False:
             pred_norm=cv2.resize(img, dsize=(250, 250), interpolation=cv2.INTER_LANCZOS4)
             test=np.array([pred_norm])
@@ -115,7 +116,7 @@ def process_image(img: np.ndarray,multiclass: bool) -> tuple[np.ndarray, str]:
 
 def process_form(df: pd.DataFrame):
     X_pred=df.astype('float64',False)
-    scaler = joblib.load("/back/scalerTita.save")
+    scaler = joblib.load(PATH_SCALER)
     X_pred_norm = scaler.transform(X_pred)
     pred=modelT.predict(X_pred_norm)
     texts={
@@ -179,4 +180,5 @@ def index():
     return render_template("index.html")
 
 if __name__ == "__main__":
-    socketio.run(app,host="0.0.0.0", port=8080, debug=True)
+    app(host="0.0.0.0", port=8080, debug=True)
+    #socketio.run(app,host="0.0.0.0", port=8080, debug=True)
