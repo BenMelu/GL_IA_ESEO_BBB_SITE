@@ -106,8 +106,6 @@ def process_image(img: np.ndarray,multiclass: bool) -> tuple[np.ndarray, str]:
                 text_class="chat"
             else:
                 text_class="chien"
-    y_pred_classes = np.argmax(y_pred, axis=1)
-    
     texts={
         "classe":text_class,
         "precision":np.array2string(np.round(y_pred.max()*100,2))
@@ -134,17 +132,6 @@ def process_form(df: pd.DataFrame):
 #         threading.Thread(target=broadcast_frames, daemon=True).start()
 #         camera_started = True
 #     return "Camera started"
-
-# @app.route("/video_feed")
-# def video_feed():
-#     global camera_started
-
-#     if not camera_started:
-#         t = threading.Thread(target=camera_thread, daemon=True)
-#         t.start()
-#         camera_started = True
-
-#     return Response(generate_frames(),mimetype='multipart/x-mixed-replace; boundary=frame')
 
 @app.route("/process", methods=["POST"])
 def process():
