@@ -14,6 +14,16 @@ import joblib
 import threading
 import time
 
+import logging
+import sys
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s %(levelname)s %(message)s",
+    handlers=[logging.StreamHandler(sys.stdout)]
+)
+
+logger = logging.getLogger(__name__)
+
 app = Flask(__name__)
 CORS(app,expose_headers=["X-Process-Texts"]) # autorise le frontend à appeler cette API
 socketio = SocketIO(app, cors_allowed_origins="*",async_mode="eventlet")
@@ -49,21 +59,21 @@ def camera_thread():
 
         if cap:
             cap.release()
-        print("Connexion au flux ESP32...")
+        logger.info("Connexion au flux ESP32...")
         cap = cv2.VideoCapture(esp_url)
 
         if not cap.isOpened():
-            print("Impossible d'ouvrir le flux, nouvel essai dans 2 sec")
+            logger.info("Impossible d'ouvrir le flux, nouvel essai dans 2 sec")
             time.sleep(2)
             continue
 
-        print("Flux ESP32 connecté.")
+        logger.info("Flux ESP32 connecté.")
 
         while not restart_camera_event.is_set():
             ret, frame = cap.read()
 
             if not ret:
-                print("Frame perdue: essaie de reconnexion...")
+                logger.info("Frame perdue: essaie de reconnexion...")
                 cap.release()
                 time.sleep(1)
                 break
@@ -149,7 +159,7 @@ def set_camera_url():
     global esp_url
 
     data = request.get_json()
-    print(data)
+    logger.info(data)
     if not data or "url" not in data:
         return jsonify({"error": "URL manquante"}), 400
 
