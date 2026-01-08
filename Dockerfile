@@ -15,4 +15,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # Cloud Run écoute TOUJOURS sur 8080
-CMD ["gunicorn", "-b", ":8080", "main:app"]
+CMD ["gunicorn","-k", "eventlet", "-w", "1","-b", ":8080", "main:app"]

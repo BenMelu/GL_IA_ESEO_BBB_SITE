@@ -2,7 +2,7 @@ from flask import Flask, request, jsonify, send_file, make_response, Response, r
 from flask_cors import CORS
 from flask_socketio import SocketIO
 import cv2
-#import ultralytics as u
+import ultralytics as u
 import tensorflow as tf
 import os.path
 import numpy as np
@@ -11,84 +11,95 @@ import magic
 from json import dumps
 import pandas as pd
 import joblib
-# import threading
-# import time
+import threading
+import time
 
 app = Flask(__name__)
 CORS(app,expose_headers=["X-Process-Texts"]) # autorise le frontend à appeler cette API
-#socketio = SocketIO(app, cors_allowed_origins="*")
+socketio = SocketIO(app, cors_allowed_origins="*",async_mode="eventlet")
 
 PATH=os.path.dirname(os.path.realpath(__file__))
 PATH=PATH+"/back"
 PATH_MODEL=PATH+"/weights"
 PATH_SCALER= os.path.join(PATH, "scalerTita.save")
 ALLOWED = {"image/png", "image/jpg", "image/jpeg", "image/gif"}
-URL_ESP="http://192.168.137.177:81/stream"
-
 
 modelT=tf.keras.models.load_model(PATH+"/modelTita.keras")
 modelCH=tf.keras.models.load_model(PATH+"/IA_chats_chiens.keras")
 modelM=tf.keras.models.load_model(PATH+"/modelMNIST.keras")
-#model=u.YOLO(PATH_MODEL+"/best.pt")
+model=u.YOLO(PATH_MODEL+"/best.pt")
 
-# camera_started = False
+camera_started = False
+esp_url=None
+esp_lock = threading.Lock()
+restart_camera_event = threading.Event()
 
-# latest_frame = None
-# lock = threading.Lock()
+latest_frame = None
+lock = threading.Lock()
 
-# def camera_thread():
-#     global latest_frame
+def camera_thread():
+    global latest_frame, esp_url
 
-#     while True:
-#         print("Connexion au flux ESP32...")
-#         cap = cv2.VideoCapture(URL_ESP)
+    while True:
+        restart_camera_event.wait()
+        restart_camera_event.clear()
 
-#         if not cap.isOpened():
-#             print("Impossible d'ouvrir le flux, nouvel essai dans 2 sec")
-#             time.sleep(2)
-#             continue
+        with lock:
+            url = esp_url
 
-#         print("Flux ESP32 connecté.")
+        if cap:
+            cap.release()
+        print("Connexion au flux ESP32...")
+        cap = cv2.VideoCapture(esp_url)
 
-#         while True:
-#             ret, frame = cap.read()
+        if not cap.isOpened():
+            print("Impossible d'ouvrir le flux, nouvel essai dans 2 sec")
+            time.sleep(2)
+            continue
 
-#             if not ret:
-#                 print("Frame perdue: essaie de reconnexion...")
-#                 cap.release()
-#                 time.sleep(1)
-#                 break
+        print("Flux ESP32 connecté.")
 
-#             # Exemple de traitement (à remplacer)
-#             img=cv2.resize(frame, (800, 600))
-#             detection=model(img,stream=True,verbose=False)
-#             for bbox in detection[0].boxes:
-#                 x1,y1,x2,y2=bbox.xyxy[0]
-#                 class_name=detection[0].names[int(bbox.cls[0])]
-#                 conf = float(bbox.conf[0])
-#                 cv2.rectangle(img,(int(x1),int(y1)),(int(x2),int(y2)),(0,0,255),3)
-#                 cv2.putText(img,f"{class_name}: {conf:.2f}",(int(x1), max(int(y1) - 5, 10)), cv2.FONT_HERSHEY_SIMPLEX,5, (0,0,255), 3)
+        while not restart_camera_event.is_set():
+            ret, frame = cap.read()
 
-#             # Stockage thread-safe
-#             with lock:
-#                 latest_frame = img
+            if not ret:
+                print("Frame perdue: essaie de reconnexion...")
+                cap.release()
+                time.sleep(1)
+                break
 
-#         time.sleep(0.01)
+            # Exemple de traitement (à remplacer)
+            img=cv2.resize(frame, (800, 600))
+            detection=model(img,stream=True,verbose=False)
+            for bbox in detection[0].boxes:
+                x1,y1,x2,y2=bbox.xyxy[0]
+                class_name=detection[0].names[int(bbox.cls[0])]
+                conf = float(bbox.conf[0])
+                cv2.rectangle(img,(int(x1),int(y1)),(int(x2),int(y2)),(0,0,255),3)
+                cv2.putText(img,f"{class_name}: {conf:.2f}",(int(x1), max(int(y1) - 5, 10)), cv2.FONT_HERSHEY_SIMPLEX,5, (0,0,255), 3)
 
-# def broadcast_frames():
-#     while True:
-#         with lock:
-#             frame = latest_frame.copy() if latest_frame is not None else None
+            # Stockage thread-safe
+            with lock:
+                latest_frame = img
 
-#         if frame is None:
-#             time.sleep(0.05)
-#             continue
+        time.sleep(0.01)
 
-#         ret, buffer = cv2.imencode(".jpg", frame)
-#         if ret:
-#             socketio.emit("video_frame", buffer.tobytes())
+def broadcast_frames():
+    while True:
+        with lock:
+            frame = latest_frame.copy() if latest_frame is not None else None
 
-#         time.sleep(0.03)
+        if frame is None:
+            time.sleep(0.05)
+            continue
+
+        ret, buffer = cv2.imencode(".jpg", frame)
+        if ret:
+            socketio.emit("video_frame", buffer.tobytes())
+
+        time.sleep(0.03)
+
+
 
 def process_image(img: np.ndarray,multiclass: bool) -> tuple[np.ndarray, str]:
     match multiclass:
@@ -123,15 +134,34 @@ def process_form(df: pd.DataFrame):
     return texts
 
 
-# @socketio.on("connect")
-# def start_camera():
-#     global camera_started
-#     if not camera_started:
-#         t = threading.Thread(target=camera_thread, daemon=True)
-#         t.start()
-#         threading.Thread(target=broadcast_frames, daemon=True).start()
-#         camera_started = True
-#     return "Camera started"
+@socketio.on("connect")
+def start_camera():
+    global camera_started
+    if not camera_started:
+        t = threading.Thread(target=camera_thread, daemon=True)
+        t.start()
+        threading.Thread(target=broadcast_frames, daemon=True).start()
+        camera_started = True
+    return "Camera started"
+
+@app.route("/urlcamera", methods=["POST"])
+def set_camera_url():
+    global esp_url
+
+    data = request.get_json()
+    print(data)
+    if not data or "url" not in data:
+        return jsonify({"error": "URL manquante"}), 400
+
+    with esp_lock:
+        esp_url = data["url"]
+
+    restart_camera_event.set()
+
+    return jsonify({
+        "status": "ok",
+        "camera_url": esp_url
+    })
 
 @app.route("/process", methods=["POST"])
 def process():
@@ -167,5 +197,5 @@ def index():
     return render_template("index.html")
 
 if __name__ == "__main__":
-    app(host="0.0.0.0", port=8080, debug=True)
-    #socketio.run(app,host="0.0.0.0", port=8080, debug=True)
+    #app(host="0.0.0.0", port=8080, debug=True)
+    socketio.run(app,host="0.0.0.0", port=8080, debug=True)
