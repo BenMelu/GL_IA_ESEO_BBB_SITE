@@ -101,13 +101,13 @@ async function sendImage(onglet) {
     return;
 }
 
-/*const socket = io();
+const socket = io();
 
     socket.on("video_frame", function(data) {
       const blob = new Blob([data], { type: "image/jpeg" });
       const url = URL.createObjectURL(blob);
       document.getElementById("fluVideoCam").src = url;
-    });*/
+    });
 
 /* Onglets principaux */
 document.querySelectorAll(".tab-btn").forEach(btn => {

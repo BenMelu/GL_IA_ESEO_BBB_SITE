@@ -15,6 +15,7 @@
 </head>
 
 <body>
+    <h1 class="titre">ESE'IA</h1>
     <!-- ONGLET PRINCIPAL -->
     <div class="tabs">
         <button class="tab-btn active" data-tab="propos">A propos</button>
@@ -23,10 +24,24 @@
     </div>
     <!-- CONTENU A PROPOS-->
     <div id="propos" class="tab-content active">
-        <span>
-            Ceci est le site de l'ESEO permettant de participer au activité pédagogique sur l'IA pour Collège et Lycée.
-            Ce site, les modèles d'IA ainsi que les activité ont été réalisées par Couplan Ghyslain et Lilian Lemercier.
-        </span>
+        <p>Bonjour et bievenue sur le site ESE'IA, un site proposant des activités diverses autour de l'Intelligence
+            Artificielle.</p>
+        <p>Ce site a pour but de répertorier plusieurs types d'activités sur les IA, afin de pouvoir réaliser des
+            ateliers modulables en temps et en compétences.</p>
+        <p>Des démonstrations de modèles d'IA sont aussi disponible afin d'expérimenter vous-même.</p>
+        <p>Ce projet a été mise en oeuvre par Ghyslain COUPLAN et Lilian LEMERCIER, sous la tutelle de Bilel BEN
+            BOUBAKER, lors de leur stage S7 en 2025.</p>
+        <p>Les différentes actvités sont :</p>
+        <ul>
+            <li>Une activité permettant de créer des chatbots et ainsi comprendre comment fonctionnement la création de
+                ceux-ci. Créée par Milovan PMS.</li>
+            <li>Une activité permettant de comprendre comment l'on peux entrainer et utiliser une IA de reconnaissance
+                de forme. Créée par Lilian LEMERCIER.</li>
+            <li>Une activité permettant de découvrir comment programmer l'une des ces IA de classification des formes
+                sous forme d'une compétition entre élèves. Créée par Ghyslain COUPLAN.</li>
+        </ul>
+        <p>Si d'autres activités particulières vous intérrèssent, vous pouvez demander en envoyant un mail détaillé à
+            l'adresse suivante: mail.ia@eseo.fr</p>
     </div>
     <!-- CONTENU DÉMO -->
     <div id="demo" class="tab-content">
@@ -41,6 +56,11 @@
 
         <div id="d1" class="subtab-content active">
             <h1>IA de régression</h1>
+            <p> Ce modèle a pour but de prédire le taux de survie d'une personne si elle se trouvait sur le Titanic.
+            </p>
+            <div class="container">
+                <div class="blocs">
+                    <h3>Si vous étiez passager du Titanic, qui seriez-vous?</h3>
             <form action="/process?ml=1" method="POST" id="answerD1">
                 <label for="Pclass">Dans quelle classe voyager vous?</label><br>
                 <label for="first">1re classe :</label>
@@ -81,7 +101,17 @@
 
                 <button type="submit">Envoyer</button>
             </form><br>
-
+            </div>
+                <div class="blocs">
+                    <h3>Quelques informations</h3>
+                    <p>Le RMS Titanic est un bateau de croisière britanique construit pour traverser l'Océan Atlantique.
+                        Il est connu pour avoir fait naufrage suite à la collision avec un iceberg.</p>
+                    <p></p>
+                    <img alt="Voyage du Titanic" classe="center" src="/static/assets/demo/titanic_voyage.png">
+                    <p>Les billets pour cette croisière étaient à environ 7£ pour les 3e classe, 13£ pour les 2e classe
+                        et environ 30£ pour les 1re classe.</p>
+                </div>
+            </div>
             <span>Avec ces informations, votre taux de survie lors du naufrage du Titanic serai de </span>
             <span id="resultTaD1"> X</span>
             <span>%</span>
@@ -89,36 +119,58 @@
         <div id="d2" class="subtab-content">
             <h1>IA de classification biclasse</h1>
 
-            <label for="fileInputD2">Votre image à analyser</label>
-            <input type="file" class="image-upload" id="fileInputD2" accept="image/*" data-preview="fileInitD2" />
-            <button onclick="sendImage(2)">Envoyer</button>
-
-            <h2>Résultat :</h2>
-            <img id="fileInitD2" alt="Image donnée" />
-            <img id="resultIMGD2" class="demo" alt="Image analysée" />
-            <span>L'image envoyée est détéctée comme un </span>
-            <span id="resultClD2"> X </span>
-            <br>
-            <span>Cette prédiction est sure à </span>
-            <span id="resultPrD2"> X</span>
-            <span>%</span>
+            <div class="container">
+                <div class="blocs">
+                    <label for="fileInputD2">
+                        <h3>Votre image à analyser</h3>
+                    </label>
+                    <input type="file" class="image-upload" id="fileInputD2" accept="image/*"
+                        data-preview="fileInitD2" />
+                    <button onclick="sendImage(2)">Envoyer</button>
+                    <img id="fileInitD2" alt="Image donnée" />
+                </div>
+                <div class="blocs">
+                    <h3>Image analysée :</h3>
+                    <img id="resultIMGD2" class="demo" alt="Image analysée" />
+                </div>
+                <div class="blocs">
+                    <h3>Résultat :</h3>
+                    <span>L'image envoyée est détéctée comme un </span>
+                    <span id="resultClD2"> X </span>
+                    <br>
+                    <span>Cette prédiction est sure à </span>
+                    <span id="resultPrD2"> X</span>
+                    <span>%</span>
+                </div>
+            </div>
         </div>
         <div id="d3" class="subtab-content">
             <h1>IA de classification multiclasse</h1>
-
-            <label for="fileInputD3">Votre image à analyser</label>
-            <input type="file" class="image-upload" id="fileInputD3" accept="image/*" data-preview="fileInitD3" />
-            <button onclick="sendImage(3)">Envoyer</button>
-
-            <h2>Résultat :</h2>
-            <img id="fileInitD3" alt="Image donnée" />
-            <img id="resultIMGD3" class="demo" alt="Image analysée" />
-            <span>L'image envoyée est détéctée comme un </span>
-            <span id="resultClD3"> X </span>
-            <br>
-            <span>Cette prédiction est sure à </span>
-            <span id="resultPrD3"> X</span>
-            <span>%</span>
+            <div class="container">
+                <div class="blocs">
+                    <label for="fileInputD3">
+                        <h3>Votre image à analyser</h3>
+                    </label>
+                    <input type="file" class="image-upload" id="fileInputD3" accept="image/*"
+                        data-preview="fileInitD3" />
+                    <button onclick="sendImage(3)">Envoyer</button>
+                    
+                    <img id="fileInitD3" alt="Image donnée" />
+                </div>
+                <div class="blocs">
+                    <h3>Image analysée :</h3>
+                    <img id="resultIMGD3" class="demo" alt="Image analysée" />
+                </div>
+                <div class="blocs">
+                    <h3>Résultat :</h3>
+                    <span>L'image envoyée est détéctée comme un </span>
+                    <span id="resultClD3"> X </span>
+                    <br>
+                    <span>Cette prédiction est sure à </span>
+                    <span id="resultPrD3"> X</span>
+                    <span>%</span>
+                </div>
+            </div>
         </div>
         <div id="d4" class="subtab-content">
             <h1>Flux vidéo de la caméra de la voiture</h1>
@@ -132,13 +184,14 @@
         <h2>Section Ateliers et Activités</h2>
 
         <div class="subtabs">
-            <button class="subtab-btn active" data-subtab="a1">Atelier Collèges</button>
-            <button class="subtab-btn" data-subtab="a2">Atelier Lycées</button>
-            <button class="subtab-btn" data-subtab="a3">Activité Entrainement et Utilisation</button>
-            <button class="subtab-btn" data-subtab="a4">Activité Programmation</button>
+            <button class="subtab-btn active" data-subtab="aColl">Atelier Collèges</button>
+            <button class="subtab-btn" data-subtab="aLyc">Atelier Lycées</button>
+            <button class="subtab-btn" data-subtab="aChat">Atelier Création de Chatbots</button>
+            <button class="subtab-btn" data-subtab="aEnUt">Activité Entrainement et Utilisation</button>
+            <button class="subtab-btn" data-subtab="aProg">Activité Programmation</button>
         </div>
 
-        <div id="a1" class="subtab-content active">
+        <div id="aColl" class="subtab-content active">
             <h2>PREMIERE CHOSE A FAIRE</h2>
             <p>Leur demander ce qu'ils connaissent de l'IA.</p>
             <h2>CONNAISSANCES ~17'</h2>
@@ -269,7 +322,7 @@
                 deuxième activité chez eux pour ceux qui le veulent<br>
                 Pour les créneaux de 2h : faire l'activité LLM et l'activité computer vision</p>
         </div>
-        <div id="a2" class="subtab-content">
+        <div id="aLyc" class="subtab-content">
             <h2>PREMIERE CHOSE A FAIRE</h2>
             <p>Leur demander ce qu'ils connaissent de l'IA.</p>
             <h2>CONNAISSANCES ~17'</h2>
@@ -471,7 +524,18 @@
                 Pour les créneaux de 3h : ajouter l'activité de programmation
             </p>
         </div>
-        <div id="a3" class="subtab-content">
+        <div id="aChat" class="subtab-content">
+            <h1>Activité : Création de Chatbots</h1>
+            <p>Cette activité permet de découvrir comment focntionne un chatbot et comment modifier les paramètres de ces chatbots.</p>
+            <p>Le site est composée de deux parties: </p>
+            <ul>
+                <li> Une partie Découverte permettant de créer un chatbot basique,</li>
+                <li> et Une partie Expert permettant de pouvoir modifier un chatbot plus en profondeur.</li>
+            </ul>
+            <p>Cette activité est disponible sur le site : <a href="http://34.155.193.187"> ESEO Chat Lab</a>.</p>
+            
+        </div>
+        <div id="aEnUt" class="subtab-content">
             <h1>Activité : Entraînement d'une IA de classification d'images</h1>
             <p>Cette activité permet de découvrir comment une IA est entraînée et pourquoi choisir les bonnes données
                 est important. Elle est très guidée et permet de voir comment les données influencent l'apprentissage
@@ -561,7 +625,7 @@
                 </li>
             </ul>
         </div>
-        <div id="a4" class="subtab-content">
+        <div id="aProg" class="subtab-content">
             <h2>KAGGLE NOTEBOOKS</h2>
 
             <p>En arrivant sur le site <a href="https://www.kaggle.com/code">https://www.kaggle.com/code</a> , vous
