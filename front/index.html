@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Pedag'ESEO</title>
+    <title>ESE'IA</title>
     <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
@@ -14,6 +14,7 @@
 </head>
 
 <body>
+    <h1 class="titre">ESE'IA</h1>
     <!-- ONGLET PRINCIPAL -->
     <div class="tabs">
         <button class="tab-btn active" data-tab="propos">A propos</button>
@@ -22,10 +23,25 @@
     </div>
     <!-- CONTENU A PROPOS-->
     <div id="propos" class="tab-content active">
-        <span>
-            Ceci est le site de l'ESEO permettant de participer au activité pédagogique sur l'IA pour Collège et Lycée.
-            Ce site, les modèles d'IA ainsi que les activité ont été réalisées par Couplan Ghyslain et Lilian Lemercier.
-        </span>
+        <p>Bonjour et bievenue sur le site ESE'IA, un site proposant des activités diverses autour de l'Intelligence
+            Artificielle.</p>
+        <p>Ce site a pour but de répertorier plusieurs types d'activités sur les IA, afin de pouvoir réaliser des
+            ateliers modulables en temps et en compétences.</p>
+        <p>Des démonstrations de modèles d'IA sont aussi disponible afin d'expérimenter vous-même.</p>
+        <p>Ce projet a été mise en oeuvre par Ghyslain COUPLAN et Lilian LEMERCIER, sous la tutelle de Bilel BEN
+            BOUBAKER, lors de leur stage S7 en 2025.</p>
+        <p>Les différentes actvités sont :</p>
+        <ul>
+            <li>Une activité permettant de créer des chatbots et ainsi comprendre comment fonctionnement la création de
+                ceux-ci. Créée par Milovan PMS.</li>
+            <li>Une activité permettant de comprendre comment l'on peux entrainer et utiliser une IA de reconnaissance
+                de forme. Créée par Lilian LEMERCIER.</li>
+            <li>Une activité permettant de découvrir comment programmer l'une des ces IA de classification des formes
+                sous forme d'une compétition entre élèves. Créée par Ghyslain COUPLAN.</li>
+        </ul>
+        <p>Si d'autres activités particulières vous intérrèssent, vous pouvez demander en envoyant un mail détaillé à
+            l'adresse suivante: mail.ia@eseo.fr</p>
+
     </div>
     <!-- CONTENU DÉMO -->
     <div id="demo" class="tab-content">
@@ -40,47 +56,62 @@
 
         <div id="d1" class="subtab-content active">
             <h1>IA de régression</h1>
-            <form action="/process?ml=1" method="POST" id="answerD1">
-                <label for="Pclass">Dans quelle classe voyager vous?</label><br>
-                <label for="first">1re classe :</label>
-                <input type="radio" id="first" name="Pclass" value=1>
-                <label for="second">2e classe :</label>
-                <input type="radio" id="second" name="Pclass" value=2>
-                <label for="third">3e classe :</label>
-                <input type="radio" id="third" name="Pclass" value=3><br><br>
+            <p> Ce modèle a pour but de prédire le taux de survie d'une personne si elle se trouvait sur le Titanic.
+            </p>
+            <div class="container">
+                <div class="blocs">
+                    <h3>Si vous étiez passager du Titanic, qui seriez-vous?</h3>
+                    <form action="/process?ml=1" method="POST" id="answerD1">
+                        <label for="Pclass">Dans quelle classe voyager vous?</label><br>
+                        <label for="first">1re classe :</label>
+                        <input type="radio" id="first" name="Pclass" value=1>
+                        <label for="second">2e classe :</label>
+                        <input type="radio" id="second" name="Pclass" value=2>
+                        <label for="third">3e classe :</label>
+                        <input type="radio" id="third" name="Pclass" value=3><br><br>
 
-                <label for="Sex">Etes vous un homme ou une femme?</label><br>
-                <label for="homme">Homme :</label>
-                <input type="radio" id="homme" name="Sex" value=0>
-                <label for="femme">Femme :</label>
-                <input type="radio" id="femme" name="Sex" value=1><br><br>
-                
-                <label for="Age">Quel age avez vous?</label><br>
-                <input type="number" id="Age" name="Age"><br><br>
+                        <label for="Sex">Etes vous un homme ou une femme?</label><br>
+                        <label for="homme">Homme :</label>
+                        <input type="radio" id="homme" name="Sex" value=0>
+                        <label for="femme">Femme :</label>
+                        <input type="radio" id="femme" name="Sex" value=1><br><br>
 
-                <label for="SibSp">Avec combien de frères, soeurs et/ou partnaires voyager vous?</label><br>
-                <input type="number" id="SibSp" name="SibSp"><br><br>
+                        <label for="Age">Quel age avez vous?</label><br>
+                        <input type="number" id="Age" name="Age"><br><br>
 
-                <label for="Parch">Avec combien de membres de votre famille autres voyager vous?</label><br>
-                <input type="number" id="Parch" name="Parch"><br><br>
+                        <label for="SibSp">Avec combien de frères, soeurs et/ou partnaires voyager vous?</label><br>
+                        <input type="number" id="SibSp" name="SibSp"><br><br>
 
-                <label for="Fare">Quel est le prix de votre billets?</label><br>
-                <input type="number" id="Fare" step=0.01 name="Fare"><br><br>
+                        <label for="Parch">Avec combien de membres de votre famille autres voyager vous?</label><br>
+                        <input type="number" id="Parch" name="Parch"><br><br>
 
-                <label for="Embarked">De quel ville etes vous partis?</label><br>
-                <label for="S">Southampton :</label>
-                <input type="radio" id="S" name="Embarked" value=0>
-                <label for="C">Cherbourg :</label>
-                <input type="radio" id="C" name="Embarked" value=1>
-                <label for="Q">Queenstown :</label>
-                <input type="radio" id="Q" name="Embarked" value=2><br><br>
+                        <label for="Fare">Quel est le prix de votre billets? (en livre £)</label><br>
+                        <input type="number" id="Fare" step=0.01 name="Fare"><br><br>
 
-                <label for="LWeight">Quel est le poids de votre bagage?</label><br>
-                <input type="number" id="LWeight" step=0.01 name="LWeight"><br><br>
+                        <label for="Embarked">De quel ville etes vous partis?</label><br>
+                        <label for="S">Southampton :</label>
+                        <input type="radio" id="S" name="Embarked" value=0>
+                        <label for="C">Cherbourg :</label>
+                        <input type="radio" id="C" name="Embarked" value=1>
+                        <label for="Q">Queenstown :</label>
+                        <input type="radio" id="Q" name="Embarked" value=2><br><br>
 
-                <button type="submit">Envoyer</button>
-            </form><br>
+                        <label for="LWeight">Quel est le poids de votre bagage?</label><br>
+                        <input type="number" id="LWeight" step=0.01 name="LWeight"><br><br>
 
+                        <button type="submit">Envoyer</button>
+                    </form><br>
+                </div>
+                <div class="blocs">
+                    <h3>Quelques informations</h3>
+                    <p>Le RMS Titanic est un bateau de croisière britanique construit pour traverser l'Océan Atlantique.
+                        Il est connu pour avoir fait naufrage suite à la collision avec un iceberg.</p>
+                    <p></p>
+                    <img alt="Voyage du Titanic" classe="center" src="assets\demo\titanic_voyage.png">
+                    <p>Les billets pour cette croisière étaient à environ 7£ pour les 3e classe, 13£ pour les 2e classe
+                        et environ 30£ pour les 1re classe.</p>
+                </div>
+            </div>
             <span>Avec ces informations, votre taux de survie lors du naufrage du Titanic serai de </span>
             <span id="resultTaD1"> X</span>
             <span>%</span>
@@ -88,36 +119,58 @@
         <div id="d2" class="subtab-content">
             <h1>IA de classification biclasse</h1>
 
-            <label for="fileInputD2">Votre image à analyser</label>
-            <input type="file" class="image-upload" id="fileInputD2" accept="image/*" data-preview="fileInitD2" />
-            <button onclick="sendImage(2)">Envoyer</button>
-
-            <h2>Résultat :</h2>
-            <img id="fileInitD2" alt="Image donnée" />
-            <img id="resultIMGD2" class="demo" alt="Image analysée" />
-            <span>L'image envoyée est détéctée comme un </span>
-            <span id="resultClD2"> X </span>
-            <br>
-            <span>Cette prédiction est sure à </span>
-            <span id="resultPrD2"> X</span>
-            <span>%</span>
+            <div class="container">
+                <div class="blocs">
+                    <label for="fileInputD2">
+                        <h3>Votre image à analyser</h3>
+                    </label>
+                    <input type="file" class="image-upload" id="fileInputD2" accept="image/*"
+                        data-preview="fileInitD2" />
+                    <button onclick="sendImage(2)">Envoyer</button>
+                    <img id="fileInitD2" alt="Image donnée" />
+                </div>
+                <div class="blocs">
+                    <h3>Image analysée :</h3>
+                    <img id="resultIMGD2" class="demo" alt="Image analysée" />
+                </div>
+                <div class="blocs">
+                    <h3>Résultat :</h3>
+                    <span>L'image envoyée est détéctée comme un </span>
+                    <span id="resultClD2"> X </span>
+                    <br>
+                    <span>Cette prédiction est sure à </span>
+                    <span id="resultPrD2"> X</span>
+                    <span>%</span>
+                </div>
+            </div>
         </div>
         <div id="d3" class="subtab-content">
             <h1>IA de classification multiclasse</h1>
-
-            <label for="fileInputD3">Votre image à analyser</label>
-            <input type="file" class="image-upload" id="fileInputD3" accept="image/*" data-preview="fileInitD3" />
-            <button onclick="sendImage(3)">Envoyer</button>
-
-            <h2>Résultat :</h2>
-            <img id="fileInitD3" alt="Image donnée" />
-            <img id="resultIMGD3" class="demo" alt="Image analysée" />
-            <span>L'image envoyée est détéctée comme un </span>
-            <span id="resultClD3"> X </span>
-            <br>
-            <span>Cette prédiction est sure à </span>
-            <span id="resultPrD3"> X</span>
-            <span>%</span>
+            <div class="container">
+                <div class="blocs">
+                    <label for="fileInputD3">
+                        <h3>Votre image à analyser</h3>
+                    </label>
+                    <input type="file" class="image-upload" id="fileInputD3" accept="image/*"
+                        data-preview="fileInitD3" />
+                    <button onclick="sendImage(3)">Envoyer</button>
+                    
+                    <img id="fileInitD3" alt="Image donnée" />
+                </div>
+                <div class="blocs">
+                    <h3>Image analysée :</h3>
+                    <img id="resultIMGD3" class="demo" alt="Image analysée" />
+                </div>
+                <div class="blocs">
+                    <h3>Résultat :</h3>
+                    <span>L'image envoyée est détéctée comme un </span>
+                    <span id="resultClD3"> X </span>
+                    <br>
+                    <span>Cette prédiction est sure à </span>
+                    <span id="resultPrD3"> X</span>
+                    <span>%</span>
+                </div>
+            </div>
         </div>
         <div id="d4" class="subtab-content">
             <h1>Flux vidéo de la caméra de la voiture</h1>
@@ -132,6 +185,7 @@
         <div class="subtabs">
             <button class="subtab-btn active" data-subtab="a1">Atelier Collèges</button>
             <button class="subtab-btn" data-subtab="a2">Atelier Lycées</button>
+            <button class="subtab-btn" data-subtab="aChat">Atelier Création de Chatbots</button>
             <button class="subtab-btn" data-subtab="a3">Activité Entrainement et Utilisation</button>
             <button class="subtab-btn" data-subtab="a4">Activité Programmation</button>
         </div>
@@ -468,6 +522,19 @@
                 Pour les créneaux de 2h : faire l'activité LLM et l'activité computer vision<br>
                 Pour les créneaux de 3h : ajouter l'activité de programmation
             </p>
+        </div>
+        <div id="aChat" class="subtab-content">
+            <h1>Activité : Création de Chatbots</h1>
+            <p>Cette activité permet de découvrir comment focntionne un chatbot et comment modifier les paramètres de
+                ces chatbots.</p>
+            <p>Le site est composé de deux parties: </p>
+            <ul>
+                <li> Une partie Découverte permettant de créer un chatbot basique,</li>
+                <li> et une partie Expert permettant de pouvoir modifier un chatbot plus en profondeur.</li>
+            </ul>
+            <p>Cette activité est disponible sur le site : <a href="http://34.155.193.187"> ESEO Chat Lab</a>.</p>
+            <p>Le guide pour cette activité se trouve directement sur le site.</p>
+
         </div>
         <div id="a3" class="subtab-content">
             <h1>Activité : Entraînement d'une IA de classification d'images</h1>

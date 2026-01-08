@@ -1,13 +1,26 @@
 body {
     font-family: sans-serif;
     padding: 2rem;
+    padding-top: 1em;
 }
 
 img {
     max-width: 400px;
     display: block;
     margin-top: 1rem;
-    
+}
+
+img .center{
+    display: block;
+    margin: 0 auto 1rem;
+    max-width: 100%;
+    height: auto;
+}
+.titre{
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #7fc2f8;
+    text-align:center;
+    font-size:2em
 }
 
 .demo{
@@ -89,16 +102,36 @@ img {
     display: block;
 }
 
+.container{
+    display: flex;
+  	width: 100%;
+    align-items: flex-start;
+}
+
+.blocs{
+    display: inline-block;
+    padding: 1em;
+    margin: 1em;
+    border: 1px solid black;
+    flex: 1;
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;   /* empile les blocs */
+  }
+}
+
 .comp-answ {
-    overflow: hidden;              /* Empêche le contenu de dépasser */
-    max-height: 0;                 /* Caché au début */
-    opacity: 0;                    /* Invisible */
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
     transition: max-height 0.5s ease, opacity 0.5s ease;
 }
 
 .comp-answ.visible {
-    max-height: 200px;             /* Hauteur suffisante pour contenir le texte */
-    opacity: 1;                    /* Visible */
+    max-height: 200px;            
+    opacity: 1;                    
 }
 
 .comp-answ-btn {
