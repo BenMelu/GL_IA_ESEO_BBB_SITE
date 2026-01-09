@@ -50,6 +50,8 @@ lock = threading.Lock()
 def camera_thread():
     global latest_frame, esp_url
 
+    cap=None
+    
     while True:
         restart_camera_event.wait()
         restart_camera_event.clear()

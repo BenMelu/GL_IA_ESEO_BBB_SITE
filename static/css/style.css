@@ -28,11 +28,11 @@ img .center{
     height: 400px;
 }
 
-#fileInitD2,#fileInitD3 {
+#fileInitD2,#fileInitD3,#resultIMGD2,#resultIMGD3 {
     display: none;
 }
 
-#fileInitD2.visible,#fileInitD3.visible {
+#fileInitD2.visible,#fileInitD3.visible,#resultIMGD2.visible,#resultIMGD3.visible {
     display: block;
 }
 

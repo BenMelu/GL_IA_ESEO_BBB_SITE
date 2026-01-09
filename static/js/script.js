@@ -91,11 +91,13 @@ async function sendImage(onglet) {
             document.getElementById("resultClD2").textContent = texts.classe;
             document.getElementById("resultPrD2").textContent = texts.precision;
             document.getElementById("resultIMGD2").src = URL.createObjectURL(blob);
+            document.getElementById("resultIMGD2").classList.add("visible");
             break;
         case 3:
             document.getElementById("resultClD3").textContent = texts.classe;
             document.getElementById("resultPrD3").textContent = texts.precision;
             document.getElementById("resultIMGD3").src = URL.createObjectURL(blob);
+            document.getElementById("resultIMGD3").classList.add("visible");
             break;
     }
     return;

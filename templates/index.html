@@ -56,8 +56,9 @@
 
         <div id="d1" class="subtab-content active">
             <h1>IA de régression</h1>
-            <p> Ce modèle a pour but de prédire le taux de survie d'une personne si elle se trouvait sur le Titanic.
-            </p>
+            <p>Un modèle de régression a pour but de prédire un nombre.</p>
+            <p>Le modèle ci-dessous a pour but de prédire le taux de survie d'une personne si elle se trouvait sur le Titanic.</p>
+            <p>Il a été entrainé avec la liste des passagers du Titanic disponible <a href="https://www.kaggle.com/competitions/titanic/data">ici</a>.</p>
             <div class="container">
                 <div class="blocs">
                     <h3>Si vous étiez passager du Titanic, qui seriez-vous?</h3>
@@ -85,7 +86,7 @@
                 <label for="Parch">Avec combien de membres de votre famille autres voyager vous?</label><br>
                 <input type="number" id="Parch" name="Parch"><br><br>
 
-                <label for="Fare">Quel est le prix de votre billets?</label><br>
+                <label for="Fare">Quel est le prix de votre billets? (en livre £)</label><br>
                 <input type="number" id="Fare" step=0.01 name="Fare"><br><br>
 
                 <label for="Embarked">De quel ville etes vous partis?</label><br>
@@ -96,7 +97,7 @@
                 <label for="Q">Queenstown :</label>
                 <input type="radio" id="Q" name="Embarked" value=2><br><br>
 
-                <label for="LWeight">Quel est le poids de votre bagage?</label><br>
+                <label for="LWeight">Quel est le poids de votre bagage? (en kg)</label><br>
                 <input type="number" id="LWeight" step=0.01 name="LWeight"><br><br>
 
                 <button type="submit">Envoyer</button>
@@ -110,6 +111,11 @@
                     <img alt="Voyage du Titanic" classe="center" src="/static/assets/demo/titanic_voyage.png">
                     <p>Les billets pour cette croisière étaient à environ 7£ pour les 3e classe, 13£ pour les 2e classe
                         et environ 30£ pour les 1re classe.</p>
+                    <p>Le poids des bagages des passagers allait d'1kg à 11kg avec une moyenne de 1.73kg. 75% des passagers avait moins de 2kg de bagages.</p>
+                    <br>
+                    <p>Pour information, Jack et Rose sont des personnage fictifs, ne se trouvant pas dans les registres de passager. Ils peuvent donc être utilisés comme test.</p>
+                    <p>Nous savons pour Rose que: elle avait 17 ans, elle était en 1re classe et elle est partie de Southampton avec sa mère et son fiancé. </p>
+                    <p>Pour Jack, nous savons qu'il avait 20 ans, qu'il était en 3e classe et qu'il est parti seul de Southampton avec un minimum de bagages.</p>
                 </div>
             </div>
             <span>Avec ces informations, votre taux de survie lors du naufrage du Titanic serai de </span>
@@ -118,7 +124,9 @@
         </div>
         <div id="d2" class="subtab-content">
             <h1>IA de classification biclasse</h1>
-
+            <p>Un modèle de classification a pour but de prédire la probabilité qu'une image représente des objets définis. </p>
+            <p>Ce modèle permet de prédire si une image représente un chat ou un chien.</p>
+            <p>Il a été entrainé avec une liste de photos de chien et de chats disponible <a href="https://www.kaggle.com/datasets/bhavikjikadara/dog-and-cat-classification-dataset">ici</a>.</p>
             <div class="container">
                 <div class="blocs">
                     <label for="fileInputD2">
@@ -146,6 +154,9 @@
         </div>
         <div id="d3" class="subtab-content">
             <h1>IA de classification multiclasse</h1>
+            <p>Un modèle de classification a pour but de prédire la probabilité qu'une image représente des objets définis. </p>
+            <p>Ce modèle permet de prédire si une image représente un chat ou un chien.</p>
+            <p>Il a été entrainé avec le jeu de données MNIST disponible directement dans les jeux de données de base de TensorFlow Keras.</p>
             <div class="container">
                 <div class="blocs">
                     <label for="fileInputD3">
@@ -526,11 +537,11 @@
         </div>
         <div id="aChat" class="subtab-content">
             <h1>Activité : Création de Chatbots</h1>
-            <p>Cette activité permet de découvrir comment focntionne un chatbot et comment modifier les paramètres de ces chatbots.</p>
-            <p>Le site est composée de deux parties: </p>
+            <p>Cette activité permet de découvrir comment fonctionne un chatbot et comment modifier les paramètres de ces chatbots.</p>
+            <p>Le site est composé de deux parties: </p>
             <ul>
                 <li> Une partie Découverte permettant de créer un chatbot basique,</li>
-                <li> et Une partie Expert permettant de pouvoir modifier un chatbot plus en profondeur.</li>
+                <li> et Une partie Expert permettant la modification d'un chatbot plus en profondeur.</li>
             </ul>
             <p>Cette activité est disponible sur le site : <a href="http://34.155.193.187"> ESEO Chat Lab</a>.</p>
             
