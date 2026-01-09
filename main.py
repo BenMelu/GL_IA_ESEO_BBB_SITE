@@ -13,6 +13,7 @@ import pandas as pd
 import joblib
 import threading
 import time
+import base64
 
 import logging
 import sys
@@ -41,17 +42,17 @@ model=u.YOLO(PATH_MODEL+"/best.pt")
 
 camera_started = False
 esp_url=None
-esp_lock = threading.Lock()
+lock = threading.Lock()
 restart_camera_event = threading.Event()
 
 latest_frame = None
-lock = threading.Lock()
+
 
 def camera_thread():
     global latest_frame, esp_url
 
     cap=None
-    
+
     while True:
         restart_camera_event.wait()
         restart_camera_event.clear()
@@ -62,7 +63,7 @@ def camera_thread():
         if cap:
             cap.release()
         logger.info("Connexion au flux ESP32...")
-        cap = cv2.VideoCapture(esp_url)
+        cap = cv2.VideoCapture(url)
 
         if not cap.isOpened():
             logger.info("Impossible d'ouvrir le flux, nouvel essai dans 2 sec")
@@ -105,9 +106,10 @@ def broadcast_frames():
             time.sleep(0.05)
             continue
 
-        ret, buffer = cv2.imencode(".jpg", frame)
-        if ret:
-            socketio.emit("video_frame", buffer.tobytes())
+        _, buffer = cv2.imencode(".jpg", frame)
+        frame_b64 = base64.b64encode(buffer).decode("utf-8")
+
+        socketio.emit("video_frame", {"image": frame_b64})
 
         time.sleep(0.03)
 
@@ -150,22 +152,21 @@ def process_form(df: pd.DataFrame):
 def start_camera():
     global camera_started
     if not camera_started:
-        t = threading.Thread(target=camera_thread, daemon=True)
-        t.start()
+        threading.Thread(target=camera_thread, daemon=True).start()
         threading.Thread(target=broadcast_frames, daemon=True).start()
         camera_started = True
-    return "Camera started"
+        logger.info("Threads caméra démarrés")
 
 @app.route("/urlcamera", methods=["POST"])
 def set_camera_url():
     global esp_url
 
-    data = request.get_json()
+    data = request.get_json(silent=True)
     logger.info(data)
     if not data or "url" not in data:
         return jsonify({"error": "URL manquante"}), 400
 
-    with esp_lock:
+    with lock:
         esp_url = data["url"]
 
     restart_camera_event.set()

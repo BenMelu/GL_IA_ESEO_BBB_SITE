@@ -105,10 +105,12 @@ async function sendImage(onglet) {
 
 const socket = io();
 
-    socket.on("video_frame", function(data) {
-      const blob = new Blob([data], { type: "image/jpeg" });
-      const url = URL.createObjectURL(blob);
-      document.getElementById("fluVideoCam").src = url;
+    socket.on("connect", () => {
+    console.log("WebSocket connecté");
+    });
+
+    socket.on("video_frame", (data) => {
+    document.getElementById("fluxVideoCam").src ="data:image/jpeg;base64," + data.image;
     });
 
 /* Onglets principaux */
