@@ -4,14 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Pedag'ESEO</title>
+    <title>ESE'IA</title>
     <link rel="apple-touch-icon" sizes="180x180" href="/static/assets/favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/static/assets/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/static/assets/favicon/favicon-16x16.png">
     <link rel="manifest" href="/static/assets/favicon/site.webmanifest">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
-    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    <!-- <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script> -->
 </head>
 
 <body>
@@ -51,7 +51,7 @@
             <button class="subtab-btn active" data-subtab="d1">Démo 1</button>
             <button class="subtab-btn" data-subtab="d2">Démo 2</button>
             <button class="subtab-btn" data-subtab="d3">Démo 3</button>
-            <button class="subtab-btn" data-subtab="d4">Flux Caméra de la voiture</button>
+            <!-- <button class="subtab-btn" data-subtab="d4">Flux Caméra de la voiture</button> -->
         </div>
 
         <div id="d1" class="subtab-content active">
@@ -183,11 +183,11 @@
                 </div>
             </div>
         </div>
-        <div id="d4" class="subtab-content">
+        <!-- <div id="d4" class="subtab-content">
             <h1>Flux vidéo de la caméra de la voiture</h1>
             <p> Non disponible pour le moment</p>
             <img id="fluxVideoCam" width="800" alt="Flux vidéo de la caméra">
-        </div>
+        </div> -->
     </div>
 
     <!-- CONTENU ACTIVITÉ -->

@@ -103,15 +103,15 @@ async function sendImage(onglet) {
     return;
 }
 
-const socket = io();
+// const socket = io();
 
-    socket.on("connect", () => {
-    console.log("WebSocket connecté");
-    });
+//     socket.on("connect", () => {
+//     console.log("WebSocket connecté");
+//     });
 
-    socket.on("video_frame", (data) => {
-    document.getElementById("fluxVideoCam").src ="data:image/jpeg;base64," + data.image;
-    });
+//     socket.on("video_frame", (data) => {
+//     document.getElementById("fluxVideoCam").src ="data:image/jpeg;base64," + data.image;
+//     });
 
 /* Onglets principaux */
 document.querySelectorAll(".tab-btn").forEach(btn => {
