@@ -135,3 +135,63 @@ document.querySelectorAll(".comp-answ-btn").forEach(btn => {
         target.classList.toggle("visible");
     });
 });
+
+
+// Permet de ne pas changer d'onglet quand on recharge la page
+
+function getActiveTab() {
+  const hash = window.location.hash.slice(1);
+  const [tab, subtab] = hash.split(':');
+  return { tab: tab || 'propos', subtab: subtab || null };
+}
+
+function switchTab(tabName) {
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.tab === tabName);
+  });
+
+  document.querySelectorAll('.tab-content').forEach(content => {
+    content.classList.toggle('active', content.id === tabName);
+  });
+
+  updateHash(tabName, null);
+}
+
+function switchSubtab(tabName, subtabName) {
+  // Ne touche qu'aux sous-onglets du bon onglet parent
+  const parent = document.getElementById(tabName);
+  if (!parent) return;
+
+  parent.querySelectorAll('.subtab-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.subtab === subtabName);
+  });
+
+  parent.querySelectorAll('.subtab-content').forEach(content => {
+    content.classList.toggle('active', content.id === subtabName);
+  });
+
+  updateHash(tabName, subtabName);
+}
+
+function updateHash(tabName, subtabName) {
+  const hash = subtabName ? `${tabName}:${subtabName}` : tabName;
+  history.replaceState(null, '', '#' + hash);
+}
+
+// Au chargement
+const { tab, subtab } = getActiveTab();
+switchTab(tab);
+if (subtab) switchSubtab(tab, subtab);
+
+// Clics sur les onglets principaux
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => switchTab(btn.dataset.tab));
+});
+
+// Clics sur les sous-onglets
+document.querySelectorAll('.subtab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const parent = btn.closest('.tab-content');
+    switchSubtab(parent.id, btn.dataset.subtab);
+  });
+});
