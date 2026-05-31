@@ -45,7 +45,16 @@ async function sendImage(onglet) {
             break;
     }
     const file = fileIn.files[0];
-    if (!file) return alert("Choisissez une image");
+
+
+// message d'alerte si l'utilisateur envoie une image vide
+if (!file) {
+    document.getElementById("erreurD" + onglet).textContent = "Veuillez choisir une image.";
+    return;
+}
+document.getElementById("erreurD" + onglet).textContent = "";
+
+
 
     const formData = new FormData();
     formData.append("file", file);
@@ -195,3 +204,25 @@ document.querySelectorAll('.subtab-btn').forEach(btn => {
     switchSubtab(parent.id, btn.dataset.subtab);
   });
 });
+
+let lastScroll = 0;
+
+window.addEventListener('scroll', () => {
+    const current = window.scrollY;
+    const diff = current - lastScroll;
+
+    if (diff < -5) {
+        // scroll vers le haut d'au moins 10px → header visible
+        document.querySelector('header').style.opacity = '1';
+        document.querySelector('header').style.transform = 'translateY(0)';
+    } else if (diff > 5) {
+        // scroll vers le bas d'au moins 10px → header caché
+        document.querySelector('header').style.opacity = '0';
+        document.querySelector('header').style.transform = 'translateY(-100%)';
+    }
+
+    lastScroll = current;
+});
+
+const header = document.querySelector('header');
+document.body.style.paddingTop = header.offsetHeight + 'px';

@@ -1,26 +1,33 @@
 /* Header avec logo + onglets alignés */
 html {
-    background: #fae8ff;
+    background: #fcfcfa;
 }
 
 body {
     font-family: sans-serif;
-    padding: 0;
+    padding-top: 0px;
     margin: 0;
-    background: #fae8ff;
+    background: #fcfcfa;
 }
 
 header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
     display: flex;
+    border-bottom: 2px solid #3eb8f0;
     align-items: center;
     background: #ecf6ff;
     padding: 0.8rem 2rem;
     gap: 2rem;
     box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    transition: opacity 0.5s ease, transform 0.8s ease;
 }
 
 header img {
-    max-width: 320px;
+    max-width: 300px;
     margin: 0;  
     display: block;
 }
@@ -88,17 +95,11 @@ img .center{
     box-shadow: 0 0 10px rgba(62,184,240,0.5);
 }
 
-/* Barre du header */
-.accent-line {
-    height: 2px;
-    background: #3eb8f0; /* le bleu cyan que tu as déjà sur les onglets actifs */
-}
-
 /* Contenu principal */
 .tab-content {
     display: none;
     padding: 20px 2rem;
-    background: #fae8ff;
+    background: #fcfcfa;
     min-height: 200px;
 }
 
@@ -172,7 +173,7 @@ img .center{
 .subtab-content {
     display: none;
     padding: 15px;
-    background: #fae8ff;
+    background: #fcfcfa;
     margin-top: 5px;
     border: none;
 }
@@ -200,6 +201,20 @@ img .center{
     flex: 1;
     background: #ffff;
     min-height: 75px;
+    align-self: stretch;
+}
+
+.blocs-rep {
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    padding: 1em;
+    margin: 1em;
+    border: 1px solid #ff7fe8;
+    flex: 1;
+    background: #ffff;
+    min-height: 75px;
+    align-self: stretch;
 }
 
 @media (max-width: 768px) {

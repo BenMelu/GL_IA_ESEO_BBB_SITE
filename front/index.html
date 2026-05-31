@@ -19,23 +19,16 @@
 
 
     <header>
+
         <img src="../images/logo_site_sans_fond.png" alt="Logo ESE'IA">
-
-
-
-
-
-
-
         <!-- ONGLET PRINCIPAL -->
         <div class="tabs">
             <button class="tab-btn active" data-tab="propos">A propos</button>
             <button class="tab-btn" data-tab="info">Qu'est-ce que l'IA ?</button>
             <button class="tab-btn" data-tab="demo">Démonstrations</button>
-            <button class="tab-btn" data-tab="activite">Ateliers et Activités</button>
+            <button class="tab-btn" data-tab="activite">Activités</button>
         </div>
     </header>
-    <div class="accent-line"></div>
 
 
 
@@ -343,14 +336,15 @@
                 </div> -->
 
                 <div class="blocs">
-                    <div style="display:flex; align-items:center; gap:6px; margin-bottom:11px;">
-                        <i class="ti ti-upload" style="font-size:16px; color:#8a96a3;"></i>
-                        <h3 style="margin:0; font-size:14px;">Votre image à analyser</h3>
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:11px;">
+                        <div style="display:flex; align-items:center; gap:6px;">
+                            <i class="ti ti-upload" style="font-size:16px; color:#8a96a3;"></i>
+                            <label for="fileInputD2" style="margin:0; font-size:14px; cursor:pointer; font-weight:bold; border: 1px solid #aaa; padding: 6px 12px; border-radius: 8px;">Votre image à analyser</label>
+                        </div>
+                        <span id="erreurD2" style="color:red; font-size:15px;"></span>
+                        <button onclick="sendImage(2)" style="border: 1px solid #aaa; padding: 6px 12px; border-radius: 8px; background:transparent; cursor:pointer; font-size:14px;">Envoyer</button>
                     </div>
-                    <div style="display:flex; gap:8px; align-items:center;">
-                        <input type="file" class="image-upload" id="fileInputD2" accept="image/*" data-preview="fileInitD2" />
-                        <button onclick="sendImage(3)">Envoyer</button>
-                    </div>
+                    <input type="file" class="image-upload" id="fileInputD2" accept="image/*" data-preview="fileInitD2" style="display:none;" />
                     <img id="fileInitD2" alt="Image donnée" />
                 </div>
 
@@ -364,18 +358,12 @@
 
             </div>
 
-            <div class="container">
-
-                <div class="blocs">
-                    <h3>Résultat :</h3>
-                    <span>L'image envoyée est détéctée comme un </span>
-                    <span id="resultClD2"> X </span>
-                    <br>
-                    <span>Cette prédiction est sure à </span>
-                    <span id="resultPrD2"> X</span>
-                    <span>%</span>
+            <div class="blocs-rep">
+                <h3 style="text-align:center; margin:0 0 auto;">Résultat :</h3>
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <span>L'image envoyée est détectée comme un <span id="resultClD2">X</span></span>
+                    <span>Cette prédiction est sûre à <span id="resultPrD2">X</span> %</span>
                 </div>
-
             </div>
 
         </div>
@@ -401,14 +389,15 @@
             <div class="container">
 
                 <div class="blocs">
-                    <div style="display:flex; align-items:center; gap:6px; margin-bottom:11px;">
-                        <i class="ti ti-upload" style="font-size:16px; color:#8a96a3;"></i>
-                        <h3 style="margin:0; font-size:14px;">Votre image à analyser</h3>
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:11px;">
+                        <div style="display:flex; align-items:center; gap:6px;">
+                            <i class="ti ti-upload" style="font-size:16px; color:#8a96a3;"></i>
+                            <label for="fileInputD3" style="margin:0; font-size:14px; cursor:pointer; font-weight:bold; border: 1px solid #aaa; padding: 6px 12px; border-radius: 8px;">Votre image à analyser</label>
+                        </div>
+                        <span id="erreurD3" style="color:red; font-size:15px;"></span>
+                        <button onclick="sendImage(3)" style="border: 1px solid #aaa; padding: 6px 12px; border-radius: 8px; background:transparent; cursor:pointer; font-size:14px;">Envoyer</button>
                     </div>
-                    <div style="display:flex; gap:8px; align-items:center;">
-                        <input type="file" class="image-upload" id="fileInputD3" accept="image/*" data-preview="fileInitD3" />
-                        <button onclick="sendImage(3)">Envoyer</button>
-                    </div>
+                    <input type="file" class="image-upload" id="fileInputD3" accept="image/*" data-preview="fileInitD3" style="display:none;" />
                     <img id="fileInitD3" alt="Image donnée" />
                 </div>
 
@@ -422,18 +411,12 @@
 
             </div>
 
-            <div class="container">
-
-                <div class="blocs">
-                    <h3>Résultat :</h3>
-                    <span>L'image envoyée est détéctée comme un </span>
-                    <span id="resultClD3"> X </span>
-                    <br>
-                    <span>Cette prédiction est sure à </span>
-                    <span id="resultPrD3"> X</span>
-                    <span>%</span>
+            <div class="blocs-rep">
+                <h3 style="text-align:center; margin:0 0 auto;">Résultat :</h3>
+                <div style="display:flex; justify-content:space-between; align-items:flex-end;">
+                    <span>L'image envoyée est détectée comme un <span id="resultClD3">X</span></span>
+                    <span>Cette prédiction est sûre à <span id="resultPrD3">X</span> %</span>
                 </div>
-
             </div>
 
         </div>
@@ -453,9 +436,9 @@
 
         <div class="subtabs">
             <button class="subtab-btn active" data-subtab="a1">Quizz</button>
-            <button class="subtab-btn" data-subtab="a2">Activité Création de Chatbots</button>
-            <button class="subtab-btn" data-subtab="a3">Activité Entrainement et Utilisation</button>
-            <button class="subtab-btn" data-subtab="a4">Activité Programmation</button>
+            <button class="subtab-btn" data-subtab="a2">Création de Chatbots</button>
+            <button class="subtab-btn" data-subtab="a3">Entrainement et Utilisation d'IA</button>
+            <button class="subtab-btn" data-subtab="a4">Programmation d'une IA</button>
         </div>
 
         <div id="a1" class="subtab-content active">
