@@ -135,13 +135,93 @@ document.querySelectorAll(".subtab-btn").forEach(btn => {
     });
 });
 
-/*Réponses aux parties compréhension*/
+/*Réponses aux questions du quizz*/
+document.querySelectorAll(".answer-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+        const quiz = btn.closest('.quiz');
+        const slide = btn.closest('.quiz-slide');
+        const compBtn = slide.querySelector('.comp-answ-btn');
+        const precisionDiv = slide.querySelectorAll('.quiz')[1];
+
+        quiz.querySelectorAll('.answer-btn').forEach(b => {
+            b.classList.remove('selected');
+            b.style.background = '';
+            b.style.borderColor = '';
+            b.style.color = '';
+        });
+
+        btn.classList.add('selected');
+
+        // Affiche ou cache la précision selon la réponse à la pertinence
+        if (quiz === slide.querySelectorAll('.quiz')[0]) {
+            if (btn.dataset.correct === 'true') {
+                precisionDiv.classList.add('visible');
+            } else {
+                precisionDiv.classList.remove('visible');
+                precisionDiv.querySelectorAll('.answer-btn').forEach(b => {
+                    b.classList.remove('selected');
+                    b.style.background = '';
+                    b.style.borderColor = '';
+                    b.style.color = '';
+                });
+            }
+        }
+
+        if (compBtn.dataset.state === 'reveal') {
+            compBtn.textContent = 'Vérifier →';
+            compBtn.dataset.state = 'verify';
+            const target = document.getElementById(compBtn.dataset.hiddendiv);
+            target.classList.remove('visible');
+            compBtn.classList.remove('active');
+        }
+    });
+});
+
 document.querySelectorAll(".comp-answ-btn").forEach(btn => {
     btn.addEventListener("click", () => {
+        const slide = btn.closest('.quiz-slide');
+        const quizzes = slide.querySelectorAll('.quiz');
+        const state = btn.dataset.state;
 
-        const target = document.getElementById(btn.dataset.hiddendiv);
-        btn.classList.toggle("active");
-        target.classList.toggle("visible");
+        if (state === 'verify') {
+            let allAnswered = true;
+            quizzes.forEach(quiz => {
+                const isHidden = quiz.classList.contains('quiz-precision') && !quiz.classList.contains('visible');
+                if (!isHidden && !quiz.querySelector('.answer-btn.selected')) {
+                    allAnswered = false;
+                    quiz.querySelectorAll('.answer-btn').forEach(b => {
+                        b.classList.add('shake');
+                        setTimeout(() => b.classList.remove('shake'), 300);
+                    });
+                }
+            });
+
+            if (!allAnswered) return;
+
+            quizzes.forEach(quiz => {
+                quiz.querySelectorAll('.answer-btn').forEach(b => {
+                    if (b.classList.contains('selected')) {
+                        if (b.dataset.correct === 'true') {
+                            b.style.background = '#d4edda';
+                            b.style.borderColor = '#28a745';
+                            b.style.color = '#28a745';
+                        } else {
+                            b.style.background = '#f8d7da';
+                            b.style.borderColor = '#dc3545';
+                            b.style.color = '#dc3545';
+                        }
+                    }
+                });
+            });
+
+            btn.textContent = 'Afficher la réponse →';
+            btn.dataset.state = 'reveal';
+
+        } else if (state === 'reveal') {
+            const target = document.getElementById(btn.dataset.hiddendiv);
+            btn.classList.toggle("active");
+            target.classList.toggle("visible");
+        }
     });
 });
 
@@ -205,6 +285,7 @@ document.querySelectorAll('.subtab-btn').forEach(btn => {
   });
 });
 
+
 let lastScroll = 0;
 
 window.addEventListener('scroll', () => {
@@ -226,3 +307,68 @@ window.addEventListener('scroll', () => {
 
 const header = document.querySelector('header');
 document.body.style.paddingTop = header.offsetHeight + 'px';
+
+// fading du quizz
+window.addEventListener('scroll', () => {
+    const scrollY = window.scrollY;
+    const intro = document.getElementById('quiz-intro');
+    const questions = document.getElementById('quiz-questions');
+
+    if (intro && questions) {
+        if (scrollY > 300) {
+            intro.style.opacity = '0';
+            intro.style.pointerEvents = 'none';
+        } else {
+            intro.style.opacity = '1';
+            intro.style.pointerEvents = 'auto';
+        }
+
+        if (scrollY > 700) {
+            questions.style.opacity = '1';
+        } else {
+            questions.style.opacity = '0';
+        }
+    }
+});
+
+// Js pour les questions du quizz
+let currentSlide = 0;
+const slides = document.querySelectorAll('.quiz-slide');
+const counter = document.getElementById('quiz-counter');
+
+function showSlide(n) {
+    const current = slides[currentSlide];
+    current.style.opacity = '0';
+    
+    setTimeout(() => {
+        slides.forEach(s => s.classList.remove('active'));
+        currentSlide = (n + slides.length) % slides.length;
+        slides[currentSlide].classList.add('active');
+        slides[currentSlide].style.opacity = '0';
+        requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+                slides[currentSlide].style.opacity = '1';
+            });
+        });
+        counter.textContent = (currentSlide + 1) + ' / ' + slides.length;
+    }, 400);
+}
+
+document.getElementById('quiz-next').addEventListener('click', () => showSlide(currentSlide + 1));
+document.getElementById('quiz-prev').addEventListener('click', () => showSlide(currentSlide - 1));
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight') showSlide(currentSlide + 1);
+    if (e.key === 'ArrowLeft') showSlide(currentSlide - 1);
+});
+
+showSlide(0);
+
+// Boutons du quizz
+document.querySelectorAll(".answer-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+        const quiz = btn.closest('.quiz');
+        quiz.querySelectorAll('.answer-btn').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+    });
+});

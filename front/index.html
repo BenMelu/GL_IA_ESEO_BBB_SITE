@@ -443,125 +443,128 @@
 
         <div id="a1" class="subtab-content active">
 
-            <h2>Quizz de compréhension</h2>
-            <p>Maintenant petit exercice pour voir si vous avez compris l'utilisation qu'on peut avoir d'une IA. Des
-                cas vont être donnés et il va falloir dire si l'IA sera intéressante à utiliser dans ce cas-là,
-                ce que va recevoir et ce que va prédire l'IA , quel type de modèle pourrait être utilisé ainsi que le
-                degré de précision qui serai nécessaire.</p>
-
-            <div class="questions">
-
-                <p><strong>Premier cas :</strong> A partie d'une trentaine de critères bien définis (la surface habitable,
-                    le nombre de chambres, de salle de bain, l'emplacement etc.), il est pertinent d'utiliser l'IA pour 
-                    prédire le prix d'une maison.</p>
-
-                <!-- Oui / Non -->
-                <div class="quiz">
-                    <button class="answer-btn" data-correct="true">Oui</button>
-                    <button class="answer-btn" data-correct="false">Non</button>
-                </div>
-
-                <!-- Niveau de précision -->
-                <div class="quiz">
-                    <button class="answer-btn" data-correct="false">moyenne</button>
-                    <button class="answer-btn" data-correct="false">Élevée</button>
-                    <button class="answer-btn" data-correct="true">Très élevée</button>
-                </div>
-
-                <button class="comp-answ-btn" data-hiddendiv="answc1">Réponse</button>
-                <div id="answc1" class="comp-answ">
-                    → Oui l'utilisation de l'IA est intéressante puisque sans cela il faudrait pour chaque critère l'influence 
-                    qu'il a sur le prix à la main. C'est une tâche fastidieuse et chronophage. Alors qu'avec une
-                    IA, elle va reconnaitre les tendances toute seule, permettant une estimation plus précise. L'IA va donc
-                    prendre des données sous forme de tableurs comprenant les critères des maisons déjà estimées avec leurs prix. 
-                    Comme elle va prédire le prix de nouvelles maisons en fonctions des critères inscrits qui est donc un nombre, 
-                    le modèle est donc un modèle de régression. La précision demandé n'est pas forcément énorme puisqu'on a juste besoin
-                    d'avoir un prix estimé à une dizaine de milliers d'euros près.</div>
-            
+            <!-- Intro avec flèche -->
+            <div id="quiz-intro">
+                <h2>Quizz de compréhension</h2>
+                <p>Maintenant un petit exercice pour voir si vous avez compris l'utilisation que peut avoir une IA. Des cas vont être donnés et il va falloir dire si l'IA sera intéressante à utiliser dans ce cas-là, ce que va recevoir et ce que va prédire l'IA, quel type de modèle pourrait être utilisé ainsi que le degré de précision qui serait nécessaire.</p>
+                <div id="arrow">↓</div>
             </div>
 
-            <div class="questions">
+            <!-- Questions -->
+            <div id="quiz-questions" style="opacity:0; transition: opacity 0.6s ease;">
 
-                <p><strong>Deuxième cas :</strong> Calculer le carré de plusieurs nombres entier.</p>
+                <div style="display:flex; align-items:center; gap:1rem;">
 
-                <!-- Oui / Non -->
-                <div class="quiz">
-                    <button class="answer-btn" data-correct="true">Oui</button>
-                    <button class="answer-btn" data-correct="false">Non</button>
+                    <button id="quiz-prev">←</button>
+
+                    <div class="quiz-carousel">
+
+                        <div class="quiz-slide active">
+                        
+                            <h3><strong>Premier cas</strong></h3>
+                            <p>A partir d'une trentaine de critères bien définis (la surface habitable, le nombre de chambres, de salle de bain, l'emplacement etc.), il est pertinent d'utiliser l'IA pour prédire le prix d'une maison.</p>
+                            
+                            <div class="quiz" id="precision1">
+                                <p>Pertinence de l'IA</p>
+                                <button class="answer-btn" data-correct="true">Oui</button>
+                                <button class="answer-btn" data-correct="false">Non</button>
+                            </div>
+                            <div class="quiz quiz-precision" id="precision1">
+                                <p>Précision nécessaire</p>
+                                <button class="answer-btn" data-correct="false">Moyenne</button>
+                                <button class="answer-btn" data-correct="true">Élevée</button>
+                                <button class="answer-btn" data-correct="false">Très élevée</button>
+                            </div>
+                            <button class="comp-answ-btn" data-hiddendiv="answc1" data-state="verify">Vérifier →</button>
+                            <div id="answc1" class="comp-answ">
+                                → Oui l'utilisation de l'IA est intéressante puisque sans cela il faudrait pour chaque critère l'influence qu'il a sur le prix à la main. C'est une tâche fastidieuse et chronophage. Alors qu'avec une IA, elle va reconnaitre les tendances toute seule, permettant une estimation plus précise. L'IA va donc prendre des données sous forme de tableurs comprenant les critères des maisons déjà estimées avec leurs prix. Comme elle va prédire le prix de nouvelles maisons en fonctions des critères inscrits qui est donc un nombre, le modèle est donc un modèle de régression. La précision demandée n'est pas forcément énorme puisqu'on a juste besoin d'avoir un prix estimé à une dizaine de milliers d'euros près.
+                            </div>
+                        
+                        </div>
+
+                        <div class="quiz-slide">
+
+                            <h3><strong>Deuxième cas</strong></h3>
+                            <p>Calculer le carré de plusieurs nombres entiers.</p>
+
+                            <div class="quiz" id="precision2">
+                                <p>Pertinence de l'IA</p>
+                                <button class="answer-btn" data-correct="false">Oui</button>
+                                <button class="answer-btn" data-correct="true">Non</button>
+                            </div>
+                            <div class="quiz quiz-precision" id="precision2">
+                                <p>Précision nécessaire</p>
+                                <button class="answer-btn" data-correct="false">Moyenne</button>
+                                <button class="answer-btn" data-correct="false">Élevée</button>
+                                <button class="answer-btn" data-correct="false">Très élevée</button>
+                            </div>
+                            <button class="comp-answ-btn" data-hiddendiv="answc2" data-state="verify">Vérifier →</button>
+                            <div id="answc2" class="comp-answ">
+                                → L'utilisation de l'IA n'est pas nécessaire car la fonction carré n'étant pas linéaire, il faudrait beaucoup de données pour que le modèle fonctionne bien, et une calculatrice y arrive très bien en utilisant largement moins de ressources.
+                            </div>
+
+                        </div>
+
+                        <div class="quiz-slide">
+
+                            <h3><strong>Troisième cas</strong></h3>
+                            <p>Détecter un cancer du sein grâce à des radiographies des seins.</p>
+                            
+                            <div class="quiz" id="precision3">
+                                <p>Pertinence de l'IA</p>
+                                <button class="answer-btn" data-correct="true">Oui</button>
+                                <button class="answer-btn" data-correct="false">Non</button>
+                            </div>
+                            <div class="quiz quiz-precision" id="precision3">
+                                <p>Précision nécessaire</p>
+                                <button class="answer-btn" data-correct="false">Moyenne</button>
+                                <button class="answer-btn" data-correct="false">Élevée</button>
+                                <button class="answer-btn" data-correct="true">Très élevée</button>
+                            </div>
+                            <button class="comp-answ-btn" data-hiddendiv="answc3" data-state="verify">Vérifier →</button>
+                            <div id="answc3" class="comp-answ">
+                                → Pour reconnaitre des objets aussi petits que des tumeurs, l'aide de l'IA peut être très utile car l'IA va mieux réussir à repérer s'il y a un problème. L'IA devrait prendre des images pour prédire si une tumeur est détectée ou non, c'est donc un problème de vision par ordinateur. Pour ce modèle, la prédiction doit être la plus précise possible pour pouvoir sauver des vies.
+                            </div>
+
+                        </div>
+
+                        <div class="quiz-slide">
+
+                            <h3><strong>Quatrième cas</strong></h3>
+                            <p>Vous êtes dans un pays scandinave (il fait très froid) mais vous ne connaissez pas la langue. Vous voulez savoir ce qu'il y a d'écrit sur un panneau.</p>
+                            
+                            <div class="quiz" id="precision4">
+                                <p>Pertinence de l'IA</p>
+                                <button class="answer-btn" data-correct="true">Oui</button>
+                                <button class="answer-btn" data-correct="false">Non</button>
+                            </div>
+                            <div class="quiz quiz-precision" id="precision4">
+                                <p>Précision nécessaire</p>
+                                <button class="answer-btn" data-correct="false">Moyenne</button>
+                                <button class="answer-btn" data-correct="true">Élevée</button>
+                                <button class="answer-btn" data-correct="false">Très élevée</button>
+                            </div>
+                            <button class="comp-answ-btn" data-hiddendiv="answc4" data-state="verify">Vérifier →</button>
+                            <div id="answc4" class="comp-answ">
+                                → Vous pouvez recopier le texte dans google traduction mais il fait froid donc une IA qui traduit automatiquement à partir d'une photo est bien plus pratique. Cette IA-là va analyser une image pour en détecter des mots et une fois fait, traduire ces mêmes mots dans votre langue, elle utilisera donc un mélange de Computer Vision et de LLM. La précision doit être assez forte car une mauvaise traduction pourrait changer complétement le sens du panneau.
+                            </div>
+                        
+                        </div>
+
+                    </div>
+
+                    <button id="quiz-next">→</button>
+
                 </div>
 
-                <!-- Niveau de précision -->
-                <div class="quiz">
-                    <button class="answer-btn" data-correct="false">moyenne</button>
-                    <button class="answer-btn" data-correct="false">Élevée</button>
-                    <button class="answer-btn" data-correct="true">Très élevée</button>
+                <div style="text-align:center; margin-top:1rem;">
+                    <span id="quiz-counter">1 / 4</span>
                 </div>
-
-                <button class="comp-answ-btn" data-hiddendiv="answc2">Réponse</button>
-                <div id="answc2" class="comp-answ">
-                    → L'utilisation de l'IA n'est pas nécessaire car la fonction carré n'étant pas linéaire, il faudrait
-                    beaucoup de données pour que le modèle fonctionne bien, et une calculatrice y arrive très bien en
-                    utilisant largement moins de ressources.</div>
-
-            </div>
-
-            <div class="questions">
-
-                <p><strong>Troisième cas :</strong> Détecter un cancer du sein grâce à des radiographies des seins.</p>
-
-                <!-- Oui / Non -->
-                <div class="quiz">
-                    <button class="answer-btn" data-correct="true">Oui</button>
-                    <button class="answer-btn" data-correct="false">Non</button>
-                </div>
-
-                <!-- Niveau de précision -->
-                <div class="quiz">
-                    <button class="answer-btn" data-correct="false">moyenne</button>
-                    <button class="answer-btn" data-correct="false">Élevée</button>
-                    <button class="answer-btn" data-correct="true">Très élevée</button>
-                </div>
-
-                <button class="comp-answ-btn" data-hiddendiv="answc3">Réponse</button>
-                <div id="answc3" class="comp-answ">
-                    → Pour reconnaitre des objets aussi petits que des tumeurs, l'aide de l'IA peut être très utile car l'IA
-                    va mieux réussir à repérer s'il y a un problème. L'IA devrait prendre des image pour prédire si une
-                    tumeur est détectée ou non, c'est donc un problème de vision par ordinateur. Pour ce modèle, la
-                    prédiction doit être la plus précise possible pour pouvoir sauver des vies.</div>
-
-            </div>
-
-            <div class="questions">
-
-                <p><strong>Quatrième cas :</strong> Vous êtes dans un pays scandinave (il fait très froid) mais vous ne
-                    connaissez pas la
-                    langue. Vous voulez savoir ce qu'il y a d'écrit sur un panneau.</p>
-
-                <!-- Oui / Non -->
-                <div class="quiz">
-                    <button class="answer-btn" data-correct="true">Oui</button>
-                    <button class="answer-btn" data-correct="false">Non</button>
-                </div>
-
-                <!-- Niveau de précision -->
-                <div class="quiz">
-                    <button class="answer-btn" data-correct="false">moyenne</button>
-                    <button class="answer-btn" data-correct="false">Élevée</button>
-                    <button class="answer-btn" data-correct="true">Très élevée</button>
-                </div>
-
-                <button class="comp-answ-btn" data-hiddendiv="answc4">Réponse</button>
-                <div id="answc4" class="comp-answ">
-                    → Vous pouvez recopier le texte dans google traduction mais il fait froid donc une IA qui traduit
-                    automatiquement à partir d'une photo est bien plus pratique. Cette IA-là va analyser une image pour en
-                    détecter des mots et une fois fait, traduire ces mêmes mots dans votre langues, elle utilisera donc un
-                    mélange de Computer Vision et de LLM. La précision doit être assez forte car une mauvaise traduction
-                    pourrait changer complétement le sens de panneau.</div>
 
             </div>
 
         </div>
-        
+                
         <div id="a2" class="subtab-content">
 
             <h2>Activité : Création de Chatbots</h2>

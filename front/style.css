@@ -27,7 +27,7 @@ header {
 }
 
 header img {
-    max-width: 300px;
+    max-width: 100px;
     margin: 0;  
     display: block;
 }
@@ -223,11 +223,121 @@ img .center{
   }
 }
 
+/* sous-onglet quizz */
+
+/* animation de la flèche */
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(10px); }
+}
+
+#quiz-intro {
+    font-size: 30px;
+    text-align: center;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-top: 5rem;
+    align-items: center;
+    transition: opacity 0.6s ease;
+}
+
+#arrow {
+    font-size: 4rem;
+    margin-top: 6rem;
+    animation: bounce 1.5s infinite;
+}
+
+.quiz {
+    margin: 1rem 0;
+}
+
+.quiz p {
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: black;
+}
+
+.quiz-slide h3 {
+    font-size: 2rem;
+}
+
+.quiz-carousel {
+    overflow: hidden;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.quiz-slide {
+    display: none;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.quiz-slide.active {
+    display: block;
+}
+
+.quiz-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    margin-top: 1rem;
+}
+
+.quiz-nav button {
+    font-size: 1.5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+}
+
+#quiz-prev, #quiz-next {
+    font-size: 2.5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+}
+
+/* Boutons du quizz */
+.answer-btn {
+    padding: 30px 72px;
+    font-size: 20px;
+    border-radius: 20px;
+    border: 1.5px solid #dde3ea;
+    background: white;
+    color: #888;
+    font-size: 15px;
+    cursor: pointer;
+    margin: 0.3rem;
+}
+
+.answer-btn:hover {
+    border-color: #aaa;
+    color: #444;
+}
+
+.answer-btn.selected {
+    background: #ececec;
+    border: 1.5px solid #dde3ea;
+    color: #888;
+}
+
 .comp-answ {
     overflow: hidden;
     max-height: 0;
     opacity: 0;
     transition: max-height 0.5s ease, opacity 0.5s ease;
+    margin-top: 1.5rem;
 }
 
 .comp-answ.visible {
@@ -237,13 +347,34 @@ img .center{
 
 .comp-answ-btn {
     padding: 10px;
-    background: #888;
-    color: #fff;
+    background: none;
+    color: #000;
     border: none;
+    outline: none;
     cursor: pointer;
+    font-size: 1.2rem;
+    margin-top: 1.5rem;
 }
 
-.comp-answ-btn.active {
-    background: #555;
+/* shaling des boutons */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-8px); }
+    75% { transform: translateX(8px); }
 }
 
+.shake {
+    animation: shake 0.3s ease;
+}
+
+.quiz-precision {
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: opacity 0.4s ease, max-height 0.4s ease;
+}
+
+.quiz-precision.visible {
+    opacity: 1;
+    max-height: 200px;
+}
