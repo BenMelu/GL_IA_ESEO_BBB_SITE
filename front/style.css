@@ -1,13 +1,28 @@
-body {
-    font-family: sans-serif;
-    padding: 2rem;
-    padding-top: 1em;
+/* Header avec logo + onglets alignés */
+html {
+    background: #fae8ff;
 }
 
-img {
-    max-width: 400px;
+body {
+    font-family: sans-serif;
+    padding: 0;
+    margin: 0;
+    background: #fae8ff;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    background: #ecf6ff;
+    padding: 0.8rem 2rem;
+    gap: 2rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+header img {
+    max-width: 320px;
+    margin: 0;  
     display: block;
-    margin-top: 1rem;
 }
 
 img .center{
@@ -29,7 +44,10 @@ img .center{
     height: 400px;
 }
 
-#fileInitD2,#fileInitD3 {
+#fileInitD2,#fileInitD3, #resultIMGD2, #resultIMGD3 {
+    max-width: 100%;
+    max-height: 200px; /* ajuste selon ton goût */
+    object-fit: contain;
     display: none;
 }
 
@@ -40,28 +58,47 @@ img .center{
 /* Onglets principaux */
 .tabs {
     display: flex;
-    background: #333;
+    background: transparent;
+    gap: 0.6rem;
+    margin-left: 150px;
 }
 
 .tabs button {
-    flex: 1;
-    padding: 15px;
-    background: #333;
-    color: #fff;
-    border: none;
+    padding: 10px 20px;
+    background: linear-gradient(135deg, rgba(100,180,240,0.2), rgba(30,120,180,0.3));
+    color: #1a7abf;
+    border: 1.5px solid rgba(100,200,255,0.4);
+    border-radius: 20px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 15px;
+    transition: all 0.2s ease;
+    backdrop-filter: blur(4px);
+}
+
+.tabs button:hover {
+    background: linear-gradient(135deg, rgba(100,200,255,0.4), rgba(30,140,200,0.5));
+    color: #fff;
+    border-color: rgba(150,220,255,0.7);
 }
 
 .tabs button.active {
-    background: #666;
+    background: linear-gradient(135deg, #3eb8f0, #1a7abf);
+    color: #fff;
+    border-color: #7fd4f8;
+    box-shadow: 0 0 10px rgba(62,184,240,0.5);
+}
+
+/* Barre du header */
+.accent-line {
+    height: 2px;
+    background: #3eb8f0; /* le bleu cyan que tu as déjà sur les onglets actifs */
 }
 
 /* Contenu principal */
 .tab-content {
     display: none;
-    padding: 20px;
-    background: #f4f4f4;
+    padding: 20px 2rem;
+    background: #fae8ff;
     min-height: 200px;
 }
 
@@ -73,29 +110,75 @@ img .center{
 /* Sous-onglets */
 .subtabs {
     display: flex;
-    background: #555;
-    margin-top: 10px;
+    background: transparent;
+    gap: 4rem;
+    margin-left: 10px;
 }
 
-.subtabs button {
+/* vert */
+/* .subtabs button {
     flex: 1;
     padding: 10px;
-    background: #555;
-    color: #fff;
-    border: none;
+    background: linear-gradient(135deg, rgba(100, 240, 150, 0.2), rgba(30, 180, 80, 0.5));
+    color: #1abf6a;
+    border: 1.5px solid rgba(100,255,150,0.4);
+    border-radius: 12px;
+    font-size: 20px;
+    transition: all 0.2s ease;
     cursor: pointer;
+    backdrop-filter: blur(4px);
+}
+
+.subtabs button:hover {
+    background: linear-gradient(135deg, rgba(100,255,150,0.4), rgba(30,200,80,0.5));
+    color: #fff;
+    border-color: rgba(150,255,180,0.7);
 }
 
 .subtabs button.active {
-    background: #888;
+    background: linear-gradient(135deg, #1abf6a, #0f8a3f);
+    color: #fff;
+    border-color: #7fffa8;
+    box-shadow: 0 0 10px rgba(26,191,106,0.5);
+} */
+
+/* magenta */
+.subtabs button {
+    flex: 1;
+    padding: 10px;
+    background: linear-gradient(135deg, rgba(240,100,200,0.2), rgba(180,30,140,0.3));
+    color: #bf1a9a;
+    border: 1.5px solid rgba(255,100,220,0.4);
+    border-radius: 30px;
+    font-size: 20px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    backdrop-filter: blur(4px);
+}
+
+.subtabs button:hover {
+    background: linear-gradient(135deg, rgba(255,100,220,0.4), rgba(200,30,160,0.5));
+    color: #fff;
+    border-color: rgba(255,150,230,0.7);
+}
+
+.subtabs button.active {
+    background: linear-gradient(135deg, #d41a9f, #8a0f6a);
+    color: #fff;
+    border-color: #ff7fe8; /* magenta */
+    box-shadow: 0 0 10px rgba(191,26,154,0.5);
 }
 
 .subtab-content {
     display: none;
     padding: 15px;
-    background: #fff;
+    background: #fae8ff;
     margin-top: 5px;
-    border: 1px solid #ddd;
+    border: none;
+}
+
+.subtab-content p {
+    color: #888;
 }
 
 .subtab-content.active {
@@ -109,11 +192,14 @@ img .center{
 }
 
 .blocs{
+    border-radius: 20px;
     display: inline-block;
     padding: 1em;
     margin: 1em;
-    border: 1px solid black;
+    border: 1px solid #ff7fe8;
     flex: 1;
+    background: #ffff;
+    min-height: 75px;
 }
 
 @media (max-width: 768px) {

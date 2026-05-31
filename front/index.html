@@ -10,11 +10,16 @@
     <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
     <link rel="manifest" href="assets/favicon/site.webmanifest">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont/tabler-icons.min.css">
     <script src="script.js" defer></script>
 </head>
 
 <body>
-    <img src="../images/logo_site_sans_fond.png" alt="Logo ESE'IA">
+
+
+
+    <header>
+        <img src="../images/logo_site_sans_fond.png" alt="Logo ESE'IA">
 
 
 
@@ -22,14 +27,15 @@
 
 
 
-    <!-- ONGLET PRINCIPAL -->
-    <div class="tabs">
-        <button class="tab-btn active" data-tab="propos">A propos</button>
-        <button class="tab-btn" data-tab="info">Qu'est-ce que l'IA ?</button>
-        <button class="tab-btn" data-tab="demo">Démonstrations</button>
-        <button class="tab-btn" data-tab="activite">Ateliers et Activités</button>
-    </div>
-
+        <!-- ONGLET PRINCIPAL -->
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="propos">A propos</button>
+            <button class="tab-btn" data-tab="info">Qu'est-ce que l'IA ?</button>
+            <button class="tab-btn" data-tab="demo">Démonstrations</button>
+            <button class="tab-btn" data-tab="activite">Ateliers et Activités</button>
+        </div>
+    </header>
+    <div class="accent-line"></div>
 
 
 
@@ -216,7 +222,6 @@
 
     <!-- CONTENU DÉMO -->
     <div id="demo" class="tab-content">
-        <h1>Démonstrations</h1>
 
         <div class="subtabs">
             <button class="subtab-btn active" data-subtab="d1">Survivant du Titanic</button>
@@ -296,9 +301,13 @@
 
             </div>
 
-            <span>Avec ces informations, votre taux de survie lors du naufrage du Titanic serai de </span>
-            <span id="resultTaD1"> X</span>
-            <span>%</span>
+            <div class="container">
+                <div class="blocs"  >
+                    <span>Avec ces informations, votre taux de survie lors du naufrage du Titanic serai de </span>
+                    <span id="resultTaD1"> X</span>
+                    <span>%</span>
+                </div>
+            </div>
 
         </div>
 
@@ -310,16 +319,15 @@
         <div id="d2" class="subtab-content">
             <h2>IA de classification biclasse</h2>
 
-            <p>Cette démonstration utilise un modèle qui permet d'identifier deux classes d'images, les chats et les chiens.<br>
+            <p>Cette démonstration utilise un modèle qui permet d'identifier deux classes d'images, les chats et les chiens. 
                 Pour l'utiliser veuillez choisir une image sur votre appareil et l'envoyer au modèle.<br>
                 Notez que si vous lui donnez une image qui n'est pas un chat ou un chien, il vous répondra tout de même.
                 L'IA répond toujours tant le le format de la donnée est bon (ici une image). En revanche le résultat 
-                qu'elle vous donnera pourra être erroné.<br>
-                Essayer de lui donner une image de tigre pour voir le résultat.</p>
+                qu'elle vous donnera pourra être erroné. Essayer de lui donner une image de tigre pour voir le résultat.</p>
 
             <div class="container">
 
-                <div class="blocs">
+                <!-- <div class="blocs">
                     <label for="fileInputD2">
                         <h3>Votre image à analyser</h3>
                     </label>
@@ -331,6 +339,26 @@
 
                 <div class="blocs">
                     <h3>Image analysée :</h3>
+                    <img id="resultIMGD2" class="demo" alt="Image analysée" />
+                </div> -->
+
+                <div class="blocs">
+                    <div style="display:flex; align-items:center; gap:6px; margin-bottom:11px;">
+                        <i class="ti ti-upload" style="font-size:16px; color:#8a96a3;"></i>
+                        <h3 style="margin:0; font-size:14px;">Votre image à analyser</h3>
+                    </div>
+                    <div style="display:flex; gap:8px; align-items:center;">
+                        <input type="file" class="image-upload" id="fileInputD2" accept="image/*" data-preview="fileInitD2" />
+                        <button onclick="sendImage(3)">Envoyer</button>
+                    </div>
+                    <img id="fileInitD2" alt="Image donnée" />
+                </div>
+
+                <div class="blocs">
+                    <div style="display:flex; align-items:center; gap:6px; margin-bottom:11px;">
+                        <i class="ti ti-eye" style="font-size:16px; color:#8a96a3;"></i>
+                        <h3 style="margin:0; font-size:14px;">Image analysée</h3>
+                    </div>
                     <img id="resultIMGD2" class="demo" alt="Image analysée" />
                 </div>
 
@@ -363,28 +391,32 @@
         <div id="d3" class="subtab-content">
             <h2>IA de classification multiclasse</h2>
 
-            <p>Cette démonstration utilise un modèle qui permet d'identifier des chiffres manuscrits (0 à 9).<br>
+            <p>Cette démonstration utilise un modèle qui permet d'identifier des chiffres manuscrits (0 à 9). 
                 Pour l'utiliser veuillez dessiner un chiffre, le prendre en photo et l'envoyer au modèle.<br>
                 Notez que si vous lui donnez une image qui n'a aucun rapport, il vous répondra tout de même.
                 L'IA répond toujours tant le le format de la donnée est bon (ici une image). En revanche le résultat 
-                qu'elle vous donnera pourra être erroné.<br>
+                qu'elle vous donnera pourra être erroné. 
                 Vous pouvez essayer en lui donnant des images de lettres ou des images de maisons.</p>
 
             <div class="container">
 
                 <div class="blocs">
-                    <label for="fileInputD3">
-                        <h3>Votre image à analyser</h3>
-                    </label>
-                    <input type="file" class="image-upload" id="fileInputD3" accept="image/*"
-                        data-preview="fileInitD3" />
-                    <button onclick="sendImage(3)">Envoyer</button>
-                    
+                    <div style="display:flex; align-items:center; gap:6px; margin-bottom:11px;">
+                        <i class="ti ti-upload" style="font-size:16px; color:#8a96a3;"></i>
+                        <h3 style="margin:0; font-size:14px;">Votre image à analyser</h3>
+                    </div>
+                    <div style="display:flex; gap:8px; align-items:center;">
+                        <input type="file" class="image-upload" id="fileInputD3" accept="image/*" data-preview="fileInitD3" />
+                        <button onclick="sendImage(3)">Envoyer</button>
+                    </div>
                     <img id="fileInitD3" alt="Image donnée" />
                 </div>
 
                 <div class="blocs">
-                    <h3>Image analysée :</h3>
+                    <div style="display:flex; align-items:center; gap:6px; margin-bottom:11px;">
+                        <i class="ti ti-eye" style="font-size:16px; color:#8a96a3;"></i>
+                        <h3 style="margin:0; font-size:14px;">Image analysée</h3>
+                    </div>
                     <img id="resultIMGD3" class="demo" alt="Image analysée" />
                 </div>
 
@@ -418,7 +450,6 @@
 
     <!-- CONTENU ACTIVITÉ -->
     <div id="activite" class="tab-content">
-        <h1>Activités</h1>
 
         <div class="subtabs">
             <button class="subtab-btn active" data-subtab="a1">Quizz</button>
@@ -653,7 +684,7 @@
                 </li>
             </ul>
         </div>
-        
+
         <div id="a4" class="subtab-content">
             <h2>KAGGLE NOTEBOOKS</h2>
 
@@ -888,7 +919,7 @@
 
             <h2>IMPORTANT</h2>
             <p>1) Le programme qui testera votre activité à la fin prendra en compte les IA qui analysent des images de
-                250x250 pixels. Veuillez ne pas changer ces deux champs au risque de que l'IA ne fonctionne pas. Ils
+                250x250 pixels. Veuillez ne pas changer ces deux champs au risque que l'IA ne fonctionne pas. Ils
                 sont respectivement dans les sections : “Importation du dataset et création des splits” et “Création du
                 modèle”.</p>
 
