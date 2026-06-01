@@ -19,18 +19,45 @@ document.querySelectorAll('.image-upload').forEach(input => {
 
 document.getElementById("answerD1").addEventListener("submit", async function(e) {
     e.preventDefault();
+    
+    let allFilled = true;
+    
+    // Vérifie les inputs number
+    this.querySelectorAll('input[type="number"]').forEach(input => {
+        if (input.value === '') {
+            allFilled = false;
+            input.classList.add('shake');
+            setTimeout(() => input.classList.remove('shake'), 300);
+        }
+    });
+    
+    // Vérifie les groupes radio
+    const radioGroups = ['Pclass', 'Sex', 'Embarked'];
+    radioGroups.forEach(name => {
+        const checked = this.querySelector(`input[name="${name}"]:checked`);
+        if (!checked) {
+            allFilled = false;
+            this.querySelectorAll(`input[name="${name}"]`).forEach(radio => {
+                radio.classList.add('shake');
+                setTimeout(() => radio.classList.remove('shake'), 300);
+            });
+        }
+    });
+    
+    if (!allFilled) return;
+    
+    // ton code d'envoi existant
     let formData = new FormData(this);
     lienRes = "http://localhost:5000/process?ml=1";
-    const res =await fetch(lienRes, {
+    const res = await fetch(lienRes, {
         method: "POST",
         body: formData
     });
-    console.log(res)
     if (!res.ok) {
         alert("Erreur serveur");
         return;
     }
-    texts=await res.json();
+    texts = await res.json();
     document.getElementById("resultTaD1").textContent = texts.tauxSurvie;
 });
 
@@ -154,7 +181,7 @@ document.querySelectorAll(".answer-btn").forEach(btn => {
 
         // Affiche ou cache la précision selon la réponse à la pertinence
         if (quiz === slide.querySelectorAll('.quiz')[0]) {
-            if (btn.dataset.correct === 'true') {
+            if (btn.textContent.trim() === 'Oui') {
                 precisionDiv.classList.add('visible');
             } else {
                 precisionDiv.classList.remove('visible');
@@ -311,19 +338,20 @@ document.body.style.paddingTop = header.offsetHeight + 'px';
 // fading du quizz
 window.addEventListener('scroll', () => {
     const scrollY = window.scrollY;
-    const intro = document.getElementById('quiz-intro');
-    const questions = document.getElementById('quiz-questions');
-
-    if (intro && questions) {
-        if (scrollY > 300) {
+    const intro = document.querySelector('.tab-content.active .subtab-content.active [id^="intro"]');
+const questions = document.querySelector('.tab-content.active .subtab-content.active .quiz-questions');
+    if (intro) {
+        if (scrollY > 150) {
             intro.style.opacity = '0';
             intro.style.pointerEvents = 'none';
         } else {
             intro.style.opacity = '1';
             intro.style.pointerEvents = 'auto';
         }
+    }
 
-        if (scrollY > 700) {
+    if (questions) {
+        if (scrollY > 500) {
             questions.style.opacity = '1';
         } else {
             questions.style.opacity = '0';
@@ -370,5 +398,69 @@ document.querySelectorAll(".answer-btn").forEach(btn => {
         const quiz = btn.closest('.quiz');
         quiz.querySelectorAll('.answer-btn').forEach(b => b.classList.remove('selected'));
         btn.classList.add('selected');
+    });
+});
+
+// box de dépôt d'images à la même taille dynamique
+document.querySelectorAll('.image-upload').forEach(input => {
+    input.addEventListener('change', function () {
+        const file = this.files[0];
+        const previewId = this.dataset.preview;
+        const preview = document.getElementById(previewId);
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            preview.classList.add("visible");
+            preview.src = e.target.result;
+
+            preview.onload = function() {
+                const container = input.closest('.container');
+                const blocs = container.querySelectorAll('.blocs');
+                const hauteur = preview.offsetHeight + 60;
+                blocs.forEach(b => b.style.minHeight = hauteur + 'px');
+            };
+        }
+        reader.readAsDataURL(file);
+    });
+});
+
+// fading des démonstrations
+const elementsToFade = [
+    // d2 et d3
+    { selector: '#d2 .disclaimer-text, #d3 .disclaimer-text', seuil: 400 },
+    { selector: '#d2 .container, #d3 .container', seuil: 700 },
+    { selector: '#d2 .blocs-rep, #d3 .blocs-rep', seuil: 1000 },
+    // d1
+    { selector: '#d1 .container', seuil: 300 },
+    { selector: '#d1 .blocs-rep', seuil: 800 },
+    { selector: '#question-d1', seuil: 1100 },
+];
+
+elementsToFade.forEach(el => {
+    document.querySelectorAll(el.selector).forEach(element => {
+        element.style.opacity = '0';
+        element.style.transition = 'opacity 0.6s ease';
+    });
+});
+
+window.addEventListener('scroll', () => {
+    const scrollY = window.scrollY;
+
+    elementsToFade.forEach(el => {
+        document.querySelectorAll(el.selector).forEach(element => {
+            if (scrollY > el.seuil) {
+                element.style.opacity = '1';
+            } else {
+                element.style.opacity = '0';
+            }
+        });
+    });
+});
+
+// bloquer les -e dans le form du titanic
+document.querySelectorAll('#answerD1 input[type="number"]').forEach(input => {
+    input.addEventListener('keydown', (e) => {
+        if (e.key === 'e' || e.key === 'E') e.preventDefault();
     });
 });

@@ -116,33 +116,6 @@ img .center{
     margin-left: 10px;
 }
 
-/* vert */
-/* .subtabs button {
-    flex: 1;
-    padding: 10px;
-    background: linear-gradient(135deg, rgba(100, 240, 150, 0.2), rgba(30, 180, 80, 0.5));
-    color: #1abf6a;
-    border: 1.5px solid rgba(100,255,150,0.4);
-    border-radius: 12px;
-    font-size: 20px;
-    transition: all 0.2s ease;
-    cursor: pointer;
-    backdrop-filter: blur(4px);
-}
-
-.subtabs button:hover {
-    background: linear-gradient(135deg, rgba(100,255,150,0.4), rgba(30,200,80,0.5));
-    color: #fff;
-    border-color: rgba(150,255,180,0.7);
-}
-
-.subtabs button.active {
-    background: linear-gradient(135deg, #1abf6a, #0f8a3f);
-    color: #fff;
-    border-color: #7fffa8;
-    box-shadow: 0 0 10px rgba(26,191,106,0.5);
-} */
-
 /* magenta */
 .subtabs button {
     flex: 1;
@@ -186,35 +159,126 @@ img .center{
     display: block;
 }
 
-.container{
+.container {
     display: flex;
-  	width: 100%;
+    width: 100%;
     align-items: flex-start;
+    margin-top: 10rem;
+    height: 310px;
+    overflow: hidden;
 }
 
-.blocs{
+#container-d1 {
+    height: auto;
+    flex-direction: column;
+    padding-top: 0rem;
+    margin-top: 3rem;
+    align-items: center;
+}
+
+.blocs {
     border-radius: 20px;
     display: inline-block;
     padding: 1em;
     margin: 1em;
-    border: 1px solid #ff7fe8;
+    border: 1.5px solid #dde3ea;
     flex: 1;
     background: #ffff;
     min-height: 75px;
-    align-self: stretch;
+    overflow: hidden;
+    height: auto;
 }
 
 .blocs-rep {
-    border-radius: 20px;
     display: flex;
     flex-direction: column;
     padding: 1em;
     margin: 1em;
-    border: 1px solid #ff7fe8;
+    border: none;
     flex: 1;
-    background: #ffff;
-    min-height: 75px;
-    align-self: stretch;
+    background: none;
+    margin-bottom: 5rem;
+}
+
+.blocs-rep h3 {
+    text-align: center;
+    margin: 0 0 2rem;
+    font-size: 3rem;
+    margin-top: 3rem;
+}
+
+.blocs-rep span {
+    text-align: center;
+    font-size: 1.3rem;
+    margin: 0.5rem 0;
+}
+
+.blocs-d1 {
+    font-size: 30px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    transition: opacity 0.6s ease;
+}
+
+#question-d1 {
+    margin-top: 10rem;
+}
+
+/* Form du titanic */
+input.shake {
+    animation: shake 0.3s ease;
+}
+
+#answerD1 {
+    width: 100%;
+}
+
+#answerD1 input[type="radio"] {
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 2px solid #dde3ea;
+    border-radius: 50%;
+    cursor: pointer;
+    vertical-align: middle;
+    margin: 0 6px;
+    transition: all 0.2s ease;
+}
+
+#answerD1 input[type="radio"]:checked {
+    background: #3eb8f0;
+    border-color: #3eb8f0;
+}
+
+#answerD1 input[type="number"] {
+    padding: 6px 12px;
+    border: 1.5px solid #aaa;
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+    width: 150px;
+}
+
+#answerD1 input[type="number"]:focus {
+    border-color: #3eb8f0;
+}
+
+#answerD1 button[type="submit"] {
+    padding: 10px 30px;
+    border-radius: 20px;
+    border: none;
+    background: #3eb8f0;
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+#answerD1 button[type="submit"]:hover {
+    background: #1a9fd4;
 }
 
 @media (max-width: 768px) {
@@ -231,10 +295,9 @@ img .center{
     50% { transform: translateY(10px); }
 }
 
-#quiz-intro {
+#intro-d1, #intro-d2, #intro-d3, #intro-a1, #disclaimer-d2, #disclaimer-d3 {
     font-size: 30px;
     text-align: center;
-    min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -243,10 +306,28 @@ img .center{
     transition: opacity 0.6s ease;
 }
 
-#arrow {
+#intro-a1 {
+    min-height: 70vh;
+}
+/* 
+#intro-d1 {
+    min-height: 100vh;
+} */
+
+#disclaimer-d2 p, #disclaimer-d3 p {
+    margin-top: 10rem;
+}
+
+
+.arrow {
     font-size: 4rem;
     margin-top: 6rem;
     animation: bounce 1.5s infinite;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: block;
 }
 
 .quiz {
@@ -267,17 +348,33 @@ img .center{
 .quiz-carousel {
     overflow: hidden;
     width: 100%;
-    min-height: 100vh;
+    min-height: 0vh;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
+#quiz-arrow {
+    font-size: 4rem;
+    margin-top: 6rem;
+    animation: bounce 1.5s infinite;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: block;
+    margin-bottom: 20rem;
+}
+
 .quiz-slide {
-    display: none;
-    text-align: center;
     opacity: 0;
     transition: opacity 0.4s ease;
+    text-align: center;
+    height: 650px; /* ajuste selon ton goût */
+    overflow: hidden;
+    display: none;
+    flex-direction: column;
+    justify-content: flex-start;
 }
 
 .quiz-slide.active {
@@ -286,6 +383,7 @@ img .center{
 
 .quiz-nav {
     display: flex;
+
     justify-content: center;
     align-items: center;
     gap: 2rem;
@@ -333,16 +431,15 @@ img .center{
 }
 
 .comp-answ {
-    overflow: hidden;
-    max-height: 0;
+    visibility: hidden;
     opacity: 0;
-    transition: max-height 0.5s ease, opacity 0.5s ease;
-    margin-top: 1.5rem;
+    transition: opacity 0.5s ease;
+    min-height: 100px;
 }
 
 .comp-answ.visible {
-    max-height: 200px;            
-    opacity: 1;                    
+    visibility: visible;
+    opacity: 1;
 }
 
 .comp-answ-btn {
@@ -377,4 +474,67 @@ img .center{
 .quiz-precision.visible {
     opacity: 1;
     max-height: 200px;
+}
+
+/* onglet démonstrations */
+.btn-scroll {
+    padding: 30px 60px;
+    border-radius: 20px;
+    font-size: 2rem;
+    cursor: pointer;
+    border: 1.5px solid #dde3ea;
+    background: linear-gradient(90deg, #8b0000, #cc0000, #8b0000);
+    background-size: 200% 100%;
+    animation: wave 6s ease infinite;
+    color: white;
+}
+
+#btn-scroll-d1 {
+    background: linear-gradient(90deg, #00008b, #1a1aff, #00008b);
+    background-size: 200% 100%;
+    animation: wave 6s ease infinite;
+    display: block;
+    margin: 5rem auto 0rem;
+}
+
+#anchor-d1 {
+    scroll-margin-top: -3rem;
+}
+
+.btn-scroll:hover {
+    transform: scale(1.05);
+    transition: transform 0.2s ease;
+}
+
+@keyframes wave {
+    0% { background-position: 0% 0%; }
+    50% { background-position: 100% 0%; }
+    100% { background-position: 0% 0%; }
+}
+
+/* démo du titanic */
+#answerD1 label {
+    font-size: 1rem;
+    color: #333;
+}
+
+#answerD1 > label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1rem 0;
+}
+
+#answerD1 input[type="number"],
+#answerD1 input[type="radio"] {
+    margin-left: 1rem;
+}
+
+/* animation des boutons */
+button:active, label[for]:active {
+    transform: scale(0.95);
+    transition: transform 0.1s ease;
+}
+.btn-scroll:active {
+    transform: scale(0.95);
 }

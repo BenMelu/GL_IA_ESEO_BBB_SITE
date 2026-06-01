@@ -231,75 +231,101 @@
 
 
         <div id="d1" class="subtab-content active">
-            <h2>IA de régression</h2>
 
-            <p>Cette démonstration utilise un modèle ayant pour but de prédire le taux de survie d'une personne 
+           <!-- Intro avec flèche -->
+            <div id="intro-d1">
+                <h2>IA de régression</h2>
+                <p>Cette démonstration utilise un modèle d'IA ayant pour but de prédire le taux de survie d'une personne 
                 si elle se trouvait sur le Titanic.</p>
+            </div>
 
-            <div class="container">
+            <div id="anchor-d1"></div>
+            <button class="btn-scroll" id="btn-scroll-d1" onclick="document.getElementById('anchor-d1').scrollIntoView({behavior: 'smooth'})">Quelques informations</button>
 
-                <div class="blocs">
-                    <h3>Si vous étiez passager du Titanic, qui seriez-vous?</h3>
-                    <form action="/process?ml=1" method="POST" id="answerD1">
-                        <label for="Pclass">Dans quelle classe voyager vous?</label><br>
-                        <label for="first">1re classe :</label>
-                        <input type="radio" id="first" name="Pclass" value=1>
-                        <label for="second">2e classe :</label>
-                        <input type="radio" id="second" name="Pclass" value=2>
-                        <label for="third">3e classe :</label>
-                        <input type="radio" id="third" name="Pclass" value=3><br><br>
-
-                        <label for="Sex">Etes vous un homme ou une femme?</label><br>
-                        <label for="homme">Homme :</label>
-                        <input type="radio" id="homme" name="Sex" value=0>
-                        <label for="femme">Femme :</label>
-                        <input type="radio" id="femme" name="Sex" value=1><br><br>
-
-                        <label for="Age">Quel age avez vous?</label><br>
-                        <input type="number" id="Age" name="Age"><br><br>
-
-                        <label for="SibSp">Avec combien de frères, soeurs et/ou partnaires voyager vous?</label><br>
-                        <input type="number" id="SibSp" name="SibSp"><br><br>
-
-                        <label for="Parch">Avec combien de membres de votre famille autres voyager vous?</label><br>
-                        <input type="number" id="Parch" name="Parch"><br><br>
-
-                        <label for="Fare">Quel est le prix de votre billets? (en livre £)</label><br>
-                        <input type="number" id="Fare" step=0.01 name="Fare"><br><br>
-
-                        <label for="Embarked">De quel ville etes vous partis?</label><br>
-                        <label for="S">Southampton :</label>
-                        <input type="radio" id="S" name="Embarked" value=0>
-                        <label for="C">Cherbourg :</label>
-                        <input type="radio" id="C" name="Embarked" value=1>
-                        <label for="Q">Queenstown :</label>
-                        <input type="radio" id="Q" name="Embarked" value=2><br><br>
-
-                        <label for="LWeight">Quel est le poids de votre bagage?</label><br>
-                        <input type="number" id="LWeight" step=0.01 name="LWeight"><br><br>
-
-                        <button type="submit">Envoyer</button>
-                    </form><br>
-                </div>
-
-                <div class="blocs">
-                    <h3>Quelques informations</h3>
+            <div class="container" id="container-d1">
+                <div class="blocs-d1">
                     <p>Le RMS Titanic est un bateau de croisière britanique construit pour traverser l'Océan Atlantique.
                         Il est connu pour avoir fait naufrage suite à la collision avec un iceberg.</p>
-                    <p></p>
-                    <img alt="Voyage du Titanic" classe="center" src="assets\demo\titanic_voyage.png">
+                    <img alt="Voyage du Titanic" classe="center" src="assets\demo\titanic_sans_fond.png">
                     <p>Les billets pour cette croisière étaient à environ 7£ pour les 3e classe, 13£ pour les 2e classe
                         et environ 30£ pour les 1re classe.</p>
+                    <button class="arrow" onclick="document.getElementById('question-d1').scrollIntoView({behavior: 'smooth'})">↓</button>
+                </div>
+
+                <div class="blocs-d1" id="question-d1">
+                    <h2>Si vous étiez passager du Titanic, qui seriez-vous?</h2>
+                    <form action="/process?ml=1" method="POST" id="answerD1">
+
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin: 1rem 0;">
+                            <label>Dans quelle classe voyagez-vous ?</label>
+                            <div>
+                                <label for="first">1re</label>
+                                <input type="radio" id="first" name="Pclass" value=1>
+                                <label for="second">2e</label>
+                                <input type="radio" id="second" name="Pclass" value=2>
+                                <label for="third">3e</label>
+                                <input type="radio" id="third" name="Pclass" value=3>
+                            </div>
+                        </div>
+
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin: 1rem 0;">
+                            <label>Êtes-vous un homme ou une femme ?</label>
+                            <div>
+                                <label for="homme">Homme</label>
+                                <input type="radio" id="homme" name="Sex" value=0>
+                                <label for="femme">Femme</label>
+                                <input type="radio" id="femme" name="Sex" value=1>
+                            </div>
+                        </div>
+
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin: 1rem 0;">
+                            <label for="Age">Quel âge avez-vous ?</label>
+                            <input type="number" id="Age" name="Age">
+                        </div>
+
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin: 1rem 0;">
+                            <label for="SibSp">Avec combien de frères, sœurs et/ou partenaires voyagez-vous ?</label>
+                            <input type="number" id="SibSp" name="SibSp">
+                        </div>
+
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin: 1rem 0;">
+                            <label for="Parch">Avec combien d'autres membres de votre famille voyagez-vous ?</label>
+                            <input type="number" id="Parch" name="Parch">
+                        </div>
+
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin: 1rem 0;">
+                            <label for="Fare">Quel est le prix de votre billet ? (en livre £)</label>
+                            <input type="number" id="Fare" step=0.01 name="Fare">
+                        </div>
+
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin: 1rem 0;">
+                            <label>De quelle ville êtes-vous partis ?</label>
+                            <div>
+                                <label for="S">Southampton</label>
+                                <input type="radio" id="S" name="Embarked" value=0>
+                                <label for="C">Cherbourg</label>
+                                <input type="radio" id="C" name="Embarked" value=1>
+                                <label for="Q">Queenstown</label>
+                                <input type="radio" id="Q" name="Embarked" value=2>
+                            </div>
+                        </div>
+
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin: 1rem 0;">
+                            <label for="LWeight">Quel est le poids de votre bagage ?</label>
+                            <input type="number" id="LWeight" step=0.01 name="LWeight">
+                        </div>
+
+                        <div style="display:flex; justify-content:center; margin-top: 2rem;">
+                            <button type="submit">Envoyer</button>
+                        </div>
+
+                    </form>
                 </div>
 
             </div>
 
-            <div class="container">
-                <div class="blocs"  >
-                    <span>Avec ces informations, votre taux de survie lors du naufrage du Titanic serai de </span>
-                    <span id="resultTaD1"> X</span>
-                    <span>%</span>
-                </div>
+            <div class="blocs-rep"  >
+                <span>Avec ces informations, votre taux de survie lors du naufrage du Titanic serait de <strong><span id="resultTaD1">X <span></strong>%</span></span></span>
             </div>
 
         </div>
@@ -310,30 +336,23 @@
 
 
         <div id="d2" class="subtab-content">
-            <h2>IA de classification biclasse</h2>
 
-            <p>Cette démonstration utilise un modèle qui permet d'identifier deux classes d'images, les chats et les chiens. 
-                Pour l'utiliser veuillez choisir une image sur votre appareil et l'envoyer au modèle.<br>
-                Notez que si vous lui donnez une image qui n'est pas un chat ou un chien, il vous répondra tout de même.
-                L'IA répond toujours tant le le format de la donnée est bon (ici une image). En revanche le résultat 
+            <!-- Intro avec flèche  et disclaimer-->
+            <div id="intro-d2">
+                <h2>IA de classification biclasse</h2>
+                <p>Cette démonstration utilise un modèle qui permet d'identifier deux classes d'images, les chats et les chiens. 
+                Pour l'utiliser, veuillez choisir une image sur votre appareil et l'envoyer au modèle.</p>
+            </div>
+
+            <div id="disclaimer-d2" class="intro">
+                <button class="btn-scroll" onclick="document.getElementById('disclaimer-d2').scrollIntoView({behavior: 'smooth'})">⚠️ Attention</button>
+                <p>Notez que si vous lui donnez une image qui n'est pas un chat ou un chien, il vous répondra tout de même.
+                L'IA répond toujours tant le le format de la donnée est bon (ici une image). En revanche, le résultat 
                 qu'elle vous donnera pourra être erroné. Essayer de lui donner une image de tigre pour voir le résultat.</p>
-
-            <div class="container">
-
-                <!-- <div class="blocs">
-                    <label for="fileInputD2">
-                        <h3>Votre image à analyser</h3>
-                    </label>
-                    <input type="file" class="image-upload" id="fileInputD2" accept="image/*"
-                        data-preview="fileInitD2" />
-                    <button onclick="sendImage(2)">Envoyer</button>
-                    <img id="fileInitD2" alt="Image donnée" />
-                </div>
-
-                <div class="blocs">
-                    <h3>Image analysée :</h3>
-                    <img id="resultIMGD2" class="demo" alt="Image analysée" />
-                </div> -->
+                <button class="arrow" onclick="document.getElementById('container-d2').scrollIntoView({behavior: 'smooth'})">↓</button>
+            </div>
+                
+            <div class="container" id="container-d2">
 
                 <div class="blocs">
                     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:11px;">
@@ -359,11 +378,8 @@
             </div>
 
             <div class="blocs-rep">
-                <h3 style="text-align:center; margin:0 0 auto;">Résultat :</h3>
-                <div style="display:flex; justify-content:space-between; align-items:center;">
-                    <span>L'image envoyée est détectée comme un <span id="resultClD2">X</span></span>
-                    <span>Cette prédiction est sûre à <span id="resultPrD2">X</span> %</span>
-                </div>
+                <span>L'image envoyée est détectée comme un <strong><span id="resultClD3">X</span></strong></span><br>
+                <span>Cette prédiction est sûre à <strong><span id="resultPrD3">X</span></strong>%</span>
             </div>
 
         </div>
@@ -377,16 +393,24 @@
 
 
         <div id="d3" class="subtab-content">
-            <h2>IA de classification multiclasse</h2>
 
-            <p>Cette démonstration utilise un modèle qui permet d'identifier des chiffres manuscrits (0 à 9). 
-                Pour l'utiliser veuillez dessiner un chiffre, le prendre en photo et l'envoyer au modèle.<br>
-                Notez que si vous lui donnez une image qui n'a aucun rapport, il vous répondra tout de même.
-                L'IA répond toujours tant le le format de la donnée est bon (ici une image). En revanche le résultat 
+            <!-- Intro avec flèche  et disclaimer-->
+            <div id="intro-d3">
+                <h2>IA de classification multiclasse</h2>
+                <p>Cette démonstration utilise un modèle qui permet d'identifier des chiffres manuscrits (0 à 9). 
+                Pour l'utiliser veuillez dessiner un chiffre, le prendre en photo et l'envoyer au modèle.</p>
+            </div>
+
+            <div id="disclaimer-d3" class="intro">
+                <button class="btn-scroll" onclick="document.getElementById('disclaimer-d3').scrollIntoView({behavior: 'smooth'})">⚠️ Attention</button>
+                <p>Notez que si vous lui donnez une image qui n'a aucun rapport, il vous répondra tout de même.
+                L'IA répond toujours tant le le format de la donnée est bon (ici une image). En revanche, le résultat 
                 qu'elle vous donnera pourra être erroné. 
                 Vous pouvez essayer en lui donnant des images de lettres ou des images de maisons.</p>
+                <button class="arrow" onclick="document.getElementById('container-d3').scrollIntoView({behavior: 'smooth'})">↓</button>
+            </div>
 
-            <div class="container">
+            <div class="container" id="container-d3">
 
                 <div class="blocs">
                     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:11px;">
@@ -412,11 +436,8 @@
             </div>
 
             <div class="blocs-rep">
-                <h3 style="text-align:center; margin:0 0 auto;">Résultat :</h3>
-                <div style="display:flex; justify-content:space-between; align-items:flex-end;">
-                    <span>L'image envoyée est détectée comme un <span id="resultClD3">X</span></span>
-                    <span>Cette prédiction est sûre à <span id="resultPrD3">X</span> %</span>
-                </div>
+                <span>L'image envoyée est détectée comme un <strong><span id="resultClD3">X</span></strong></span><br>
+                <span>Cette prédiction est sûre à <strong><span id="resultPrD3">X</span></strong>%</span>
             </div>
 
         </div>
@@ -444,14 +465,14 @@
         <div id="a1" class="subtab-content active">
 
             <!-- Intro avec flèche -->
-            <div id="quiz-intro">
+            <div id="intro-a1">
                 <h2>Quizz de compréhension</h2>
-                <p>Maintenant un petit exercice pour voir si vous avez compris l'utilisation que peut avoir une IA. Des cas vont être donnés et il va falloir dire si l'IA sera intéressante à utiliser dans ce cas-là, ce que va recevoir et ce que va prédire l'IA, quel type de modèle pourrait être utilisé ainsi que le degré de précision qui serait nécessaire.</p>
-                <div id="arrow">↓</div>
+                <p>Maintenant un petit exercice pour voir si vous avez compris l'utilisation que peut avoir une IA</p>
+                <button id="quiz-arrow" onclick="document.querySelector('.quiz-questions').scrollIntoView({behavior: 'smooth'})">↓</button>
             </div>
 
             <!-- Questions -->
-            <div id="quiz-questions" style="opacity:0; transition: opacity 0.6s ease;">
+            <div class="quiz-questions" style="opacity:0; transition: opacity 0.6s ease;">
 
                 <div style="display:flex; align-items:center; gap:1rem;">
 
@@ -465,7 +486,7 @@
                             <p>A partir d'une trentaine de critères bien définis (la surface habitable, le nombre de chambres, de salle de bain, l'emplacement etc.), il est pertinent d'utiliser l'IA pour prédire le prix d'une maison.</p>
                             
                             <div class="quiz" id="precision1">
-                                <p>Pertinence de l'IA</p>
+                                <p>Nécessité de l'IA</p>
                                 <button class="answer-btn" data-correct="true">Oui</button>
                                 <button class="answer-btn" data-correct="false">Non</button>
                             </div>
@@ -488,7 +509,7 @@
                             <p>Calculer le carré de plusieurs nombres entiers.</p>
 
                             <div class="quiz" id="precision2">
-                                <p>Pertinence de l'IA</p>
+                                <p>Nécessité de l'IA</p>
                                 <button class="answer-btn" data-correct="false">Oui</button>
                                 <button class="answer-btn" data-correct="true">Non</button>
                             </div>
@@ -511,7 +532,7 @@
                             <p>Détecter un cancer du sein grâce à des radiographies des seins.</p>
                             
                             <div class="quiz" id="precision3">
-                                <p>Pertinence de l'IA</p>
+                                <p>Nécessité de l'IA</p>
                                 <button class="answer-btn" data-correct="true">Oui</button>
                                 <button class="answer-btn" data-correct="false">Non</button>
                             </div>
@@ -534,7 +555,7 @@
                             <p>Vous êtes dans un pays scandinave (il fait très froid) mais vous ne connaissez pas la langue. Vous voulez savoir ce qu'il y a d'écrit sur un panneau.</p>
                             
                             <div class="quiz" id="precision4">
-                                <p>Pertinence de l'IA</p>
+                                <p>Nécessité de l'IA</p>
                                 <button class="answer-btn" data-correct="true">Oui</button>
                                 <button class="answer-btn" data-correct="false">Non</button>
                             </div>
