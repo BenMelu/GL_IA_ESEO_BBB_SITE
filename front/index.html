@@ -37,25 +37,34 @@
 
     <!-- CONTENU A PROPOS-->
     <div id="propos" class="tab-content active">
-        <p>**Insérer le flux vidéo**</p>
-        <p>Bonjour, vous êtes bien sur le site ESE'IA!</p>
-        <p>Produit par l'école d'ingénieur ESEO, il a pour but de répertorier plusieurs 
-            activités sur certains types d'IA, afin de comprendre plus en détail ce phénomène.</p>
-        <p>Sur ce site, vous trouverez une présentation générale de l'IA, pour comprendre ce que c'est et comment elle fonctionne. 
-            Vous pourrez ensuite vous amuser avec des démonstrations de modèles d'IA afin d'expérimenter par vous-même, 
-            avant de pouvoir jouer avec les activités.</p>
-        <!-- <p>Ce projet a été mise en oeuvre par Ghyslain COUPLAN et Lilian LEMERCIER, sous la tutelle de Bilel BEN
-            BOUBAKER, lors de leur stage S7 en 2025.</p> ça il faut le mettre en bottom page dans un header (botter ducoup)-->
-        <p>Les différentes actvités sont :</p>
-        <ul>
-            <li>Créer des chatbots pour comprendre comment ils fonctionnent. Créée par Milovan PMS.</li>
-            <li>Entrainer et utiliser une IA de reconnaissance de forme. Créée par Lilian LEMERCIER.</li>
-            <li>Programmer une des IA de classification de chats et de chiens. Créée par Ghyslain COUPLAN.</li>
-        </ul>
-        <!-- <p>Si d'autres activités particulières vous intérrèssent, vous pouvez demander en envoyant un mail détaillé à
-            l'adresse suivante: mail.ia@eseo.fr</p> pareil faut le mettre en bottom-->
-    </div>
+        <div class="propos-hero">
+            <p class="propos-video">**Insérer le flux vidéo**</p>
+            <h2>Bienvenue sur ESE'IA</h2>
+            <p class="propos-intro">Produit par l'école d'ingénieur ESEO, ce site répertorie plusieurs activités sur certains types d'IA, afin de mieux comprendre ce phénomène.</p>
+            <p class="propos-intro">Vous trouverez ici une présentation générale de l'IA, des démonstrations de modèles, et des activités pour expérimenter par vous-même.</p>
+        </div>
 
+        <div class="propos-activities">
+            <h3>Les différentes activités</h3>
+            <div class="propos-cards">
+                <div class="propos-card">
+                    <i class="ti ti-robot" aria-hidden="true"></i>
+                    <p>Créer des chatbots pour comprendre comment ils fonctionnent.</p>
+                    <span>Créée par Milovan PMS</span>
+                </div>
+                <div class="propos-card">
+                    <i class="ti ti-eye" aria-hidden="true"></i>
+                    <p>Entrainer et utiliser une IA de reconnaissance de forme.</p>
+                    <span>Créée par Lilian LEMERCIER</span>
+                </div>
+                <div class="propos-card">
+                    <i class="ti ti-code" aria-hidden="true"></i>
+                    <p>Programmer une IA de classification de chats et de chiens.</p>
+                    <span>Créée par Ghyslain COUPLAN</span>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 
@@ -358,7 +367,7 @@
                     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:11px;">
                         <div style="display:flex; align-items:center; gap:6px;">
                             <i class="ti ti-upload" style="font-size:16px; color:#8a96a3;"></i>
-                            <label for="fileInputD2" style="margin:0; font-size:14px; cursor:pointer; font-weight:bold; border: 1px solid #aaa; padding: 6px 12px; border-radius: 8px;">Votre image à analyser</label>
+                            <label for="fileInputD2" style="margin:0; font-size:14px; cursor:pointer; border: 1px solid #aaa; padding: 6px 12px; border-radius: 8px;">Glissez une image ou cliquez</label>
                         </div>
                         <span id="erreurD2" style="color:red; font-size:15px;"></span>
                         <button onclick="sendImage(2)" style="border: 1px solid #aaa; padding: 6px 12px; border-radius: 8px; background:transparent; cursor:pointer; font-size:14px;">Envoyer</button>
@@ -416,7 +425,7 @@
                     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:11px;">
                         <div style="display:flex; align-items:center; gap:6px;">
                             <i class="ti ti-upload" style="font-size:16px; color:#8a96a3;"></i>
-                            <label for="fileInputD3" style="margin:0; font-size:14px; cursor:pointer; font-weight:bold; border: 1px solid #aaa; padding: 6px 12px; border-radius: 8px;">Votre image à analyser</label>
+                            <label for="fileInputD3" style="margin:0; font-size:14px; cursor:pointer; border: 1px solid #aaa; padding: 6px 12px; border-radius: 8px;">Glissez une image ou cliquez</label>
                         </div>
                         <span id="erreurD3" style="color:red; font-size:15px;"></span>
                         <button onclick="sendImage(3)" style="border: 1px solid #aaa; padding: 6px 12px; border-radius: 8px; background:transparent; cursor:pointer; font-size:14px;">Envoyer</button>
@@ -585,19 +594,34 @@
             </div>
 
         </div>
-                
+                        
         <div id="a2" class="subtab-content">
 
-            <h2>Activité : Création de Chatbots</h2>
-            <p>Cette activité permet de découvrir comment focntionne un chatbot et comment modifier les paramètres de
-                ces chatbots.</p>
-            <p>Le site est composé de deux parties: </p>
-            <ul>
-                <li> Une partie Découverte permettant de créer un chatbot basique,</li>
-                <li> et une partie Expert permettant de pouvoir modifier un chatbot plus en profondeur.</li>
-            </ul>
-            <p>Cette activité est disponible sur le site : <a href="http://34.155.193.187"> ESEO Chat Lab</a>.</p>
-            <p>Le guide pour cette activité se trouve directement sur le site.</p>
+            <div class="propos-hero">
+                <h2>Activité : Création de Chatbots</h2>
+                <p class="propos-intro">Cette activité permet de découvrir comment fonctionne un chatbot et comment modifier les paramètres de ces chatbots.</p>
+            </div>
+
+            <div class="propos-activities">
+                <h3>Le site est composé de deux parties</h3>
+                <div class="propos-cards">
+                    <div class="propos-card">
+                        <i class="ti ti-star" aria-hidden="true"></i>
+                        <p>Créer un chatbot basique.</p>
+                        <span>Partie Découverte</span>
+                    </div>
+                    <div class="propos-card">
+                        <i class="ti ti-settings" aria-hidden="true"></i>
+                        <p>Modifier un chatbot plus en profondeur.</p>
+                        <span>Partie Expert</span>
+                    </div>
+                </div>
+
+                <div style="text-align:center; margin-top:2rem;">
+                    <p class="propos-intro">Le guide pour cette activité se trouve directement sur le site.</p>
+                    <a href="http://34.155.193.187" class="btn-site">Accéder à ESEO Chat Lab</a>
+                </div>        
+            </div>
 
         </div>
         
