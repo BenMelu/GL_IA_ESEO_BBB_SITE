@@ -1,0 +1,464 @@
+<!-- ==========================================================================
+     pages/demo.html
+     Page "Démonstrations" — 3 sous-onglets : Titanic, Chats/Chiens, Maths
+     Injectée dans #page-container par router.js
+     La logique JS est dans js/demo.js (initialisé par router.js)
+     ========================================================================== -->
+
+<div class="page is-active" id="page-demo">
+
+  <!-- ── Barre de sous-onglets ────────────────────────────────────────────── -->
+  <nav class="subtabs-bar" aria-label="Sous-sections Démonstrations">
+    <div class="subtabs-bar__inner">
+      <button class="subtabs-bar__btn"           data-subtab="d1">Survivant du Titanic</button>
+      <button class="subtabs-bar__btn is-active" data-subtab="d2">Entre chats et chiens</button>
+      <button class="subtabs-bar__btn"           data-subtab="d3">La base des mathématiques</button>
+    </div>
+  </nav>
+
+
+  <!-- ══════════════════════════════════════════════════════════════════════
+       D1 — Survivant du Titanic (régression)
+       ══════════════════════════════════════════════════════════════════════ -->
+  <div class="subpage" id="d1">
+    <div class="page-section">
+
+      <div class="badge badge--magenta">
+        <span class="badge__dot"></span>
+        Régression
+      </div>
+
+      <h1 class="t-orbitron t-h1 t-magenta">
+        IA de <em>régression</em>
+      </h1>
+
+      <p class="t-lead">
+        Ce modèle prédit votre taux de survie si vous vous trouviez à bord du Titanic
+        lors de son naufrage en avril 1912. Les billets allaient de
+        <strong>7 £</strong> (3e classe) à <strong>30 £</strong> (1re classe).
+      </p>
+
+      <!-- Barre de statut -->
+      <div class="status-bar" role="status" aria-live="polite">
+        <span class="status-bar__dot status-bar__dot--ok" id="d1-status-dot"></span>
+        <span id="d1-status-text">Modèle prêt — remplissez le formulaire ci-dessous</span>
+      </div>
+
+      <!-- Formulaire -->
+      <form id="form-titanic" novalidate>
+
+        <!-- Classe de voyage -->
+        <div class="form-row">
+          <span class="form-row__label">Dans quelle classe voyagez-vous ?</span>
+          <div class="form-row__controls radio-group">
+            <label class="radio-label">
+              <input type="radio" name="Pclass" value="1">
+              <span class="radio-pip"></span>
+              1re
+            </label>
+            <label class="radio-label">
+              <input type="radio" name="Pclass" value="2">
+              <span class="radio-pip"></span>
+              2e
+            </label>
+            <label class="radio-label">
+              <input type="radio" name="Pclass" value="3">
+              <span class="radio-pip"></span>
+              3e
+            </label>
+          </div>
+        </div>
+
+        <!-- Genre -->
+        <div class="form-row">
+          <span class="form-row__label">Êtes-vous un homme ou une femme ?</span>
+          <div class="form-row__controls radio-group">
+            <label class="radio-label">
+              <input type="radio" name="Sex" value="0">
+              <span class="radio-pip"></span>
+              Homme
+            </label>
+            <label class="radio-label">
+              <input type="radio" name="Sex" value="1">
+              <span class="radio-pip"></span>
+              Femme
+            </label>
+          </div>
+        </div>
+
+        <!-- Âge -->
+        <div class="form-row">
+          <label class="form-row__label" for="Age">Quel âge avez-vous ?</label>
+          <div class="form-row__controls">
+            <input class="num-input" type="number" id="Age" name="Age"
+                   min="0" max="120" placeholder="ex : 28">
+          </div>
+        </div>
+
+        <!-- Frères / sœurs / partenaires -->
+        <div class="form-row">
+          <label class="form-row__label" for="SibSp">
+            Avec combien de frères, sœurs et/ou partenaires voyagez-vous ?
+          </label>
+          <div class="form-row__controls">
+            <input class="num-input" type="number" id="SibSp" name="SibSp"
+                   min="0" placeholder="ex : 1">
+          </div>
+        </div>
+
+        <!-- Autres membres de famille -->
+        <div class="form-row">
+          <label class="form-row__label" for="Parch">
+            Avec combien d'autres membres de votre famille ?
+          </label>
+          <div class="form-row__controls">
+            <input class="num-input" type="number" id="Parch" name="Parch"
+                   min="0" placeholder="ex : 0">
+          </div>
+        </div>
+
+        <!-- Prix du billet -->
+        <div class="form-row">
+          <label class="form-row__label" for="Fare">Prix de votre billet (en £)</label>
+          <div class="form-row__controls">
+            <input class="num-input" type="number" id="Fare" name="Fare"
+                   step="0.01" min="0" placeholder="ex : 13.00">
+          </div>
+        </div>
+
+        <!-- Ville d'embarquement -->
+        <div class="form-row">
+          <span class="form-row__label">De quelle ville êtes-vous parti(e) ?</span>
+          <div class="form-row__controls radio-group">
+            <label class="radio-label">
+              <input type="radio" name="Embarked" value="0">
+              <span class="radio-pip"></span>
+              Southampton
+            </label>
+            <label class="radio-label">
+              <input type="radio" name="Embarked" value="1">
+              <span class="radio-pip"></span>
+              Cherbourg
+            </label>
+            <label class="radio-label">
+              <input type="radio" name="Embarked" value="2">
+              <span class="radio-pip"></span>
+              Queenstown
+            </label>
+          </div>
+        </div>
+
+        <!-- Poids du bagage -->
+        <div class="form-row">
+          <label class="form-row__label" for="LWeight">Poids de votre bagage (kg)</label>
+          <div class="form-row__controls">
+            <input class="num-input" type="number" id="LWeight" name="LWeight"
+                   step="0.01" min="0" placeholder="ex : 22.5">
+          </div>
+        </div>
+
+        <!-- Bouton de soumission -->
+        <div class="form-submit">
+          <button type="submit" class="btn btn--primary btn--lg">
+            <i class="ti ti-send" aria-hidden="true"></i>
+            Prédire ma survie
+          </button>
+        </div>
+
+      </form>
+      <!-- /form-titanic -->
+
+      <!-- Bloc de résultat (affiché après réponse du serveur) -->
+      <div class="survival-result" id="survival-result" aria-live="polite">
+        <div class="survival-result__label">Votre taux de survie estimé</div>
+        <div>
+          <span class="survival-result__value" id="survival-value">—</span>
+          <span class="survival-result__unit"> %</span>
+        </div>
+      </div>
+
+    </div>
+    <!-- /page-section -->
+  </div>
+  <!-- /d1 -->
+
+
+  <!-- ══════════════════════════════════════════════════════════════════════
+       D2 — Entre chats et chiens (classification biclasse)
+       ══════════════════════════════════════════════════════════════════════ -->
+  <div class="subpage is-active" id="d2">
+    <div class="page-section">
+
+      <div class="badge">
+        <span class="badge__dot"></span>
+        Classification biclasse
+      </div>
+
+      <h1 class="t-orbitron t-h1">
+        IA de <em>classification</em> biclasse
+      </h1>
+
+      <p class="t-lead">
+        Ce modèle identifie deux classes d'images : les <strong>chats</strong> et les
+        <strong>chiens</strong>. Si vous lui donnez une image d'un tigre, il répondra quand même
+        — l'IA répond toujours tant que le format de la donnée est correct.
+      </p>
+
+      <!-- Barre de statut -->
+      <div class="status-bar" role="status" aria-live="polite">
+        <span class="status-bar__dot status-bar__dot--ok" id="d2-status-dot"></span>
+        <span id="d2-status-text">Modèle prêt — choisissez une image à analyser</span>
+      </div>
+
+      <!-- Grille upload / preview -->
+      <div class="grid-2 u-mt-lg">
+
+        <!-- Colonne gauche : upload -->
+        <div class="cyber-card">
+          <div class="cyber-card__head">
+            <div class="cyber-card__label">
+              <span class="cyber-card__label-icon">
+                <i class="ti ti-upload" aria-hidden="true"></i>
+              </span>
+              Votre image
+            </div>
+            <span class="cyber-card__tag">INPUT</span>
+          </div>
+
+          <div class="upload-zone" id="d2-dropzone" role="button"
+               tabindex="0" aria-label="Zone de dépôt d'image — cliquez ou glissez une image">
+            <div class="upload-zone__ring">
+              <i class="ti ti-photo" aria-hidden="true"></i>
+            </div>
+            <p class="upload-zone__title">Glissez votre image ici</p>
+            <p class="upload-zone__sub">ou cliquez pour sélectionner</p>
+            <p class="upload-zone__sub">PNG, JPG — max 10 Mo</p>
+            <span class="upload-zone__filename" id="d2-filename" aria-live="polite"></span>
+            <input class="upload-zone__input" type="file" id="d2-file"
+                   accept="image/*" aria-label="Sélectionner un fichier image">
+          </div>
+
+          <button class="btn btn--primary btn--full u-mt-md"
+                  id="d2-send" disabled aria-label="Envoyer l'image au modèle">
+            <i class="ti ti-send" aria-hidden="true"></i>
+            Envoyer au modèle
+          </button>
+
+          <span class="demo-error" id="d2-error" role="alert"></span>
+        </div>
+        <!-- /colonne upload -->
+
+        <!-- Colonne droite : preview -->
+        <div class="cyber-card">
+          <div class="cyber-card__head">
+            <div class="cyber-card__label">
+              <span class="cyber-card__label-icon">
+                <i class="ti ti-eye" aria-hidden="true"></i>
+              </span>
+              Image analysée
+            </div>
+            <span class="cyber-card__tag">PREVIEW</span>
+          </div>
+
+          <div class="preview-box" id="d2-preview">
+            <div class="preview-box__scanline" aria-hidden="true"></div>
+            <div class="preview-box__placeholder">
+              <i class="ti ti-photo" aria-hidden="true"></i>
+              <p>En attente d'une image</p>
+              <small>L'aperçu apparaîtra ici</small>
+            </div>
+          </div>
+        </div>
+        <!-- /colonne preview -->
+
+      </div>
+      <!-- /grid-2 -->
+
+      <!-- Loader -->
+      <div class="loader" id="d2-loader" aria-label="Analyse en cours" aria-live="polite">
+        <span class="loader__dot"></span>
+        <span class="loader__dot"></span>
+        <span class="loader__dot"></span>
+      </div>
+
+      <!-- Carte de résultat -->
+      <div class="result-card" id="d2-result" aria-live="polite">
+
+        <div class="result-card__header">
+          <i class="ti ti-activity" aria-hidden="true"></i>
+          Résultat d'analyse
+        </div>
+
+        <div class="result-card__body">
+          <div>
+            <p class="result-card__sub-label">L'image est détectée comme un</p>
+            <p class="result-card__entity" id="d2-entity">—</p>
+          </div>
+          <div class="confidence">
+            <p class="confidence__label">Indice de confiance</p>
+            <p class="confidence__value" id="d2-conf-value">— %</p>
+          </div>
+        </div>
+
+        <div class="confidence-bar">
+          <div class="confidence-bar__track">
+            <div class="confidence-bar__fill" id="d2-conf-bar"></div>
+          </div>
+          <div class="confidence-bar__marks" aria-hidden="true">
+            <span class="confidence-bar__mark">0 %</span>
+            <span class="confidence-bar__mark">25 %</span>
+            <span class="confidence-bar__mark">50 %</span>
+            <span class="confidence-bar__mark">75 %</span>
+            <span class="confidence-bar__mark">100 %</span>
+          </div>
+        </div>
+
+      </div>
+      <!-- /result-card -->
+
+    </div>
+    <!-- /page-section -->
+  </div>
+  <!-- /d2 -->
+
+
+  <!-- ══════════════════════════════════════════════════════════════════════
+       D3 — La base des mathématiques (classification multiclasse)
+       ══════════════════════════════════════════════════════════════════════ -->
+  <div class="subpage" id="d3">
+    <div class="page-section">
+
+      <div class="badge badge--purple">
+        <span class="badge__dot"></span>
+        Classification multiclasse
+      </div>
+
+      <h1 class="t-orbitron t-h1 t-purple">
+        IA de <em>classification</em> multiclasse
+      </h1>
+
+      <p class="t-lead">
+        Ce modèle identifie des <strong>chiffres manuscrits</strong> (0 à 9).
+        Dessinez un chiffre, prenez-le en photo et envoyez-le au modèle. Essayez avec
+        une lettre ou un dessin pour voir comment l'IA réagit hors de son domaine.
+      </p>
+
+      <!-- Barre de statut -->
+      <div class="status-bar" role="status" aria-live="polite">
+        <span class="status-bar__dot status-bar__dot--ok" id="d3-status-dot"></span>
+        <span id="d3-status-text">Modèle prêt — choisissez une image de chiffre manuscrit</span>
+      </div>
+
+      <!-- Grille upload / preview -->
+      <div class="grid-2 u-mt-lg">
+
+        <!-- Colonne gauche : upload -->
+        <div class="cyber-card cyber-card--purple">
+          <div class="cyber-card__head">
+            <div class="cyber-card__label">
+              <span class="cyber-card__label-icon">
+                <i class="ti ti-upload" aria-hidden="true"></i>
+              </span>
+              Votre image
+            </div>
+            <span class="cyber-card__tag">INPUT</span>
+          </div>
+
+          <div class="upload-zone" id="d3-dropzone" role="button"
+               tabindex="0" aria-label="Zone de dépôt — cliquez ou glissez une photo de chiffre">
+            <div class="upload-zone__ring">
+              <i class="ti ti-pencil" aria-hidden="true"></i>
+            </div>
+            <p class="upload-zone__title">Glissez votre image ici</p>
+            <p class="upload-zone__sub">Chiffre manuscrit en photo</p>
+            <span class="upload-zone__filename" id="d3-filename" aria-live="polite"></span>
+            <input class="upload-zone__input" type="file" id="d3-file"
+                   accept="image/*" aria-label="Sélectionner un fichier image">
+          </div>
+
+          <button class="btn btn--full u-mt-md"
+                  id="d3-send" disabled aria-label="Envoyer l'image au modèle"
+                  style="border-color:rgba(123,47,255,.3);background:rgba(123,47,255,.08);color:var(--color-purple)">
+            <i class="ti ti-send" aria-hidden="true"></i>
+            Envoyer au modèle
+          </button>
+
+          <span class="demo-error" id="d3-error" role="alert"></span>
+        </div>
+
+        <!-- Colonne droite : preview -->
+        <div class="cyber-card cyber-card--purple">
+          <div class="cyber-card__head">
+            <div class="cyber-card__label">
+              <span class="cyber-card__label-icon">
+                <i class="ti ti-eye" aria-hidden="true"></i>
+              </span>
+              Image analysée
+            </div>
+            <span class="cyber-card__tag">PREVIEW</span>
+          </div>
+
+          <div class="preview-box" id="d3-preview">
+            <div class="preview-box__scanline" aria-hidden="true"
+                 style="background:linear-gradient(90deg,transparent,var(--color-purple),transparent)"></div>
+            <div class="preview-box__placeholder">
+              <i class="ti ti-pencil" aria-hidden="true"></i>
+              <p>En attente d'une image</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <!-- /grid-2 -->
+
+      <!-- Loader -->
+      <div class="loader" id="d3-loader" aria-label="Analyse en cours" aria-live="polite">
+        <span class="loader__dot"></span>
+        <span class="loader__dot"></span>
+        <span class="loader__dot"></span>
+      </div>
+
+      <!-- Carte de résultat (variante purple) -->
+      <div class="result-card result-card--purple" id="d3-result" aria-live="polite">
+
+        <div class="result-card__header">
+          <i class="ti ti-123" aria-hidden="true"></i>
+          Résultat d'analyse
+        </div>
+
+        <div class="result-card__body">
+          <div>
+            <p class="result-card__sub-label">Le chiffre détecté est</p>
+            <p class="result-card__entity" id="d3-entity"
+               style="color:var(--color-purple)">—</p>
+          </div>
+          <div class="confidence">
+            <p class="confidence__label">Indice de confiance</p>
+            <p class="confidence__value" id="d3-conf-value"
+               style="color:var(--color-purple);text-shadow:0 0 18px rgba(123,47,255,.5)">— %</p>
+          </div>
+        </div>
+
+        <div class="confidence-bar">
+          <div class="confidence-bar__track">
+            <div class="confidence-bar__fill" id="d3-conf-bar"></div>
+          </div>
+          <div class="confidence-bar__marks" aria-hidden="true">
+            <span class="confidence-bar__mark">0 %</span>
+            <span class="confidence-bar__mark">25 %</span>
+            <span class="confidence-bar__mark">50 %</span>
+            <span class="confidence-bar__mark">75 %</span>
+            <span class="confidence-bar__mark">100 %</span>
+          </div>
+        </div>
+
+      </div>
+      <!-- /result-card -->
+
+    </div>
+    <!-- /page-section -->
+  </div>
+  <!-- /d3 -->
+
+</div>
+<!-- /page-demo -->

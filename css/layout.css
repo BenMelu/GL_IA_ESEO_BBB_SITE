@@ -1,0 +1,308 @@
+/* ==========================================================================
+   LAYOUT.CSS
+   Header, navigation principale, sous-onglets, fond atmosphérique, footer
+   ========================================================================== */
+
+
+/* --------------------------------------------------------------------------
+   1. FOND ATMOSPHÉRIQUE (background ambiance)
+   -------------------------------------------------------------------------- */
+
+/* Grille de fond fixe */
+.bg-grid {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image:
+    linear-gradient(rgba(var(--rgb-cyan), 0.022) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(var(--rgb-cyan), 0.022) 1px, transparent 1px);
+  background-size: 55px 55px;
+}
+
+/* Halo ambiant cyan (haut-gauche) */
+.bg-glow-tl {
+  position: fixed;
+  top: -30%;
+  left: -20%;
+  width: 70%;
+  height: 70%;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(
+    ellipse,
+    rgba(var(--rgb-cyan), 0.04) 0%,
+    transparent 65%
+  );
+}
+
+/* Halo ambiant magenta (bas-droite) */
+.bg-glow-br {
+  position: fixed;
+  bottom: -25%;
+  right: -15%;
+  width: 60%;
+  height: 60%;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(
+    ellipse,
+    rgba(var(--rgb-magenta), 0.035) 0%,
+    transparent 65%
+  );
+}
+
+
+/* --------------------------------------------------------------------------
+   2. HEADER PRINCIPAL
+   -------------------------------------------------------------------------- */
+
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 200;
+  height: var(--header-height);
+  background: rgba(3, 5, 14, 0.82);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--color-border-cyan);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--space-xl);
+  gap: var(--space-lg);
+  transition: opacity var(--transition-slow), transform 0.6s ease;
+}
+
+/* État caché (scroll vers le bas) */
+.site-header.is-hidden {
+  opacity: 0;
+  transform: translateY(-100%);
+}
+
+
+/* -- Logo -- */
+
+.header-logo {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+  border-bottom: none;
+  flex-shrink: 0;
+}
+
+.header-logo__icon {
+  width: 40px;
+  height: 40px;
+}
+
+.header-logo__icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.header-logo__wordmark {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  color: var(--color-white);
+}
+
+.header-logo__wordmark em {
+  font-style: normal;
+  color: var(--color-cyan);
+}
+
+
+/* -- Navigation principale -- */
+
+.main-nav {
+  display: flex;
+  gap: 3px;
+}
+
+.main-nav__btn {
+  padding: 7px 17px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  border: 1px solid transparent;
+  background: none;
+  color: var(--color-text-muted);
+  transition: all var(--transition-fast);
+}
+
+.main-nav__btn:hover {
+  color: var(--color-cyan);
+  border-color: var(--color-border-cyan);
+  background: rgba(var(--rgb-cyan), 0.05);
+}
+
+.main-nav__btn.is-active {
+  color: var(--color-cyan);
+  border-color: var(--color-cyan);
+  background: rgba(var(--rgb-cyan), 0.08);
+  box-shadow: var(--glow-cyan);
+}
+
+
+/* --------------------------------------------------------------------------
+   3. CONTENU DES PAGES (tabs)
+   -------------------------------------------------------------------------- */
+
+/* Conteneur de page (masqué par défaut) */
+.page {
+  display: none;
+  position: relative;
+  z-index: 10;
+  min-height: calc(100vh - var(--header-height));
+}
+
+.page.is-active {
+  display: block;
+}
+
+
+/* --------------------------------------------------------------------------
+   4. BARRE DE SOUS-ONGLETS
+   -------------------------------------------------------------------------- */
+
+.subtabs-bar {
+  position: sticky;
+  top: var(--header-height);
+  z-index: 150;
+  background: rgba(3, 5, 14, 0.78);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(var(--rgb-magenta), 0.15);
+}
+
+.subtabs-bar__inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 var(--space-xl);
+  display: flex;
+}
+
+.subtabs-bar__btn {
+  padding: 16px 36px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  border: none;
+  background: none;
+  color: var(--color-text-muted);
+  position: relative;
+  white-space: nowrap;
+  transition: color var(--transition-fast);
+}
+
+/* Indicateur actif (trait bas) */
+.subtabs-bar__btn::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--color-magenta);
+  border-radius: 2px 2px 0 0;
+  transform: scaleX(0);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.subtabs-bar__btn:hover {
+  color: var(--color-magenta);
+}
+
+.subtabs-bar__btn.is-active {
+  color: var(--color-magenta);
+}
+
+.subtabs-bar__btn.is-active::after {
+  transform: scaleX(1);
+  box-shadow: 0 0 10px var(--color-magenta);
+}
+
+
+/* -- Sous-pages -- */
+
+.subpage {
+  display: none;
+}
+
+.subpage.is-active {
+  display: block;
+}
+
+
+/* --------------------------------------------------------------------------
+   5. SÉPARATEURS DE SECTION
+   -------------------------------------------------------------------------- */
+
+/* Ligne simple */
+.divider {
+  height: 1px;
+  background: linear-gradient(90deg, var(--color-border-cyan), transparent);
+  margin: var(--space-xl) 0;
+}
+
+.divider--magenta {
+  background: linear-gradient(90deg, var(--color-border-magenta), transparent);
+}
+
+/* Séparateur titré (avec texte centré) */
+.section-sep {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  margin: var(--space-xl) 0;
+}
+
+.section-sep__line {
+  flex: 1;
+  height: 1px;
+  background: var(--color-border-cyan);
+}
+
+.section-sep__line--right {
+  background: linear-gradient(270deg, var(--color-border-cyan), transparent);
+}
+
+.section-sep__label {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 9px;
+  letter-spacing: 3px;
+  color: var(--color-text-faint);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+
+/* --------------------------------------------------------------------------
+   6. FOOTER
+   -------------------------------------------------------------------------- */
+
+.site-footer {
+  position: relative;
+  z-index: 10;
+  border-top: 1px solid var(--color-border-cyan);
+  padding: var(--space-lg) var(--space-xl);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.site-footer__text {
+  font-size: 11px;
+  color: var(--color-text-faint);
+  letter-spacing: 0.5px;
+  text-align: center;
+}

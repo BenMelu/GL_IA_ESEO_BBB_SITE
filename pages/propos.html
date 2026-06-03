@@ -1,0 +1,110 @@
+<!-- ==========================================================================
+     pages/propos.html
+     Page "À propos" — Section d'accueil du site ESE'IA
+     Injectée dans #page-container par router.js
+     ========================================================================== -->
+
+<div class="page is-active" id="page-propos">
+
+  <!-- ── Hero ───────────────────────────────────────────────────────────── -->
+  <div class="hero">
+
+    <!-- Sous-titre discret au-dessus du titre principal -->
+    <div class="hero__kicker">
+      <div class="hero__kicker-line"></div>
+      <span class="hero__kicker-text">École d'ingénieur ESEO</span>
+    </div>
+
+    <!-- Titre principal -->
+    <h1 class="hero__title">
+      Bienvenue sur<br>
+      <em>ESE'IA</em>
+    </h1>
+
+    <!-- Description courte -->
+    <p class="hero__subtitle">
+      Un site dédié à comprendre l'intelligence artificielle — ses mécanismes,
+      ses démonstrations concrètes et ses activités pratiques pour expérimenter
+      par vous-même.
+    </p>
+
+    <!-- Liste des activités disponibles -->
+    <ul class="activity-list">
+      <li class="activity-item">
+        <span class="activity-item__num">01</span>
+        <div class="activity-item__body">
+          <strong class="activity-item__title">Création de chatbots</strong>
+          Découvrir le fonctionnement d'un chatbot et modifier ses paramètres.
+          Par Milovan PMS.
+        </div>
+      </li>
+      <li class="activity-item">
+        <span class="activity-item__num">02</span>
+        <div class="activity-item__body">
+          <strong class="activity-item__title">Entraînement d'une IA de reconnaissance de forme</strong>
+          Comprendre pourquoi les données sont cruciales pour l'apprentissage.
+          Par Lilian LEMERCIER.
+        </div>
+      </li>
+      <li class="activity-item">
+        <span class="activity-item__num">03</span>
+        <div class="activity-item__body">
+          <strong class="activity-item__title">Programmation d'une IA chats / chiens</strong>
+          Coder et entraîner votre propre modèle de classification d'images.
+          Par Ghyslain COUPLAN.
+        </div>
+      </li>
+    </ul>
+
+    <!-- Raccourcis vers les sections principales -->
+    <div class="hero__quick-nav grid-3">
+
+      <div class="cyber-card quick-nav-card" data-nav-page="info">
+        <div class="quick-nav-card__icon">
+          <i class="ti ti-cpu u-text-cyan"></i>
+        </div>
+        <div class="quick-nav-card__title">Comprendre l'IA</div>
+        <div class="quick-nav-card__desc">Théorie et concepts fondamentaux</div>
+      </div>
+
+      <div class="cyber-card cyber-card--magenta quick-nav-card" data-nav-page="demo">
+        <div class="quick-nav-card__icon">
+          <i class="ti ti-flask u-text-magenta"></i>
+        </div>
+        <div class="quick-nav-card__title">Démonstrations</div>
+        <div class="quick-nav-card__desc">Modèles IA en direct</div>
+      </div>
+
+      <div class="cyber-card cyber-card--purple quick-nav-card" data-nav-page="activite">
+        <div class="quick-nav-card__icon">
+          <i class="ti ti-bolt u-text-purple"></i>
+        </div>
+        <div class="quick-nav-card__title">Activités</div>
+        <div class="quick-nav-card__desc">Pratique guidée pas à pas</div>
+      </div>
+
+    </div>
+    <!-- /hero__quick-nav -->
+
+  </div>
+  <!-- /hero -->
+
+  <!-- ── Footer ─────────────────────────────────────────────────────────── -->
+  <footer class="site-footer">
+    <p class="site-footer__text">
+      Produit par l'ESEO —
+      Ghyslain COUPLAN &amp; Lilian LEMERCIER — Stage S7 2025 —
+      Tuteur : Bilel BEN BOUBAKER —
+      Contact : <a href="mailto:mail.ia@eseo.fr">mail.ia@eseo.fr</a>
+    </p>
+  </footer>
+
+</div>
+<!-- /page-propos -->
+
+
+<!-- ==========================================================================
+     Script inline INTERDIT — toute logique est dans js/router.js
+     Les cartes quick-nav utilisent data-nav-page pour la navigation,
+     gérée par le listener délégué dans router.js.
+     ========================================================================== -->

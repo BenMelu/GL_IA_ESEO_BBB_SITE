@@ -1,0 +1,822 @@
+<!-- ==========================================================================
+     pages/activite.html
+     Page "Activités" — 4 sous-onglets :
+       A1 : Quizz de compréhension
+       A2 : Création de chatbots
+       A3 : Entraînement et utilisation d'une IA
+       A4 : Programmation d'une IA (Kaggle)
+     Injectée dans #page-container par router.js
+     La logique JS du quizz est dans js/quiz.js (initialisé par router.js)
+     ========================================================================== -->
+
+<div class="page is-active" id="page-activite">
+
+  <!-- ── Barre de sous-onglets ────────────────────────────────────────────── -->
+  <nav class="subtabs-bar" aria-label="Sous-sections Activités">
+    <div class="subtabs-bar__inner">
+      <button class="subtabs-bar__btn is-active" data-subtab="a1">Quizz</button>
+      <button class="subtabs-bar__btn"           data-subtab="a2">Création de chatbots</button>
+      <button class="subtabs-bar__btn"           data-subtab="a3">Entraînement d'une IA</button>
+      <button class="subtabs-bar__btn"           data-subtab="a4">Programmation d'une IA</button>
+    </div>
+  </nav>
+
+
+  <!-- ══════════════════════════════════════════════════════════════════════
+       A1 — Quizz de compréhension
+       La logique (navigation, vérification, réponses) est gérée par quiz.js.
+
+       Convention d'IDs utilisée par quiz.js :
+         .quiz-slide         id="qs-N"   (slide N, N commence à 1)
+         .quiz-precision     id="qp-N"   (bloc précision conditionnel)
+         .quiz-answer        id="qa-N"   (réponse détaillée révélée)
+         .verify-btn         data-quiz="N"
+         .answer-btn         data-quiz="N" data-question="necessity|precision" data-correct="true|false"
+         .quiz-nav [data-nav] data-nav="prev|next"
+       ══════════════════════════════════════════════════════════════════════ -->
+  <div class="subpage is-active" id="a1">
+    <div class="quiz-wrap">
+
+      <!-- En-tête -->
+      <div class="badge badge--magenta">
+        <span class="badge__dot"></span>
+        Activité 1
+      </div>
+      <h1 class="t-orbitron t-h1 t-magenta">
+        Quizz de <em>compréhension</em>
+      </h1>
+      <p class="t-lead">
+        Quatre cas pratiques pour vérifier si vous savez identifier quand et comment
+        utiliser une IA, et quel niveau de précision est requis.
+      </p>
+
+      <!-- ── Slide 1 : Prix d'une maison ──────────────────────────────── -->
+      <div class="quiz-slide is-active" id="qs-1">
+
+        <p class="quiz-slide__case-title">Premier cas</p>
+        <p class="quiz-slide__description">
+          À partir d'une trentaine de critères bien définis (la surface habitable,
+          le nombre de chambres, l'emplacement, etc.), on souhaite prédire le prix
+          d'une maison.
+        </p>
+
+        <!-- Question : nécessité -->
+        <div class="quiz-question">
+          <p class="quiz-question__label">Nécessité de l'IA</p>
+          <div class="answer-group">
+            <button class="answer-btn"
+                    data-quiz="1" data-question="necessity" data-correct="true">
+              Oui
+            </button>
+            <button class="answer-btn"
+                    data-quiz="1" data-question="necessity" data-correct="false">
+              Non
+            </button>
+          </div>
+        </div>
+
+        <!-- Question : précision (conditionnelle — visible si nécessité = Oui) -->
+        <div class="quiz-precision" id="qp-1">
+          <div class="quiz-question">
+            <p class="quiz-question__label quiz-question__label--precision">
+              Précision nécessaire
+            </p>
+            <div class="answer-group">
+              <button class="answer-btn"
+                      data-quiz="1" data-question="precision" data-correct="false">
+                Moyenne
+              </button>
+              <button class="answer-btn"
+                      data-quiz="1" data-question="precision" data-correct="true">
+                Élevée
+              </button>
+              <button class="answer-btn"
+                      data-quiz="1" data-question="precision" data-correct="false">
+                Très élevée
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <button class="verify-btn" data-quiz="1">
+          <i class="ti ti-check" aria-hidden="true"></i>
+          Vérifier
+        </button>
+
+        <div class="quiz-answer" id="qa-1">
+          <strong>→ Oui</strong>, l'utilisation de l'IA est intéressante : sans elle, il faudrait
+          calculer manuellement l'influence de chaque critère sur le prix — tâche fastidieuse.
+          L'IA va reconnaître les tendances automatiquement pour une estimation plus précise.
+          C'est un <strong>modèle de régression</strong> (le résultat est un nombre).
+          La précision demandée est <strong>élevée</strong> mais pas très élevée :
+          une estimation à quelques milliers d'euros près suffit généralement.
+        </div>
+
+        <!-- Navigation entre slides -->
+        <div class="quiz-nav">
+          <span class="quiz-nav__counter">1 / 4</span>
+          <div class="quiz-nav__buttons">
+            <button class="btn btn--ghost" data-nav="prev" aria-label="Cas précédent">
+              <i class="ti ti-arrow-left" aria-hidden="true"></i>
+            </button>
+            <button class="btn" data-nav="next" aria-label="Cas suivant">
+              <i class="ti ti-arrow-right" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
+
+      </div>
+      <!-- /qs-1 -->
+
+
+      <!-- ── Slide 2 : Calcul du carré ────────────────────────────────── -->
+      <div class="quiz-slide" id="qs-2">
+
+        <p class="quiz-slide__case-title">Deuxième cas</p>
+        <p class="quiz-slide__description">
+          Calculer le carré de plusieurs nombres entiers.
+        </p>
+
+        <div class="quiz-question">
+          <p class="quiz-question__label">Nécessité de l'IA</p>
+          <div class="answer-group">
+            <button class="answer-btn"
+                    data-quiz="2" data-question="necessity" data-correct="false">
+              Oui
+            </button>
+            <button class="answer-btn"
+                    data-quiz="2" data-question="necessity" data-correct="true">
+              Non
+            </button>
+          </div>
+        </div>
+
+        <!-- Pas de question de précision pour ce cas (réponse = Non) -->
+
+        <button class="verify-btn" data-quiz="2">
+          <i class="ti ti-check" aria-hidden="true"></i>
+          Vérifier
+        </button>
+
+        <div class="quiz-answer" id="qa-2">
+          <strong>→ Non</strong>, l'utilisation de l'IA n'est pas nécessaire ici.
+          La fonction carré n'est pas linéaire : il faudrait énormément de données pour que
+          le modèle fonctionne correctement, alors qu'une simple calculatrice y arrive
+          parfaitement en consommant beaucoup moins de ressources.
+        </div>
+
+        <div class="quiz-nav">
+          <span class="quiz-nav__counter">2 / 4</span>
+          <div class="quiz-nav__buttons">
+            <button class="btn btn--ghost" data-nav="prev" aria-label="Cas précédent">
+              <i class="ti ti-arrow-left" aria-hidden="true"></i>
+            </button>
+            <button class="btn" data-nav="next" aria-label="Cas suivant">
+              <i class="ti ti-arrow-right" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
+
+      </div>
+      <!-- /qs-2 -->
+
+
+      <!-- ── Slide 3 : Détection cancer ───────────────────────────────── -->
+      <div class="quiz-slide" id="qs-3">
+
+        <p class="quiz-slide__case-title">Troisième cas</p>
+        <p class="quiz-slide__description">
+          Détecter un cancer du sein grâce à des radiographies.
+        </p>
+
+        <div class="quiz-question">
+          <p class="quiz-question__label">Nécessité de l'IA</p>
+          <div class="answer-group">
+            <button class="answer-btn"
+                    data-quiz="3" data-question="necessity" data-correct="true">
+              Oui
+            </button>
+            <button class="answer-btn"
+                    data-quiz="3" data-question="necessity" data-correct="false">
+              Non
+            </button>
+          </div>
+        </div>
+
+        <div class="quiz-precision" id="qp-3">
+          <div class="quiz-question">
+            <p class="quiz-question__label quiz-question__label--precision">
+              Précision nécessaire
+            </p>
+            <div class="answer-group">
+              <button class="answer-btn"
+                      data-quiz="3" data-question="precision" data-correct="false">
+                Moyenne
+              </button>
+              <button class="answer-btn"
+                      data-quiz="3" data-question="precision" data-correct="false">
+                Élevée
+              </button>
+              <button class="answer-btn"
+                      data-quiz="3" data-question="precision" data-correct="true">
+                Très élevée
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <button class="verify-btn" data-quiz="3">
+          <i class="ti ti-check" aria-hidden="true"></i>
+          Vérifier
+        </button>
+
+        <div class="quiz-answer" id="qa-3">
+          <strong>→ Oui</strong>, l'IA peut très bien repérer des anomalies aussi petites que
+          des tumeurs sur des radiographies. C'est un problème de <strong>Computer Vision</strong>.
+          Pour ce modèle, la précision doit être <strong>très élevée</strong> : un faux négatif
+          (tumeur non détectée) peut avoir des conséquences fatales.
+        </div>
+
+        <div class="quiz-nav">
+          <span class="quiz-nav__counter">3 / 4</span>
+          <div class="quiz-nav__buttons">
+            <button class="btn btn--ghost" data-nav="prev" aria-label="Cas précédent">
+              <i class="ti ti-arrow-left" aria-hidden="true"></i>
+            </button>
+            <button class="btn" data-nav="next" aria-label="Cas suivant">
+              <i class="ti ti-arrow-right" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
+
+      </div>
+      <!-- /qs-3 -->
+
+
+      <!-- ── Slide 4 : Traduction panneau ─────────────────────────────── -->
+      <div class="quiz-slide" id="qs-4">
+
+        <p class="quiz-slide__case-title">Quatrième cas</p>
+        <p class="quiz-slide__description">
+          Vous êtes dans un pays scandinave et vous ne connaissez pas la langue.
+          Vous voulez savoir ce qu'il y a d'écrit sur un panneau — mais il fait très froid.
+        </p>
+
+        <div class="quiz-question">
+          <p class="quiz-question__label">Nécessité de l'IA</p>
+          <div class="answer-group">
+            <button class="answer-btn"
+                    data-quiz="4" data-question="necessity" data-correct="true">
+              Oui
+            </button>
+            <button class="answer-btn"
+                    data-quiz="4" data-question="necessity" data-correct="false">
+              Non
+            </button>
+          </div>
+        </div>
+
+        <div class="quiz-precision" id="qp-4">
+          <div class="quiz-question">
+            <p class="quiz-question__label quiz-question__label--precision">
+              Précision nécessaire
+            </p>
+            <div class="answer-group">
+              <button class="answer-btn"
+                      data-quiz="4" data-question="precision" data-correct="false">
+                Moyenne
+              </button>
+              <button class="answer-btn"
+                      data-quiz="4" data-question="precision" data-correct="true">
+                Élevée
+              </button>
+              <button class="answer-btn"
+                      data-quiz="4" data-question="precision" data-correct="false">
+                Très élevée
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <button class="verify-btn" data-quiz="4">
+          <i class="ti ti-check" aria-hidden="true"></i>
+          Vérifier
+        </button>
+
+        <div class="quiz-answer" id="qa-4">
+          <strong>→ Oui</strong>, vous pourriez recopier le texte dans Google Traduction, mais
+          il fait froid — une IA qui traduit automatiquement depuis une photo est bien plus pratique.
+          Cette IA combinerait <strong>Computer Vision</strong> (lire le texte sur l'image) et
+          <strong>LLM</strong> (traduire le texte). La précision doit être <strong>élevée</strong>
+          car une mauvaise traduction pourrait changer complètement le sens du panneau.
+        </div>
+
+        <div class="quiz-nav">
+          <span class="quiz-nav__counter">4 / 4</span>
+          <div class="quiz-nav__buttons">
+            <button class="btn btn--ghost" data-nav="prev" aria-label="Cas précédent">
+              <i class="ti ti-arrow-left" aria-hidden="true"></i>
+            </button>
+            <!-- Dernier slide : bouton suivant désactivé -->
+            <button class="btn btn--ghost" data-nav="next"
+                    aria-label="Pas de cas suivant" disabled style="opacity:.3;cursor:default">
+              <i class="ti ti-arrow-right" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
+
+      </div>
+      <!-- /qs-4 -->
+
+    </div>
+    <!-- /quiz-wrap -->
+  </div>
+  <!-- /a1 -->
+
+
+  <!-- ══════════════════════════════════════════════════════════════════════
+       A2 — Création de chatbots
+       ══════════════════════════════════════════════════════════════════════ -->
+  <div class="subpage" id="a2">
+    <div class="page-section">
+
+      <div class="badge">
+        <span class="badge__dot"></span>
+        Activité 2
+      </div>
+      <h1 class="t-orbitron t-h1">
+        Création de <em>chatbots</em>
+      </h1>
+      <p class="t-lead">
+        Découvrez comment fonctionne un chatbot et comment modifier ses paramètres
+        pour obtenir des comportements différents.
+      </p>
+
+      <div class="divider"></div>
+
+      <!-- Présentation des deux parties -->
+      <div class="grid-2 u-mt-lg">
+
+        <div class="cyber-card">
+          <div class="cyber-card__head">
+            <div class="cyber-card__label">
+              <span class="cyber-card__label-icon">
+                <i class="ti ti-school" aria-hidden="true"></i>
+              </span>
+              Partie Découverte
+            </div>
+          </div>
+          <p class="t-body">
+            Créer un chatbot basique et comprendre ses mécanismes fondamentaux.
+            Idéal pour débuter sans expérience préalable.
+          </p>
+        </div>
+
+        <div class="cyber-card cyber-card--magenta">
+          <div class="cyber-card__head">
+            <div class="cyber-card__label">
+              <span class="cyber-card__label-icon">
+                <i class="ti ti-settings" aria-hidden="true"></i>
+              </span>
+              Partie Expert
+            </div>
+          </div>
+          <p class="t-body">
+            Modifier un chatbot en profondeur : température, prompt système,
+            historique de conversation.
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Lien vers le site de l'activité -->
+      <div class="cyber-card u-mt-lg">
+        <div class="cyber-card__head">
+          <div class="cyber-card__label">
+            <span class="cyber-card__label-icon">
+              <i class="ti ti-external-link" aria-hidden="true"></i>
+            </span>
+            Accéder à l'activité
+          </div>
+        </div>
+        <p class="t-body">
+          L'activité est disponible sur le site
+          <a href="http://34.155.193.187" target="_blank" rel="noopener">
+            ESEO Chat Lab
+          </a>.
+          Le guide est directement intégré au site.
+        </p>
+      </div>
+
+    </div>
+  </div>
+  <!-- /a2 -->
+
+
+  <!-- ══════════════════════════════════════════════════════════════════════
+       A3 — Entraînement et utilisation d'une IA
+       ══════════════════════════════════════════════════════════════════════ -->
+  <div class="subpage" id="a3">
+    <div class="page-section">
+
+      <div class="badge badge--purple">
+        <span class="badge__dot"></span>
+        Activité 3
+      </div>
+      <h1 class="t-orbitron t-h1 t-purple">
+        Entraînement et <em>utilisation</em> d'une IA
+      </h1>
+      <p class="t-lead">
+        Découvrez comment une IA est entraînée et pourquoi les données sont cruciales,
+        puis programmez un mini-projet utilisant les prédictions de votre modèle.
+      </p>
+
+      <!-- ── Partie 1 : Entraînement ─────────────────────────────────── -->
+      <div class="section-sep">
+        <div class="section-sep__line"></div>
+        <span class="section-sep__label">Partie 1 — Entraînement</span>
+        <div class="section-sep__line section-sep__line--right"></div>
+      </div>
+
+      <div class="guide-step">
+        <span class="guide-step__num">01</span>
+        <div class="guide-step__content">
+          <h3 class="guide-step__title">Aller sur le site</h3>
+          <div class="guide-step__body">
+            <p>
+              <a href="https://pixees.fr/classcodeiai/app/tuto1/" target="_blank" rel="noopener">
+                pixees.fr/classcodeiai/app/tuto1/
+              </a>
+              — puis aller dans la section <strong>« Expérimenter »</strong>.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="guide-step">
+        <span class="guide-step__num">02</span>
+        <div class="guide-step__content">
+          <h3 class="guide-step__title">Suivre les étapes</h3>
+          <div class="guide-step__body">
+            <p>
+              Si un intervenant fait l'activité avec vous, vous pouvez passer les vidéos —
+              les explications seront données à l'oral.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Partie 2 : Utilisation ──────────────────────────────────── -->
+      <div class="section-sep">
+        <div class="section-sep__line"></div>
+        <span class="section-sep__label">Partie 2 — Utilisation avec VittaScience</span>
+        <div class="section-sep__line section-sep__line--right"></div>
+      </div>
+
+      <div class="guide-step">
+        <span class="guide-step__num">01</span>
+        <div class="guide-step__content">
+          <h3 class="guide-step__title">Aller sur VittaScience</h3>
+          <div class="guide-step__body">
+            <p>
+              <a href="https://fr.vittascience.com/ia/images" target="_blank" rel="noopener">
+                fr.vittascience.com/ia/images
+              </a>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="guide-step">
+        <span class="guide-step__num">02</span>
+        <div class="guide-step__content">
+          <h3 class="guide-step__title">Créer vos catégories (partie Données)</h3>
+          <div class="guide-step__body">
+            <p>
+              Ajouter des catégories et leur affecter des images. Trois façons
+              d'ajouter des images :
+            </p>
+            <ul>
+              <li>Caméra (icône caméra)</li>
+              <li>Catégories existantes (icône 6 carrés)</li>
+              <li>Téléversement depuis votre appareil (icône téléchargement)</li>
+            </ul>
+            <img src="assets/act3/donnees.png"
+                 alt="Interface VittaScience — section Données"
+                 class="guide-step__img">
+          </div>
+        </div>
+      </div>
+
+      <div class="guide-step">
+        <span class="guide-step__num">03</span>
+        <div class="guide-step__content">
+          <h3 class="guide-step__title">Entraîner le modèle</h3>
+          <div class="guide-step__body">
+            <p>
+              Cliquer sur <strong>« Entraîner le modèle »</strong> dans la section
+              Entraînement. Tester ensuite dans <strong>« Aperçu »</strong> en
+              téléversant une image de test.
+            </p>
+            <img src="assets/act3/entrainement.png"
+                 alt="Interface VittaScience — section Entraînement"
+                 class="guide-step__img">
+          </div>
+        </div>
+      </div>
+
+      <div class="guide-step">
+        <span class="guide-step__num">04</span>
+        <div class="guide-step__content">
+          <h3 class="guide-step__title">Passer à la programmation avec AdaCraft</h3>
+          <div class="guide-step__body">
+            <p>
+              Une fois satisfait du modèle, cliquer sur le bouton <strong>AdaCraft</strong>.
+              Les deux blocs indispensables sont :
+            </p>
+            <ul>
+              <li><code>Sélectionner et initialiser le modèle de la mémoire locale du navigateur</code></li>
+              <li><code>Lancer la détection de la caméra</code> (ou <code>sur fichier/URL</code> sans caméra)</li>
+            </ul>
+            <img src="assets/act3/code.png"
+                 alt="Interface AdaCraft — blocs de programmation IA"
+                 class="guide-step__img">
+          </div>
+        </div>
+      </div>
+
+      <div class="guide-step">
+        <span class="guide-step__num">05</span>
+        <div class="guide-step__content">
+          <h3 class="guide-step__title">Idées de projets</h3>
+          <div class="guide-step__body">
+            <ul>
+              <li><strong>Tri des poubelles</strong> — un objet se dirige vers la bonne poubelle selon la photo</li>
+              <li><strong>Voiture autonome</strong> — la voiture tourne selon les panneaux détectés</li>
+              <li><strong>Météo</strong> — affichage soleil/pluie selon l'image capturée</li>
+              <li><strong>Pierre-feuille-ciseaux</strong> — comparer le geste capturé à une variable aléatoire</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <!-- /a3 -->
+
+
+  <!-- ══════════════════════════════════════════════════════════════════════
+       A4 — Programmation d'une IA (Kaggle Notebooks)
+       ══════════════════════════════════════════════════════════════════════ -->
+  <div class="subpage" id="a4">
+    <div class="page-section">
+
+      <div class="badge badge--magenta">
+        <span class="badge__dot"></span>
+        Activité 4
+      </div>
+      <h1 class="t-orbitron t-h1 t-magenta">
+        Programmation <em>d'une IA</em>
+      </h1>
+      <p class="t-lead">
+        Vous allez programmer votre propre IA de classification de chats et de chiens
+        sur Kaggle Notebooks (infrastructure Google). L'entraînement prend quelques minutes
+        au lieu de plusieurs heures grâce au GPU mis à disposition.
+      </p>
+
+      <!-- ── Mise en place ───────────────────────────────────────────── -->
+      <div class="section-sep">
+        <div class="section-sep__line"></div>
+        <span class="section-sep__label">Mise en place — Kaggle</span>
+        <div class="section-sep__line section-sep__line--right"></div>
+      </div>
+
+      <div class="guide-step">
+        <span class="guide-step__num">01</span>
+        <div class="guide-step__content">
+          <h3 class="guide-step__title">Créer un compte Kaggle</h3>
+          <div class="guide-step__body">
+            <p>
+              Rendez-vous sur
+              <a href="https://www.kaggle.com/code" target="_blank" rel="noopener">kaggle.com/code</a>
+              et créez un compte (société acquise par Google).
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="guide-step">
+        <span class="guide-step__num">02</span>
+        <div class="guide-step__content">
+          <h3 class="guide-step__title">Rechercher le notebook de l'activité</h3>
+          <div class="guide-step__body">
+            <p>
+              Dans la barre de recherche, tapez <code>ACTIVITE IA LYCEE</code>.
+              Sélectionnez le résultat en majuscules, sans chiffre, avec le logo ESEO.
+            </p>
+            <img src="assets/act4/recherche.png"
+                 alt="Résultat de recherche Kaggle pour ACTIVITE IA LYCEE"
+                 class="guide-step__img">
+          </div>
+        </div>
+      </div>
+
+      <div class="guide-step">
+        <span class="guide-step__num">03</span>
+        <div class="guide-step__content">
+          <h3 class="guide-step__title">Copier le notebook</h3>
+          <div class="guide-step__body">
+            <p>
+              Cliquer sur <strong>« Copy and Edit »</strong> en haut à droite.
+              Votre copie personnelle apparaîtra dans <strong>« Your Work »</strong>.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="guide-step">
+        <span class="guide-step__num">04</span>
+        <div class="guide-step__content">
+          <h3 class="guide-step__title">Configurer la session</h3>
+          <div class="guide-step__body">
+            <p>
+              Dans le panneau <strong>« Session options »</strong> (droite de l'écran),
+              configurer :
+            </p>
+            <ul>
+              <li>Accelerator : <code>GPU P100</code></li>
+              <li>Internet : <strong>activé</strong> (indispensable pour le dataset)</li>
+            </ul>
+            <p>Puis cliquer sur le bouton On/Off en haut à droite pour démarrer la session.</p>
+            <img src="assets/act4/session.png"
+                 alt="Options de session Kaggle — GPU P100 et Internet activés"
+                 class="guide-step__img">
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Les 8 parties du code ───────────────────────────────────── -->
+      <div class="section-sep">
+        <div class="section-sep__line"></div>
+        <span class="section-sep__label">Le code — 8 parties</span>
+        <div class="section-sep__line section-sep__line--right"></div>
+      </div>
+
+      <div class="guide-step">
+        <span class="guide-step__num">1</span>
+        <div class="guide-step__content">
+          <h3 class="guide-step__title">Les librairies</h3>
+          <div class="guide-step__body">
+            <p>
+              Importer les librairies nécessaires. Si des erreurs apparaissent
+              au premier lancement, relancer la cellule — elles se corrigent
+              automatiquement.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="guide-step">
+        <span class="guide-step__num">2</span>
+        <div class="guide-step__content">
+          <h3 class="guide-step__title">Vérification du GPU</h3>
+          <div class="guide-step__body">
+            <p>
+              Vérifie que le GPU est bien détecté. Si vous voyez <code>GPU not found</code>,
+              vérifiez que <code>GPU P100</code> est bien sélectionné dans les options de session.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="guide-step">
+        <span class="guide-step__num">3</span>
+        <div class="guide-step__content">
+          <h3 class="guide-step__title">Le dataset</h3>
+          <div class="guide-step__body">
+            <p>
+              Import du jeu de données via <code>tfds.load()</code>. Internet doit être activé.
+              Cette cellule peut prendre quelques minutes.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="guide-step">
+        <span class="guide-step__num">4</span>
+        <div class="guide-step__content">
+          <h3 class="guide-step__title">Informations du dataset</h3>
+          <div class="guide-step__body">
+            <p>Affiche les métadonnées du dataset (nombre d'images, dimensions, etc.).</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="guide-step">
+        <span class="guide-step__num">5 ✏️</span>
+        <div class="guide-step__content">
+          <h3 class="guide-step__title">Le modèle d'IA — votre partie principale</h3>
+          <div class="guide-step__body">
+            <p>
+              Créez votre modèle avec <code>Sequential()</code>. Chaque ligne = une couche.
+              Pour améliorer les performances, ajoutez des couches de convolution + pooling
+              et/ou augmentez le nombre de neurones :
+            </p>
+            <pre>tf.keras.layers.Conv2D(<strong>NOMBRE_NEURONES</strong>, 3, activation='relu')</pre>
+            <img src="assets/act4/schema.png"
+                 alt="Schéma de l'architecture du modèle CNN"
+                 class="guide-step__img">
+
+            <div class="warning-box" style="margin-top:12px">
+              <p>
+                ⚠️ Ne jamais modifier les dimensions <strong>250×250</strong> présentes dans
+                les sections « Importation du dataset » et « Création du modèle » — le programme
+                de test de fin d'activité s'attend à cette taille.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="guide-step">
+        <span class="guide-step__num">6</span>
+        <div class="guide-step__content">
+          <h3 class="guide-step__title">L'entraînement</h3>
+          <div class="guide-step__body">
+            <p>
+              Lance l'apprentissage. Après chaque epoch s'affichent l'<strong>accuracy</strong>
+              (proportion d'images correctement prédites) et la <strong>loss</strong>
+              (erreur du modèle). Objectif : accuracy haute + loss basse.
+              Augmenter le nombre d'epochs si le modèle peut encore progresser sans surapprendre.
+            </p>
+            <img src="assets/act4/Epoch.png"
+                 alt="Exemple d'affichage des résultats par epoch"
+                 class="guide-step__img">
+          </div>
+        </div>
+      </div>
+
+      <div class="guide-step">
+        <span class="guide-step__num">7</span>
+        <div class="guide-step__content">
+          <h3 class="guide-step__title">Sauvegarde du modèle</h3>
+          <div class="guide-step__body">
+            <p>
+              Enregistre votre IA dans un fichier <code>.keras</code> visible dans
+              le panneau <strong>Output</strong> (droite). Cliquer sur Refresh si le fichier
+              n'apparaît pas immédiatement. Changer le nom entre chaque sauvegarde pour ne
+              pas écraser la précédente.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="guide-step">
+        <span class="guide-step__num">8</span>
+        <div class="guide-step__content">
+          <h3 class="guide-step__title">Affichage des résultats</h3>
+          <div class="guide-step__body">
+            <p>
+              Graphes détaillés de l'évolution des performances au fil des epochs.
+              Utile pour détecter un surapprentissage.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Fin de l'activité ───────────────────────────────────────── -->
+      <div class="section-sep">
+        <div class="section-sep__line"></div>
+        <span class="section-sep__label">Fin de l'activité</span>
+        <div class="section-sep__line section-sep__line--right"></div>
+      </div>
+
+      <div class="cyber-card cyber-card--magenta u-mt-lg">
+        <div class="cyber-card__head">
+          <div class="cyber-card__label">
+            <span class="cyber-card__label-icon">
+              <i class="ti ti-send" aria-hidden="true"></i>
+            </span>
+            Envoyer votre fichier
+          </div>
+        </div>
+        <div class="t-body">
+          <p>
+            Nommez votre fichier <code>IA_NOM_PRENOM.keras</code> et envoyez-le via
+            <a href="https://wetransfer.com/" target="_blank" rel="noopener">WeTransfer</a>
+            à l'adresse <a href="mailto:mail.ia@eseo.fr">mail.ia@eseo.fr</a>.
+          </p>
+          <p>
+            Mettez votre adresse ESEO en expéditeur
+            (format : <code>formation1.ia@eseo.fr</code>) et le titre <strong>« IA »</strong>.
+            Vous pouvez vous ajouter en destinataire pour récupérer votre fichier.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <!-- /a4 -->
+
+</div>
+<!-- /page-activite -->

@@ -1,0 +1,230 @@
+/* ==========================================================================
+   QUIZ.CSS
+   Slides de quiz, boutons de réponse, précision conditionnelle
+   Spécifique à l'activité Quizz (page Activités > A1)
+   ========================================================================== */
+
+
+/* --------------------------------------------------------------------------
+   1. CONTENEUR DU QUIZ
+   -------------------------------------------------------------------------- */
+
+.quiz-wrap {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: var(--space-xl) var(--space-xl) var(--space-2xl);
+}
+
+
+/* --------------------------------------------------------------------------
+   2. SLIDES
+   -------------------------------------------------------------------------- */
+
+.quiz-slide {
+  display: none;
+}
+
+.quiz-slide.is-active {
+  display: block;
+}
+
+.quiz-slide__case-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-magenta);
+  letter-spacing: 1px;
+  margin-bottom: 6px;
+}
+
+.quiz-slide__description {
+  font-size: 14px;
+  line-height: 1.75;
+  color: var(--color-text-muted);
+  font-weight: 300;
+  margin-bottom: var(--space-lg);
+}
+
+
+/* --------------------------------------------------------------------------
+   3. QUESTION
+   -------------------------------------------------------------------------- */
+
+.quiz-question {
+  margin: 18px 0;
+}
+
+.quiz-question__label {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--color-cyan);
+  margin-bottom: 10px;
+}
+
+.quiz-question__label--precision {
+  color: var(--color-magenta);
+}
+
+/* Groupe de boutons-réponses */
+.answer-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+
+/* --------------------------------------------------------------------------
+   4. BOUTON RÉPONSE
+   -------------------------------------------------------------------------- */
+
+.answer-btn {
+  padding: 9px 22px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 500;
+  border: 1px solid var(--color-border-cyan);
+  background: rgba(var(--rgb-cyan), 0.03);
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  font-family: 'Exo 2', sans-serif;
+}
+
+.answer-btn:hover {
+  border-color: rgba(var(--rgb-cyan), 0.35);
+  color: var(--color-text);
+}
+
+/* État sélectionné (avant vérification) */
+.answer-btn.is-selected {
+  border-color: var(--color-cyan);
+  color: var(--color-cyan);
+  background: rgba(var(--rgb-cyan), 0.08);
+}
+
+/* État correct (après vérification) */
+.answer-btn.is-correct {
+  border-color: var(--color-green-ok);
+  color: var(--color-green-ok);
+  background: rgba(45, 255, 142, 0.08);
+}
+
+/* État incorrect (après vérification) */
+.answer-btn.is-wrong {
+  border-color: var(--color-magenta);
+  color: var(--color-magenta);
+  background: rgba(var(--rgb-magenta), 0.08);
+}
+
+/* Animation de secousse (champ non rempli) */
+.answer-btn.is-shaking {
+  animation: answer-shake 0.28s ease;
+}
+
+@keyframes answer-shake {
+  0%, 100% { transform: translateX(0); }
+  25%       { transform: translateX(-6px); }
+  75%       { transform: translateX(6px); }
+}
+
+
+/* --------------------------------------------------------------------------
+   5. BLOC PRÉCISION (conditionnel)
+   Apparaît uniquement si la réponse à la nécessité est "Oui"
+   -------------------------------------------------------------------------- */
+
+.quiz-precision {
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 0.4s ease, opacity 0.4s ease;
+}
+
+.quiz-precision.is-visible {
+  max-height: 200px;
+  opacity: 1;
+}
+
+
+/* --------------------------------------------------------------------------
+   6. BOUTON VÉRIFIER
+   -------------------------------------------------------------------------- */
+
+.verify-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 10px 20px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border: 1px solid var(--color-border-magenta);
+  background: rgba(var(--rgb-magenta), 0.06);
+  color: var(--color-magenta);
+  cursor: pointer;
+  font-family: 'Exo 2', sans-serif;
+  transition: all var(--transition-normal);
+  margin-top: var(--space-lg);
+}
+
+.verify-btn:hover {
+  background: rgba(var(--rgb-magenta), 0.14);
+  box-shadow: var(--glow-magenta);
+}
+
+
+/* --------------------------------------------------------------------------
+   7. BLOC DE RÉPONSE (révélation)
+   -------------------------------------------------------------------------- */
+
+.quiz-answer {
+  background: rgba(var(--rgb-cyan), 0.03);
+  border: 1px solid rgba(var(--rgb-cyan), 0.1);
+  border-left: 2px solid var(--color-cyan);
+  border-radius: var(--radius-md);
+  padding: 18px;
+  margin-top: var(--space-md);
+  font-size: 13px;
+  line-height: 1.75;
+  color: var(--color-text-muted);
+  display: none;
+}
+
+.quiz-answer.is-visible {
+  display: block;
+}
+
+.quiz-answer strong {
+  color: var(--color-text);
+  font-weight: 500;
+}
+
+
+/* --------------------------------------------------------------------------
+   8. BARRE DE NAVIGATION DU QUIZ
+   -------------------------------------------------------------------------- */
+
+.quiz-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: var(--space-lg);
+  padding-top: var(--space-lg);
+  border-top: 1px solid rgba(var(--rgb-cyan), 0.08);
+}
+
+.quiz-nav__counter {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 12px;
+  color: var(--color-text-faint);
+  letter-spacing: 2px;
+}
+
+.quiz-nav__buttons {
+  display: flex;
+  gap: 8px;
+}
