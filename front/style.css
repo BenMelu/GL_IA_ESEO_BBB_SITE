@@ -1,9 +1,4 @@
 /* Page de chargement du site */
-#main-content {
-    opacity: 0;
-    transition: opacity 0.5s ease;
-}
-
 #loading-screen {
     position: fixed;
     top: 0;

@@ -1,16 +1,13 @@
 // Page de chargement du site
 window.addEventListener('load', () => {
     const screen = document.getElementById('loading-screen');
-    const totalDuration = 1.5 * 1000;
-
-    document.body.style.overflow = 'hidden'; // bloque le scroll pendant le chargement
+    const totalDuration = 1.5 * 1000; // 1 pulses de 1.5s
 
     setTimeout(() => {
         screen.style.opacity = '0';
         setTimeout(() => {
             screen.style.display = 'none';
-            document.getElementById('main-content').style.opacity = '1';
-        }, 1000);
+        }, 1500);
     }, totalDuration);
 });
 
