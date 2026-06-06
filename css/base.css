@@ -47,9 +47,9 @@ a:hover {
   border-bottom-color: var(--color-cyan);
 }
 
-ul {
+/* ul {
   list-style: none;
-}
+} */
 
 button {
   font-family: 'Exo 2', sans-serif;
@@ -81,13 +81,13 @@ select {
 .t-orbitron.t-purple  em { color: var(--color-purple); }
 
 /* Tailles de titres */
-.t-h1 { font-size: clamp(24px, 4vw, 44px); font-weight: 700; margin-bottom: var(--space-md); }
-.t-h2 { font-size: clamp(18px, 2.5vw, 30px); font-weight: 700; margin-bottom: var(--space-sm); }
+.t-h1 { font-size: var(--title-md-text); font-weight: 700; margin-bottom: var(--space-md); }
+.t-h2 { font-size: var(--subtitle-text); font-weight: 700; margin-bottom: var(--space-sm); }
 .t-h3 { font-size: 16px; font-weight: 600; margin-bottom: var(--space-sm); }
 
 /* Corps de texte */
 .t-lead {
-  font-size: 14px;
+  font-size: var(--text);
   line-height: 1.78;
   color: var(--color-text-muted);
   font-weight: 300;
@@ -95,7 +95,7 @@ select {
 }
 
 .t-body {
-  font-size: 14px;
+  font-size: var(--text);
   line-height: 1.8;
   color: var(--color-text-muted);
   font-weight: 300;
@@ -107,7 +107,7 @@ select {
 .t-body li       { margin: var(--space-xs) 0; }
 .t-body h2       {
   font-family: 'Orbitron', sans-serif;
-  font-size: 16px;
+  font-size: var(--subtitle-text);
   font-weight: 700;
   color: var(--color-cyan);
   letter-spacing: 0.8px;
@@ -116,7 +116,6 @@ select {
   align-items: center;
   gap: var(--space-sm);
 }
-
 
 /* --------------------------------------------------------------------------
    4. MISE EN PAGE

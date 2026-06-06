@@ -1,62 +1,93 @@
+/* --------------------------------------------------------------------------
+   DESIGN TOKENS (CSS VARIABLES)
+   -------------------------------------------------------------------------- */
 
 /* --------------------------------------------------------------------------
-   2. DESIGN TOKENS (CSS VARIABLES)
+   1. Text variables
    -------------------------------------------------------------------------- */
 
 :root {
+    --title-lg-text:    80px;
+    --title-md-text:    40px;
+    --subtitle-text:    25px;
+    --index-text:       13px;
+    --box-title-text:   22px;
+    --box-text:         18px;
+    --tab-text:         13px;
+    --subtab-text:      15px;
+    --text:             20px;
+    --footer-text:      15px;
+}
 
-  /* -- Couleurs principales -- */
-  --color-cyan:         #00e5ff;
-  --color-magenta:      #ff1f8e;
-  --color-purple:       #7b2fff;
-  --color-green-ok:     #2dff8e;
 
-  /* Canaux RGB pour rgba() dynamique */
-  --rgb-cyan:           0, 229, 255;
-  --rgb-magenta:        255, 31, 142;
-  --rgb-purple:         123, 47, 255;
+/* --------------------------------------------------------------------------
+   1. Color themes
+   -------------------------------------------------------------------------- */
 
-  /* -- Fonds -- */
-  --color-bg:           #fcfcfa;
-  --color-bg-panel:     rgba(5, 14, 35, 0.88);
-  --color-bg-card:      rgba(0, 229, 255, 0.03);
-  --color-bg-card-m:    rgba(255, 31, 142, 0.03);
-  --color-bg-card-p:    rgba(123, 47, 255, 0.03);
 
-  /* -- Textes -- */
-  --color-text:         #c8e6ff;
-  --color-text-muted:   #5a8ab0;
-  --color-text-faint:   #3a5878;
-  --color-white:        #ffffff;
+:root {
 
-  /* -- Bordures -- */
-  --color-border-cyan:    rgba(0, 229, 255, 0.2);
-  --color-border-magenta: rgba(255, 31, 142, 0.2);
-  --color-border-purple:  rgba(123, 47, 255, 0.2);
+    --color-none: none;
 
-  /* -- Glows (box-shadow) -- */
-  --glow-cyan:    0 0 22px rgba(0, 229, 255, 0.3);
-  --glow-magenta: 0 0 22px rgba(255, 31, 142, 0.3);
-  --glow-purple:  0 0 22px rgba(123, 47, 255, 0.3);
+    /* -- Couleurs principales -- */
+    --color-cyan:         #2fbff0; /* #00e5ff; */
+    --color-magenta:      #e6007a; /* #ff1f8e; */
+    --color-purple:       #6a2cff;
+    --color-green-ok:     #1fdc7a;
 
-  /* -- Géométrie -- */
-  --radius-sm:    6px;
-  --radius-md:    10px;
-  --radius-lg:    16px;
-  --header-height: 68px;
+    /* Canaux RGB pour rgba() dynamique */
+    --rgb-cyan:           47, 191, 240;
+    --rgb-magenta:        230, 0, 122;
+    --rgb-purple:         106, 44, 255;
 
-  /* -- Espacement -- */
-  --space-xs:  4px;
-  --space-sm:  8px;
-  --space-md:  16px;
-  --space-lg:  24px;
-  --space-xl:  40px;
-  --space-2xl: 64px;
+    /* -- Fonds -- */
+    --color-bg:               #fcfcfa;
+    --color-bg-header:        none;
+    --color-bg-subtabs-bar:   none;
+    --color-bg-panel:         rgba(5, 14, 35, 0.88);
+    --color-bg-card:          rgba(47, 191, 240, 0.06);
+    --color-bg-card-m:        rgba(255, 31, 142, 0.03);
+    --color-bg-card-p:        rgba(123, 47, 255, 0.03);
 
-  /* -- Transitions -- */
-  --transition-fast:   0.18s ease;
-  --transition-normal: 0.28s ease;
-  --transition-slow:   0.5s ease;
+    /* -- Textes -- */
+    --color-text:                    #000;
+    --color-text-light-title:        #000;
+    --color-text-dark-title:         #2fbff0;
+    --color-text-muted:              #333;
+    --color-text-faint:              #3a5878;
+    --color-text-attention:          #ff4d4d;
+    --color-white:                   #fff;
+
+    /* -- Bordures -- */
+    --color-border-bottom:    none;
+    --color-border-cyan:    rgba(47, 191, 240, 0.35);
+    --color-border-magenta: rgba(230, 0, 122, 0.35);
+    --color-border-purple:  rgba(106, 44, 255, 0.35);
+
+
+    /* -- Glows (box-shadow) -- */
+    --glow-cyan:    0 0 10px rgba(62,184,240,0.5); /* 0 0 22px rgba(0, 229, 255, 0.3); */
+    --glow-magenta: 0 0 22px rgba(255, 31, 142, 0.3);
+    --glow-purple:  0 0 22px rgba(123, 47, 255, 0.3);
+
+    /* -- Géométrie -- */
+    --radius-sm:    6px;
+    --radius-md:    10px;
+    --radius-lg:    16px;
+    --header-height: 68px;
+
+    /* -- Espacement -- */
+    --space-xs:  4px;
+    --space-sm:  8px;
+    --space-md:  16px;
+    --space-lg:  24px;
+    --space-xl:  40px;
+    --space-2xl: 64px;
+
+    /* -- Transitions -- */
+    --transition-fast:   0.18s ease;
+    --transition-normal: 0.28s ease;
+    --transition-slow:   0.5s ease;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -74,11 +105,13 @@
     --rgb-purple:         123, 47, 255;
 
     /* -- Fonds -- */
-    --color-bg:           #fcfcfa;
-    --color-bg-panel:     rgba(5, 14, 35, 0.88);
-    --color-bg-card:      rgba(0, 229, 255, 0.03);
-    --color-bg-card-m:    rgba(255, 31, 142, 0.03);
-    --color-bg-card-p:    rgba(123, 47, 255, 0.03);
+    --color-bg:               #03050e;
+    --color-bg-header:        rgba(3, 5, 14, 0.82);
+    --color-bg-subtabs-bar:   rgba(3, 5, 14, 0.78);
+    --color-bg-panel:         rgba(5, 14, 35, 0.88);
+    --color-bg-card:          rgba(0, 229, 255, 0.03);
+    --color-bg-card-m:        rgba(255, 31, 142, 0.03);
+    --color-bg-card-p:        rgba(123, 47, 255, 0.03);
 
     /* -- Textes -- */
     --color-text:         #c8e6ff;
@@ -87,6 +120,7 @@
     --color-white:        #ffffff;
 
     /* -- Bordures -- */
+    --color-border-bottom:    none;
     --color-border-cyan:    rgba(0, 229, 255, 0.2);
     --color-border-magenta: rgba(255, 31, 142, 0.2);
     --color-border-purple:  rgba(123, 47, 255, 0.2);

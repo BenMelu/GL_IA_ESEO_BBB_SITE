@@ -8,18 +8,6 @@
    1. FOND ATMOSPHÉRIQUE (background ambiance)
    -------------------------------------------------------------------------- */
 
-/* Grille de fond fixe */
-.bg-grid {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-  background-image:
-    linear-gradient(rgba(var(--rgb-cyan), 0.022) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(var(--rgb-cyan), 0.022) 1px, transparent 1px);
-  background-size: 55px 55px;
-}
-
 /* Halo ambiant cyan (haut-gauche) */
 .bg-glow-tl {
   position: fixed;
@@ -62,15 +50,14 @@
   top: 0;
   left: 0;
   right: 0;
-  z-index: 200;
+  z-index: 100;
   height: var(--header-height);
-  background: rgba(3, 5, 14, 0.82);
+  background: var(--color-bg-header);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid var(--color-border-cyan);
+  border-bottom: 1px solid var(--color-border-bottom);
   display: flex;
   align-items: center;
-  justify-content: space-between;
   padding: 0 var(--space-xl);
   gap: var(--space-lg);
   transition: opacity var(--transition-slow), transform 0.6s ease;
@@ -94,41 +81,28 @@
   flex-shrink: 0;
 }
 
-.header-logo__icon {
-  width: 40px;
-  height: 40px;
-}
-
-.header-logo__icon svg {
-  width: 100%;
-  height: 100%;
-}
-
-.header-logo__wordmark {
-  font-family: 'Orbitron', sans-serif;
-  font-size: 20px;
-  font-weight: 700;
-  letter-spacing: 3px;
-  color: var(--color-white);
-}
-
-.header-logo__wordmark em {
-  font-style: normal;
-  color: var(--color-cyan);
+.header-logo img {
+  max-width: 100px;
+  margin: 0;  
+  display: block;
 }
 
 
 /* -- Navigation principale -- */
 
 .main-nav {
-  display: flex;
-  gap: 3px;
+    display: flex;
+    background: transparent;
+    gap: 0.6rem;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .main-nav__btn {
   padding: 7px 17px;
   border-radius: var(--radius-sm);
-  font-size: 12px;
+  font-size: var(--tab-text);
   font-weight: 500;
   letter-spacing: 0.8px;
   text-transform: uppercase;
@@ -147,7 +121,7 @@
 .main-nav__btn.is-active {
   color: var(--color-cyan);
   border-color: var(--color-cyan);
-  background: rgba(var(--rgb-cyan), 0.08);
+  background: var(--color-none);
   box-shadow: var(--glow-cyan);
 }
 
@@ -174,25 +148,21 @@
    -------------------------------------------------------------------------- */
 
 .subtabs-bar {
-  position: sticky;
-  top: var(--header-height);
   z-index: 150;
-  background: rgba(3, 5, 14, 0.78);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border-bottom: 1px solid rgba(var(--rgb-magenta), 0.15);
+  background: var(--color-bg-subtabs-bar);
 }
 
 .subtabs-bar__inner {
-  max-width: 1280px;
+  max-width: 85%;
   margin: 0 auto;
   padding: 0 var(--space-xl);
   display: flex;
 }
 
 .subtabs-bar__btn {
-  padding: 16px 36px;
-  font-size: 12px;
+  flex: 1;
+  padding: 16px;
+  font-size: var(--subtab-text);
   font-weight: 600;
   letter-spacing: 0.8px;
   text-transform: uppercase;
@@ -301,7 +271,7 @@
 }
 
 .site-footer__text {
-  font-size: 11px;
+  font-size: var(--footer-text);
   color: var(--color-text-faint);
   letter-spacing: 0.5px;
   text-align: center;

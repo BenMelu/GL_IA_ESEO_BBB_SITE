@@ -25,13 +25,13 @@
 }
 
 /* Brackets décoratifs (coins HUD) */
-.cyber-card::before,
+/* .cyber-card::before,
 .cyber-card::after {
   content: '';
   position: absolute;
   width: 16px;
   height: 16px;
-}
+} */
 
 .cyber-card::before {
   top: -1px;
@@ -147,7 +147,7 @@
   padding: 5px 16px;
   border: 1px solid var(--color-border-cyan);
   border-radius: 100px;
-  font-size: 10.5px;
+  font-size: var(--index-text);
   font-weight: 700;
   letter-spacing: 2.5px;
   color: var(--color-cyan);
@@ -428,10 +428,10 @@
 .hero {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   min-height: calc(100vh - var(--header-height));
   padding: var(--space-2xl) var(--space-xl);
-  max-width: 1280px;
+  max-width: 85%;
   margin: 0 auto;
 }
 
@@ -449,7 +449,7 @@
 }
 
 .hero__kicker-text {
-  font-size: 11px;
+  font-size: var(--index-text);
   letter-spacing: 3px;
   text-transform: uppercase;
   color: var(--color-text-muted);
@@ -457,24 +457,23 @@
 
 .hero__title {
   font-family: 'Orbitron', sans-serif;
-  font-size: clamp(28px, 5.5vw, 62px);
-  font-weight: 900;
-  line-height: 1.1;
-  color: var(--color-white);
-  margin-bottom: var(--space-lg);
+  font-size: var(--title-md-text);
+  color: var(--color-text-light-title);
+  margin-bottom: var(--space-2xl);
 }
 
 .hero__title em {
+  font-size: var(--title-lg-text);
   font-style: normal;
-  color: var(--color-cyan);
+  color: var(--color-text-dark-title);
 }
 
 .hero__subtitle {
-  font-size: 15px;
+  font-size: var(--subtitle-text);
   line-height: 1.75;
   color: var(--color-text-muted);
   font-weight: 300;
-  max-width: 650px;
+  max-width: 100%;
   margin-bottom: var(--space-xl);
 }
 
@@ -483,7 +482,7 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
-  max-width: 580px;
+  max-width: 70%;
   margin-bottom: var(--space-xl);
 }
 
@@ -493,7 +492,7 @@
   gap: 14px;
   padding: 14px 18px;
   background: rgba(var(--rgb-cyan), 0.025);
-  border: 1px solid rgba(var(--rgb-cyan), 0.1);
+  border: 1px solid rgba(var(--rgb-cyan), 0.5);
   border-radius: var(--radius-md);
   transition: all var(--transition-normal);
 }
@@ -505,7 +504,7 @@
 
 .activity-item__num {
   font-family: 'Orbitron', sans-serif;
-  font-size: 12px;
+  font-size: var(--index-text);
   color: var(--color-cyan);
   opacity: 0.6;
   flex-shrink: 0;
@@ -514,7 +513,6 @@
 }
 
 .activity-item__body {
-  font-size: 13px;
   color: var(--color-text-muted);
   line-height: 1.5;
 }
@@ -522,13 +520,19 @@
 .activity-item__title {
   display: block;
   color: var(--color-text);
+  font-size: var( --box-title-text);
   font-weight: 500;
   margin-bottom: 2px;
 }
 
+.activity-item__desc {
+  font-size: var(--box-text);
+}
+
 /* Cartes de navigation rapide */
 .hero__quick-nav {
-  max-width: 680px;
+  max-width: 100%;
+  margin-bottom: var(--space-2xl);
 }
 
 .quick-nav-card {
@@ -540,14 +544,14 @@
 }
 
 .quick-nav-card__title {
-  font-size: 13px;
+  font-size: var(--box-title-text);
   font-weight: 500;
   color: var(--color-text);
   margin-bottom: 4px;
 }
 
 .quick-nav-card__desc {
-  font-size: 12px;
+  font-size: var(--box-text);
   color: var(--color-text-muted);
 }
 
@@ -624,7 +628,7 @@
 .guide-step__img {
   max-width: 100%;
   border-radius: var(--radius-sm);
-  border: 1px solid var(--color-border-cyan);
+  /* border: 1px solid var(--color-border-cyan); */
   margin-top: 10px;
 }
 
@@ -643,8 +647,8 @@
 }
 
 .warning-box p {
-  font-size: 13px;
+  font-size: var(--box-text);
   line-height: 1.75;
-  color: rgba(200, 150, 170, 0.9);
+  color: var(--color-text-attention);
   margin: 0;
 }
