@@ -653,3 +653,8 @@
   color: var(--color-text-attention);
   margin: 0;
 }
+
+.warning-box strong {
+  color: var(--color-text-attention);
+  font-weight: var(--strong-second);
+}

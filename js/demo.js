@@ -234,10 +234,6 @@ function handleFileSelected(file, config) {
     filenameEl.classList.add('is-visible');
   }
 
-  // Activer le bouton d'envoi
-  const sendBtn = document.getElementById(config.sendBtnId);
-  if (sendBtn) sendBtn.disabled = false;
-
   // Prévisualiser l'image
   const reader = new FileReader();
   reader.onload = ev => updatePreview(config.previewId, ev.target.result);
@@ -257,7 +253,7 @@ async function sendImageToApi(config) {
   const file = fileInput?.files[0];
 
   if (!file) {
-    showError(config.errorId, 'Veuillez choisir une image.');
+    showError(config.errorId, 'Veuillez téléverser une image.');
     return;
   }
 

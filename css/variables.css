@@ -31,6 +31,11 @@
 
     --color-none: none;
 
+    /* Strong */
+    --strong-first:         400;
+    --strong-second:        700;
+    --strong-third:         1000;
+
     /* -- Couleurs principales -- */
     --color-cyan:         #2fbff0;
     --color-magenta:      #e6007a;
@@ -116,10 +121,10 @@
     --color-bg-card-p:        rgba(123, 47, 255, 0.03);
 
     /* -- Textes -- */
-    --color-text:                    #c8e6ff;
+    --color-text:                    #fff;
     --color-text-light-title:        #fff;
     --color-text-dark-title:         #2fbff0;
-    --color-text-muted:              #5a8ab0;
+    --color-text-muted:              #bbb;
     --color-text-faint:              #3a5878;
     --color-text-attention:          #ff4d4d;
     --color-white:                   #ffffff;

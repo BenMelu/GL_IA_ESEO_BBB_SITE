@@ -243,14 +243,23 @@ function onVerifyClick(verifyBtn) {
   const slide  = document.getElementById(`qs-${quizId}`);
   if (!slide) return;
 
-  // 1. Vérifier que toutes les questions requises ont une réponse
-  if (!allQuestionsAnswered(slide, quizId)) return;
+  const state = verifyBtn.dataset.state || 'verify';
 
-  // 2. Colorer les boutons (correct / incorrect)
-  colorAnswers(slide);
+  if (state === 'verify') {
+    // Étape 1 : vérifier que tout est rempli
+    if (!allQuestionsAnswered(slide, quizId)) return;
 
-  // 3. Basculer l'affichage de la réponse détaillée
-  toggleAnswerReveal(quizId, verifyBtn);
+    // Colorer les boutons
+    colorAnswers(slide);
+
+    // Passer en état "reveal"
+    verifyBtn.dataset.state = 'reveal';
+    verifyBtn.innerHTML = '<i class="ti ti-eye"></i> Afficher la réponse';
+
+  } else {
+    // Étape 2 : afficher/masquer la réponse détaillée
+    toggleAnswerReveal(quizId, verifyBtn);
+  }
 }
 
 /**
@@ -312,7 +321,7 @@ function toggleAnswerReveal(quizId, verifyBtn) {
 
   verifyBtn.innerHTML = isNowVisible
     ? '<i class="ti ti-eye-off"></i> Masquer la réponse'
-    : '<i class="ti ti-check"></i> Afficher la réponse';
+    : '<i class="ti ti-eye"></i> Afficher la réponse';
 }
 
 /**
@@ -326,7 +335,10 @@ function resetVerificationState(quizId) {
   const verifyBtn = document.querySelector(`.verify-btn[data-quiz="${quizId}"]`);
 
   if (answerEl)  answerEl.classList.remove('is-visible');
-  if (verifyBtn) verifyBtn.innerHTML = '<i class="ti ti-check"></i> Vérifier';
+  if (verifyBtn) {
+    verifyBtn.innerHTML = '<i class="ti ti-check"></i> Vérifier';
+    verifyBtn.dataset.state = 'verify';
+  }
 }
 
 

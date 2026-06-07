@@ -105,6 +105,6 @@ input.shake {
     animation: shake 0.3s ease;
 }
 
-.shake {
-    animation: shake 0.3s ease;
+.is-shaking {
+  animation: shake 0.3s ease;
 }
