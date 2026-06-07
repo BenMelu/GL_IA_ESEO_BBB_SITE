@@ -248,7 +248,7 @@
 
 .section-sep__label {
   font-family: 'Orbitron', sans-serif;
-  font-size: 9px;
+  font-size: var(--index-text);
   letter-spacing: 3px;
   color: var(--color-text-faint);
   text-transform: uppercase;

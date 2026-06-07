@@ -7,16 +7,18 @@
    -------------------------------------------------------------------------- */
 
 :root {
-    --title-lg-text:    80px;
-    --title-md-text:    40px;
-    --subtitle-text:    25px;
-    --index-text:       13px;
-    --box-title-text:   22px;
-    --box-text:         18px;
-    --tab-text:         13px;
-    --subtab-text:      15px;
-    --text:             20px;
-    --footer-text:      15px;
+    --title-lg-text:        80px;
+    --title-md-text:        40px;
+    --subtitle-text:        25px;
+    --index-text:           13px;
+    --box-title-text:       20px;
+    --box-title-text-maj:   16px;
+    --box-text:             18px;
+    --box-text-maj:         13px;
+    --tab-text:             13px;
+    --subtab-text:          15px;
+    --text:                 20px;
+    --footer-text:          15px;
 }
 
 

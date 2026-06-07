@@ -103,7 +103,7 @@
   display: flex;
   align-items: center;
   gap: 9px;
-  font-size: 11px;
+  font-size: var(--box-title-text-maj);
   font-weight: 700;
   letter-spacing: 2px;
   text-transform: uppercase;
@@ -128,7 +128,7 @@
 .cyber-card--purple  .cyber-card__label-icon { background: rgba(var(--rgb-purple), 0.1); }
 
 .cyber-card__tag {
-  font-size: 9.5px;
+  font-size: var(--index-text);
   letter-spacing: 1.5px;
   color: var(--color-text-muted);
   text-transform: uppercase;
@@ -200,7 +200,7 @@
   gap: 7px;
   padding: 10px 22px;
   border-radius: var(--radius-sm);
-  font-size: 13px;
+  font-size: var(--box-text);
   font-weight: 600;
   letter-spacing: 0.5px;
   border: 1px solid var(--color-border-cyan);
@@ -264,10 +264,11 @@
   align-items: center;
   gap: 8px;
   padding: 9px 14px;
+  width: 35%;
   background: rgba(var(--rgb-cyan), 0.03);
-  border: 1px solid rgba(var(--rgb-cyan), 0.1);
+  border: 1px solid var(--color-border-cyan);
   border-radius: var(--radius-sm);
-  font-size: 12px;
+  font-size: var(--index-text);
   color: var(--color-text-muted);
   margin: var(--space-lg) 0;
 }
@@ -307,17 +308,17 @@
   padding: 12px 16px;
   margin-bottom: var(--space-sm);
   border-radius: var(--radius-sm);
-  background: rgba(var(--rgb-cyan), 0.02);
-  border: 1px solid rgba(var(--rgb-cyan), 0.07);
+  background: rgba(var(--rgb-cyan), 0.001);
+  border: 1px solid var(--color-border-cyan);
   transition: border-color var(--transition-fast);
 }
 
 .form-row:hover {
-  border-color: rgba(var(--rgb-cyan), 0.15);
+  border-color: rgba(var(--rgb-cyan), 1);
 }
 
 .form-row__label {
-  font-size: 13px;
+  font-size: --var(--box-text);
   color: var(--color-text);
   font-weight: 400;
 }
@@ -378,7 +379,7 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: var(--color-bg);
+  background: var(--color-cyan);
 }
 
 /* Input numérique */
@@ -584,14 +585,14 @@
 .guide-step__content { flex: 1; }
 
 .guide-step__title {
-  font-size: 13px;
+  font-size: var(--box-title-text);
   font-weight: 600;
   color: var(--color-text);
   margin-bottom: 6px;
 }
 
 .guide-step__body {
-  font-size: 13px;
+  font-size: var(--box-text);
   line-height: 1.7;
   color: var(--color-text-muted);
   font-weight: 300;
@@ -604,7 +605,7 @@
 
 .guide-step__body code {
   font-family: monospace;
-  font-size: 12px;
+  font-size: var(--index-text);
   background: rgba(var(--rgb-cyan), 0.08);
   border: 1px solid var(--color-border-cyan);
   padding: 2px 7px;
@@ -615,7 +616,7 @@
 .guide-step__body pre {
   font-family: monospace;
   font-size: 12px;
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(var(--rgb-cyan), 0.08);
   border: 1px solid var(--color-border-cyan);
   padding: 12px;
   border-radius: var(--radius-sm);

@@ -88,3 +88,23 @@
 .page.is-active {
   animation: page-enter 0.35s ease forwards;
 }
+
+
+/* --------------------------------------------------------------------------
+   5. Bouton shaking
+   -------------------------------------------------------------------------- */
+
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-8px); }
+    75% { transform: translateX(8px); }
+}
+
+input.shake {
+    animation: shake 0.3s ease;
+}
+
+.shake {
+    animation: shake 0.3s ease;
+}

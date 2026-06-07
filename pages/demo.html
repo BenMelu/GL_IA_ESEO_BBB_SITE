@@ -169,12 +169,32 @@
       <!-- /form-titanic -->
 
       <!-- Bloc de résultat (affiché après réponse du serveur) -->
-      <div class="survival-result" id="survival-result" aria-live="polite">
-        <div class="survival-result__label">Votre taux de survie estimé</div>
-        <div>
-          <span class="survival-result__value" id="survival-value">—</span>
-          <span class="survival-result__unit"> %</span>
+      <div class="result-card" id="d1-result" aria-live="polite">
+
+        <div class="result-card__header result-card__header--d1">
+          <i class="ti ti-activity" aria-hidden="true"></i>
+          Votre taux de survie estimé
         </div>
+
+        <div class="result-card__body result-card__body--d1">
+          <div class="confidence">
+            <p class="confidence__value" id="d2-conf-value">— %</p>
+          </div>
+        </div>
+
+        <div class="confidence-bar">
+          <div class="confidence-bar__track">
+            <div class="confidence-bar__fill" id="d2-conf-bar"></div>
+          </div>
+          <div class="confidence-bar__marks" aria-hidden="true">
+            <span class="confidence-bar__mark">0 %</span>
+            <span class="confidence-bar__mark">25 %</span>
+            <span class="confidence-bar__mark">50 %</span>
+            <span class="confidence-bar__mark">75 %</span>
+            <span class="confidence-bar__mark">100 %</span>
+          </div>
+        </div>
+
       </div>
 
     </div>
@@ -364,9 +384,9 @@
             <span class="cyber-card__tag">INPUT</span>
           </div>
 
-          <div class="upload-zone" id="d3-dropzone" role="button"
+          <div class="upload-zone upload-zone--purple" id="d3-dropzone" role="button"
                tabindex="0" aria-label="Zone de dépôt — cliquez ou glissez une photo de chiffre">
-            <div class="upload-zone__ring">
+            <div class="upload-zone__ring upload-zone__ring--purple">
               <i class="ti ti-pencil" aria-hidden="true"></i>
             </div>
             <p class="upload-zone__title">Glissez votre image ici</p>
@@ -376,9 +396,8 @@
                    accept="image/*" aria-label="Sélectionner un fichier image">
           </div>
 
-          <button class="btn btn--full u-mt-md"
-                  id="d3-send" disabled aria-label="Envoyer l'image au modèle"
-                  style="border-color:rgba(123,47,255,.3);background:rgba(123,47,255,.08);color:var(--color-purple)">
+          <button class="btn btn--primary btn--full u-mt-md"
+                  id="d3-send" disabled aria-label="Envoyer l'image au modèle">
             <i class="ti ti-send" aria-hidden="true"></i>
             Envoyer au modèle
           </button>
@@ -398,12 +417,13 @@
             <span class="cyber-card__tag">PREVIEW</span>
           </div>
 
-          <div class="preview-box" id="d3-preview">
+          <div class="preview-box preview-box--purple" id="d3-preview">
             <div class="preview-box__scanline" aria-hidden="true"
                  style="background:linear-gradient(90deg,transparent,var(--color-purple),transparent)"></div>
             <div class="preview-box__placeholder">
               <i class="ti ti-pencil" aria-hidden="true"></i>
               <p>En attente d'une image</p>
+              <small>L'aperçu apparaîtra ici</small>  
             </div>
           </div>
         </div>
@@ -419,7 +439,7 @@
       </div>
 
       <!-- Carte de résultat (variante purple) -->
-      <div class="result-card result-card--purple" id="d3-result" aria-live="polite">
+      <div class="result-card" id="d3-result" aria-live="polite">
 
         <div class="result-card__header">
           <i class="ti ti-123" aria-hidden="true"></i>
@@ -429,13 +449,11 @@
         <div class="result-card__body">
           <div>
             <p class="result-card__sub-label">Le chiffre détecté est</p>
-            <p class="result-card__entity" id="d3-entity"
-               style="color:var(--color-purple)">—</p>
+            <p class="result-card__entity" id="d3-entity">—</p>
           </div>
           <div class="confidence">
             <p class="confidence__label">Indice de confiance</p>
-            <p class="confidence__value" id="d3-conf-value"
-               style="color:var(--color-purple);text-shadow:0 0 18px rgba(123,47,255,.5)">— %</p>
+            <p class="confidence__value" id="d3-conf-value">— %</p>
           </div>
         </div>
 

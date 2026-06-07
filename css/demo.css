@@ -19,10 +19,21 @@
   background: rgba(var(--rgb-cyan), 0.015);
 }
 
+.upload-zone--purple {
+  border: 2px dashed rgba(var(--rgb-purple), 0.2);
+  background: rgba(var(--rgb-purple), 0.015);
+}
+
 .upload-zone:hover,
 .upload-zone.is-dragging {
   border-color: rgba(var(--rgb-cyan), 0.55);
   background: rgba(var(--rgb-cyan), 0.06);
+}
+
+.upload-zone--purple:hover,
+.upload-zone--purple.is-dragging {
+  border-color: rgba(var(--rgb-purple), 0.55);
+  background: rgba(var(--rgb-purple), 0.06);
 }
 
 /* Icône centrale (anneau) */
@@ -41,19 +52,20 @@
   transition: box-shadow var(--transition-normal);
 }
 
-.upload-zone:hover .upload-zone__ring {
-  box-shadow: 0 0 26px rgba(var(--rgb-cyan), 0.35);
+.upload-zone__ring--purple {
+  background: rgba(var(--rgb-purple), 0.07);
+  border: 1px solid rgba(var(--rgb-purple), 0.2);
 }
 
 .upload-zone__title {
   font-weight: 600;
-  font-size: 13px;
+  font-size: var(--box-title-text);
   color: var(--color-text);
   margin-bottom: 4px;
 }
 
 .upload-zone__sub {
-  font-size: 11.5px;
+  font-size: var(--box-text);
   color: var(--color-text-muted);
   line-height: 1.6;
 }
@@ -87,13 +99,18 @@
 .preview-box {
   min-height: 200px;
   border-radius: var(--radius-md);
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(var(--rgb-cyan), 0.015);
   display: flex;
   align-items: center;
   justify-content: center;
   border: 1px solid rgba(var(--rgb-cyan), 0.07);
   position: relative;
   overflow: hidden;
+}
+
+.preview-box--purple {
+  background: rgba(var(--rgb-purple), 0.015);
+  border: 1px solid rgba(var(--rgb-purple), 0.07);
 }
 
 /* Ligne de scan animée */
@@ -255,7 +272,7 @@
 /* En-tête de la carte résultat */
 .result-card__header {
   font-family: 'Orbitron', sans-serif;
-  font-size: 11.5px;
+  font-size: var(--box-title-text-maj);
   font-weight: 700;
   letter-spacing: 2.5px;
   color: var(--color-magenta);
@@ -266,12 +283,24 @@
   gap: 10px;
 }
 
+.result-card__header--d1 {
+  display: flex;
+  justify-content: center;
+}
+
 .result-card--purple .result-card__header {
   color: var(--color-purple);
 }
 
 /* Ligne décorative après le titre */
 .result-card__header::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(var(--rgb-magenta), 0.3), transparent);
+}
+
+.result-card__header--d1::before {
   content: '';
   flex: 1;
   height: 1px;
@@ -290,15 +319,20 @@
   gap: var(--space-lg);
 }
 
+.result-card__body--d1 {
+  display: flex;
+  justify-content: center;
+}
+
 .result-card__sub-label {
-  font-size: 13px;
+  font-size: var(--box-text);
   color: var(--color-text-muted);
   margin-bottom: 6px;
 }
 
 .result-card__entity {
   font-family: 'Orbitron', sans-serif;
-  font-size: 18px;
+  font-size: var(--box-title-text);
   font-weight: 700;
   letter-spacing: 1px;
   color: var(--color-cyan);
@@ -311,7 +345,7 @@
 }
 
 .confidence__label {
-  font-size: 10px;
+  font-size: var(--box-text-maj);
   letter-spacing: 2px;
   text-transform: uppercase;
   color: var(--color-text-muted);
