@@ -71,33 +71,38 @@ export function initTabs() {
 
   subtabBars.forEach(bar => {
     const buttons = bar.querySelectorAll('.subtabs-bar__btn');
+    const scope = bar.closest('.page') || document;
 
+    // Retirer tous les is-active existants du HTML
+    buttons.forEach(b => b.classList.remove('is-active'));
+    scope.querySelectorAll('.subpage').forEach(sp => sp.classList.remove('is-active'));
+
+    // Lire le hash pour savoir quel sous-onglet activer
+    const hash = window.location.hash.slice(1);
+    const subtabId = hash.split(':')[1];
+    const targetBtn = subtabId
+      ? bar.querySelector(`[data-subtab="${subtabId}"]`)
+      : bar.querySelector('.subtabs-bar__btn'); // premier par défaut
+
+    if (targetBtn) {
+      targetBtn.classList.add('is-active');
+      const target = scope.querySelector(`#${targetBtn.dataset.subtab}`);
+      if (target) target.classList.add('is-active');
+    }
+
+    // Attacher les listeners
     buttons.forEach(btn => {
       btn.addEventListener('click', () => {
         const targetId = btn.dataset.subtab;
 
-        // Mettre à jour les boutons
         buttons.forEach(b => b.classList.remove('is-active'));
         btn.classList.add('is-active');
 
-        // Trouver le conteneur parent des sous-pages
-        // (le premier .page ou le document lui-même)
-        const scope = btn.closest('.page') || document;
+        scope.querySelectorAll('.subpage').forEach(sp => sp.classList.remove('is-active'));
 
-        // Masquer toutes les sous-pages de ce scope
-        scope.querySelectorAll('.subpage').forEach(sp => {
-          sp.classList.remove('is-active');
-        });
-
-        // Afficher la sous-page ciblée
         const target = scope.querySelector(`#${targetId}`);
-        if (target) {
-          target.classList.add('is-active');
-        } else {
-          console.warn(`[tabs] Sous-page introuvable : #${targetId}`);
-        }
+        if (target) target.classList.add('is-active');
 
-        // Mettre à jour le hash URL (format : pageid:subtabid)
         const pageId = window.location.hash.slice(1).split(':')[0];
         history.replaceState(null, '', `#${pageId}:${targetId}`);
       });

@@ -19,7 +19,17 @@
     --subtab-text:          15px;
     --text:                 20px;
     --footer-text:          15px;
+
+    
+    /* Strong */
+    --strong-first:         400;
+    --strong-second:        700;
+    --strong-third:         1000;
+
+    --color-none: none;
+
 }
+
 
 
 /* --------------------------------------------------------------------------
@@ -28,13 +38,6 @@
 
 
 :root {
-
-    --color-none: none;
-
-    /* Strong */
-    --strong-first:         400;
-    --strong-second:        700;
-    --strong-third:         1000;
 
     /* -- Couleurs principales -- */
     --color-cyan:         #2fbff0;

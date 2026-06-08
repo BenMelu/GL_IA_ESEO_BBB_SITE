@@ -64,34 +64,33 @@ let currentPage = null;
  */
 async function navigateTo(pageId, pushState = true) {
   if (!PAGES[pageId]) {
-    console.warn(`[router] Page inconnue : "${pageId}". Redirection vers "${DEFAULT_PAGE}".`);
     pageId = DEFAULT_PAGE;
   }
 
-  // Éviter de recharger la page déjà affichée
   if (pageId === currentPage) return;
 
-  // 1. Charger le HTML (depuis le cache ou via fetch)
   const html = await loadPage(pageId);
   if (!html) return;
 
-  // 2. Injecter dans le conteneur principal
   const container = document.getElementById('page-container');
-  container.innerHTML = html;
 
-  // 3. Mettre à jour les classes CSS des boutons de navigation
+  // Masquer pendant le chargement
+  container.style.visibility = 'hidden';
+
+  container.innerHTML = html;
   updateNavButtons(pageId);
 
-  // 4. Mettre à jour le hash URL
   if (pushState) {
     history.replaceState(null, '', `#${pageId}`);
   }
 
-  // 5. Remonter en haut de la page
   window.scrollTo({ top: 0, behavior: 'smooth' });
 
-  // 6. Initialiser les modules qui ont besoin du DOM de la nouvelle page
+  // Initialiser les modules (dont initTabs qui règle les sous-onglets)
   initPageModules(pageId);
+
+  // Révéler une fois tout prêt
+  container.style.visibility = 'visible';
 
   currentPage = pageId;
 }

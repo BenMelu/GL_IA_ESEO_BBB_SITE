@@ -333,11 +333,22 @@ function toggleAnswerReveal(quizId, verifyBtn) {
 function resetVerificationState(quizId) {
   const answerEl  = document.getElementById(`qa-${quizId}`);
   const verifyBtn = document.querySelector(`.verify-btn[data-quiz="${quizId}"]`);
+  const slide     = document.getElementById(`qs-${quizId}`);
 
-  if (answerEl)  answerEl.classList.remove('is-visible');
+  if (answerEl) answerEl.classList.remove('is-visible');
+
   if (verifyBtn) {
     verifyBtn.innerHTML = '<i class="ti ti-check"></i> Vérifier';
     verifyBtn.dataset.state = 'verify';
+  }
+
+  // Remettre les boutons colorés en is-selected
+  // pour que allQuestionsAnswered les reconnaisse
+  if (slide) {
+    slide.querySelectorAll('.answer-btn.is-correct, .answer-btn.is-wrong').forEach(btn => {
+      btn.classList.remove('is-correct', 'is-wrong');
+      btn.classList.add('is-selected');
+    });
   }
 }
 

@@ -58,7 +58,7 @@
 }
 
 .upload-zone__title {
-  font-weight: 600;
+  font-weight: var(--strong-second);
   font-size: var(--box-title-text);
   color: var(--color-text);
   margin-bottom: 4px;
@@ -144,8 +144,19 @@
   margin-bottom: 10px;
 }
 
-.preview-box__placeholder p     { font-size: 13px; }
-.preview-box__placeholder small { font-size: 11px; opacity: 0.55; }
+.verify-zone__title {
+  font-weight: var(--strong-second);
+  font-size: var(--box-title-text);
+  color: var(--color-text);
+  margin-bottom: 4px;
+}
+
+.verify-zone__sub {
+  font-size: var(--box-text);
+  color: var(--color-text-muted);
+  line-height: 1.6;
+}
+
 
 /* Image chargée */
 .preview-box__image {
