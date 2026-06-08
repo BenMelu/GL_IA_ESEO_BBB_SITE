@@ -209,20 +209,19 @@
   transition: all var(--transition-normal);
 }
 
-.btn:hover {
+/* Hover uniquement pour les boutons non-primaires */
+.btn:not(.btn--primary):hover {
   background: rgba(var(--rgb-cyan), 0.18);
   box-shadow: var(--glow-cyan);
   transform: translateY(-1px);
 }
 
-/* -- Bouton primaire (dégradé magenta→purple) -- */
-.btn--primary {
-  background: linear-gradient(135deg, var(--color-magenta), var(--color-purple));
-  border: none;
-  color: var(--color-white);
-  box-shadow: 0 0 20px rgba(var(--rgb-magenta), 0.25);
+/* Hover bouton primaire — dégradé légèrement éclairci */
+.btn--primary:hover {
+  background: linear-gradient(135deg, #ff4da6, #9b5fff);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 28px rgba(var(--rgb-magenta), 0.45);
 }
-
 .btn--primary:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 28px rgba(var(--rgb-magenta), 0.45);
