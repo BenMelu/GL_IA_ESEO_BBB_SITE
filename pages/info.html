@@ -165,7 +165,7 @@
       </p>
 
       <p>
-        De combien de données a-t-on besoin ? <strong>Le plus possible</strong>, et idéalement
+        C'est donc une chose importante, mais de quelle quantité de données une IA a besoin ? <strong>Le plus possible</strong>, et idéalement
         des données variées. Pour des escargots, il faudrait des images de différentes couleurs,
         de différents angles, à différents moments. Plus la donnée est complexe, plus il en faut
         — et plus ça coûte cher.
@@ -224,16 +224,38 @@
       </h2>
 
       <p>
-        Certaines IA ont été créées en calquant la manière dont fonctionne le cerveau humain :
-        un réseau de neurones. Un réseau de neurones est composé de plusieurs <strong>couches</strong>,
-        chacune composée de 1 à plusieurs neurones. Entre chaque couche, les neurones sont reliés
-        à tous les neurones de la couche précédente.
+        Comme l'un des buts initiaux de l'IA est de décharger l'humain de certaines tâches, certaines IA ont été 
+        créer en recalquant la manière dont fonctionne le cerveau humain : un réseau de neurones. La performance de 
+        ce type d'IA est excellente et alimente désormais la plupart des modèles actuels.
+        Mais comment un réseau de neurones d'IA fonctionne-t-il ?
       </p>
 
       <p>
-        Chaque neurone est représenté par une fonction. Si son résultat est supérieur à un certain
-        seuil, il s'active et transmet son résultat à la couche suivante. La <strong>couche de sortie</strong>
-        produit la prédiction finale.
+        Un réseau de neurones est composé de plusieurs couches, chacune composée de 1 à plusieurs neurones. Entre 
+        chaque couche, les neurones sont reliés à tous les neurones de la couche précédente.
+      </p>
+
+      <p>
+        Chaque neurone est représenté par une fonction. Lorsque le réseau de neurone essaye de prédire quelque chose, 
+        les neurones d'une couche (ou les fonctions d'une couche car un neurone = une fonction) vont prendre en argument 
+        les résultats de la couche précédente. Chaque neurone va donc donner un résultat. Si ce résultat est supérieur 
+        à un certain seuil, le neurone en question va s'activer et transmettre son résultat à la couche suivante et ainsi 
+        de suite pour traverser tout le réseau.
+      </p>
+
+      <p>
+        Dans un réseau de neurone, chaque neurone représente une fonction différente.
+      </p>
+
+      <p>
+        La dernière couche du réseau, la couche de sortie, va permettre la prédiction. Suivant le résultat obtenu sur le(s) 
+        neurone(s) de cette couche, la réponse changera.
+      </p>
+
+      <p>
+        Donnons un exemple avec le schéma ci-dessous (layer = couche de neurone). Un neurone de la couche L2 va utiliser 
+        tous les neurones de la couche L1 pour avoir son résultat. Ce résultat va ensuite être utilisé par les neurones de 
+        la couche L3 et ainsi de suite jusqu'à la couche de sortie.
       </p>
 
       <img
@@ -244,7 +266,7 @@
 
       <p>
         Lors de l'entraînement, les paramètres des fonctions se modifient d'eux-mêmes en fonction
-        de la capacité du réseau à donner les bonnes réponses.
+        de la capacité du réseau à donner les bonnes réponses sur les données d'entraînements.
       </p>
 
     </section>
@@ -263,6 +285,15 @@
         Comme avec les humains, si une IA apprend 200 fois les mêmes images d'escargots, elle
         finira par ne savoir reconnaître que ceux-là — et échouera sur un escargot légèrement
         différent. On appelle cela le <strong>surapprentissage</strong> (ou <em>overfitting</em>).
+      </p>
+
+      <p>
+        En cours, lorsqu'un étudiant apprend à faire un exercice, il doit faire l'exercice plusieurs fois. 
+        Seulement après il sera apte à le résoudre.
+        En revanche, s'il apprend l'exercice apprend par cœur, il le connaîtra mot pour mot, mais il ne 
+        saura pas résoudre un exercice légèrement différent. Alors que sans apprendre 
+        par cœur, il comprend les mécanismes de l'exercice et deviendra meilleur sur des exercices 
+        similaires qui ont des données différentes.
       </p>
 
       <p>
