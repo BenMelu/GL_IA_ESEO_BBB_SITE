@@ -98,11 +98,11 @@ select {
   font-size: var(--text);
   line-height: 1.8;
   color: var(--color-text-muted);
-  font-weight: 300;
+  font-weight: var(--normal);
 }
 
 .t-body p        { margin-bottom: var(--space-md); }
-.t-body strong   { color: var(--color-text); font-weight: 500; }
+.t-body strong   { color: var(--color-text); font-weight: var(--strong-first); }
 .t-body ul       { margin: var(--space-sm) 0 var(--space-md) var(--space-lg); }
 .t-body li       { margin: var(--space-xs) 0; }
 .t-body h2       {

@@ -233,7 +233,7 @@
       <!-- Grille upload / preview -->
       <div class="grid-2 u-mt-lg">
 
-        <!-- Colonne gauche : upload -->
+        <!-- Colonne gauche : upload + preview gauche -->
         <div class="cyber-card">
           <div class="cyber-card__head">
             <div class="cyber-card__label">
@@ -246,7 +246,7 @@
           </div>
 
           <div class="upload-zone" id="d2-dropzone" role="button"
-               tabindex="0" aria-label="Zone de dépôt d'image — cliquez ou glissez une image">
+              tabindex="0" aria-label="Zone de dépôt d'image">
             <div class="upload-zone__ring">
               <i class="ti ti-photo" aria-hidden="true"></i>
             </div>
@@ -255,7 +255,7 @@
             <p class="upload-zone__sub">PNG, JPG — max 10 Mo</p>
             <span class="upload-zone__filename" id="d2-filename" aria-live="polite"></span>
             <input class="upload-zone__input" type="file" id="d2-file"
-                   accept="image/*" aria-label="Sélectionner un fichier image">
+                  accept="image/*" aria-label="Sélectionner un fichier image">
           </div>
 
           <button class="btn btn--primary btn--full u-mt-md"
@@ -266,9 +266,8 @@
 
           <span class="demo-error" id="d2-error" role="alert"></span>
         </div>
-        <!-- /colonne upload -->
 
-        <!-- Colonne droite : preview -->
+        <!-- Colonne droite : résultat du modèle -->
         <div class="cyber-card">
           <div class="cyber-card__head">
             <div class="cyber-card__label">
@@ -283,14 +282,12 @@
           <div class="preview-box" id="d2-preview">
             <div class="preview-box__scanline" aria-hidden="true"></div>
             <div class="preview-box__placeholder">
-              <i class="ti ti-photo" aria-hidden="true"></i>
-              <p class="verify-zone__title">En attente d'une image</p>
-              <p class="verify-zone__sub">L'aperçu apparaîtra ici</p>
+              <i class="ti ti-cpu" aria-hidden="true"></i>
+              <p>En attente d'une analyse</p>
+              <small>L'image analysée apparaîtra ici</small>
             </div>
           </div>
         </div>
-        <!-- /colonne preview -->
-
       </div>
       <!-- /grid-2 -->
 
@@ -372,8 +369,9 @@
       <!-- Grille upload / preview -->
       <div class="grid-2 u-mt-lg">
 
-        <!-- Colonne gauche : upload -->
+                <!-- Colonne gauche : upload + preview gauche -->
         <div class="cyber-card cyber-card--purple">
+
           <div class="cyber-card__head">
             <div class="cyber-card__label">
               <span class="cyber-card__label-icon">
@@ -385,15 +383,16 @@
           </div>
 
           <div class="upload-zone upload-zone--purple" id="d3-dropzone" role="button"
-               tabindex="0" aria-label="Zone de dépôt — cliquez ou glissez une photo de chiffre">
+              tabindex="0" aria-label="Zone de dépôt d'image">
             <div class="upload-zone__ring upload-zone__ring--purple">
-              <i class="ti ti-pencil" aria-hidden="true"></i>
+              <i class="ti ti-photo" aria-hidden="true"></i>
             </div>
             <p class="upload-zone__title">Glissez votre image ici</p>
-            <p class="upload-zone__sub">Chiffre manuscrit en photo</p>
+            <p class="upload-zone__sub">ou cliquez pour sélectionner</p>
+            <p class="upload-zone__sub">PNG, JPG — max 10 Mo</p>
             <span class="upload-zone__filename" id="d3-filename" aria-live="polite"></span>
             <input class="upload-zone__input" type="file" id="d3-file"
-                   accept="image/*" aria-label="Sélectionner un fichier image">
+                  accept="image/*" aria-label="Sélectionner un fichier image">
           </div>
 
           <button class="btn btn--primary btn--full u-mt-md"
@@ -405,7 +404,7 @@
           <span class="demo-error" id="d3-error" role="alert"></span>
         </div>
 
-        <!-- Colonne droite : preview -->
+        <!-- Colonne droite : résultat du modèle -->
         <div class="cyber-card cyber-card--purple">
           <div class="cyber-card__head">
             <div class="cyber-card__label">
@@ -417,17 +416,15 @@
             <span class="cyber-card__tag">PREVIEW</span>
           </div>
 
-          <div class="preview-box preview-box--purple" id="d3-preview">
-            <div class="preview-box__scanline" aria-hidden="true"
-                 style="background:linear-gradient(90deg,transparent,var(--color-purple),transparent)"></div>
+          <div class="preview-box preview-box--purple" id="d2-preview">
+            <div class="preview-box__scanline preview-box__scanline--purple" aria-hidden="true"></div>
             <div class="preview-box__placeholder">
-              <i class="ti ti-pencil" aria-hidden="true"></i>
-              <p>En attente d'une image</p>
-              <small>L'aperçu apparaîtra ici</small>  
+              <i class="ti ti-cpu" aria-hidden="true"></i>
+              <p>En attente d'une analyse</p>
+              <small>L'image analysée apparaîtra ici</small>
             </div>
           </div>
         </div>
-
       </div>
       <!-- /grid-2 -->
 

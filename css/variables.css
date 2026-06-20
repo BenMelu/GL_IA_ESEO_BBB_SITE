@@ -9,7 +9,7 @@
 :root {
     --title-lg-text:        80px;
     --title-md-text:        40px;
-    --subtitle-text:        25px;
+    --subtitle-text:        30px;
     --index-text:           13px;
     --box-title-text:       20px;
     --box-title-text-maj:   16px;
@@ -22,9 +22,9 @@
 
     
     /* Strong */
-    --strong-first:         400;
-    --strong-second:        700;
-    --strong-third:         1000;
+    --normal:               300;
+    --strong-first:         700;
+    --strong-second:        1000;
 
     --color-none: none;
 

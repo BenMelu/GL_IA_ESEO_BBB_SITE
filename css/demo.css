@@ -55,6 +55,7 @@
 .upload-zone__ring--purple {
   background: rgba(var(--rgb-purple), 0.07);
   border: 1px solid rgba(var(--rgb-purple), 0.2);
+  color: var(--color-purple);
 }
 
 .upload-zone__title {
@@ -123,6 +124,10 @@
   animation: scanline-move 3.5s linear infinite;
   opacity: 0.3;
   pointer-events: none;
+}
+
+.preview-box__scanline--purple {
+  background: linear-gradient(90deg, transparent, var(--color-purple), transparent);
 }
 
 @keyframes scanline-move {

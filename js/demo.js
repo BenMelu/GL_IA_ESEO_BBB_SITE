@@ -133,21 +133,21 @@ function displaySurvivalResult(value) {
 
 function initDemoD2() {
   initImageDemo({
-    demoId:       'd2',
-    fileInputId:  'd2-file',
-    dropZoneId:   'd2-dropzone',
-    filenameId:   'd2-filename',
-    sendBtnId:    'd2-send',
-    previewId:    'd2-preview',
-    errorId:      'd2-error',
-    resultCardId: 'd2-result',
-    entityId:     'd2-entity',
-    confValueId:  'd2-conf-value',
-    confBarId:    'd2-conf-bar',
-    apiParam:     2,
+    demoId:          'd2',
+    fileInputId:     'd2-file',
+    dropZoneId:      'd2-dropzone',
+    filenameId:      'd2-filename',
+    sendBtnId:       'd2-send',
+    previewInputId:  'd2-preview-input',  // preview gauche
+    previewId:       'd2-preview',         // preview droite (résultat)
+    errorId:         'd2-error',
+    resultCardId:    'd2-result',
+    entityId:        'd2-entity',
+    confValueId:     'd2-conf-value',
+    confBarId:       'd2-conf-bar',
+    apiParam:        2,
   });
 }
-
 
 // --------------------------------------------------------------------------
 // D3 — Classification de chiffres manuscrits
@@ -155,21 +155,21 @@ function initDemoD2() {
 
 function initDemoD3() {
   initImageDemo({
-    demoId:       'd3',
-    fileInputId:  'd3-file',
-    dropZoneId:   'd3-dropzone',
-    filenameId:   'd3-filename',
-    sendBtnId:    'd3-send',
-    previewId:    'd3-preview',
-    errorId:      'd3-error',
-    resultCardId: 'd3-result',
-    entityId:     'd3-entity',
-    confValueId:  'd3-conf-value',
-    confBarId:    'd3-conf-bar',
-    apiParam:     3,
+    demoId:          'd3',
+    fileInputId:     'd3-file',
+    dropZoneId:      'd3-dropzone',
+    filenameId:      'd3-filename',
+    sendBtnId:       'd3-send',
+    previewInputId:  'd3-preview-input',
+    previewId:       'd3-preview',
+    errorId:         'd3-error',
+    resultCardId:    'd3-result',
+    entityId:        'd3-entity',
+    confValueId:     'd3-conf-value',
+    confBarId:       'd3-conf-bar',
+    apiParam:        3,
   });
 }
-
 
 // --------------------------------------------------------------------------
 // Fonction générique pour les démos avec upload d'image
@@ -227,16 +227,28 @@ function initImageDemo(config) {
  * @param {object} config
  */
 function handleFileSelected(file, config) {
-  // Afficher le nom du fichier
   const filenameEl = document.getElementById(config.filenameId);
   if (filenameEl) {
     filenameEl.textContent = `📎 ${file.name}`;
     filenameEl.classList.add('is-visible');
   }
 
-  // Prévisualiser l'image
+  const sendBtn = document.getElementById(config.sendBtnId);
+  if (sendBtn) sendBtn.disabled = false;
+
+  // Prévisualiser directement dans la zone de drop
   const reader = new FileReader();
-  reader.onload = ev => updatePreview(config.previewId, ev.target.result);
+  reader.onload = ev => {
+    const dropZone = document.getElementById(config.dropZoneId);
+    if (dropZone) {
+      dropZone.innerHTML = `
+        <img class="preview-box__image" src="${ev.target.result}" alt="Aperçu de l'image sélectionnée" style="margin: 0 auto;">
+        <p class="upload-zone__sub u-mt-sm">
+          <i class="ti ti-file-check" style="vertical-align:middle; margin-right:4px;"></i>${file.name}
+        </p>
+      `;
+    }
+  };
   reader.readAsDataURL(file);
 
   setStatus(config.demoId, 'ok', 'Image chargée — prête à être analysée');

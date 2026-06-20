@@ -82,13 +82,12 @@ export function initQuiz() {
   currentSlide = 0;
   showSlide(0);
 
-  // Délégation de clic pour toute la zone du quiz
-  const quizWrap = document.querySelector('.quiz-wrap');
-  if (!quizWrap) return;
+  // Chercher quiz-pannel OU quiz-wrap comme conteneur de délégation
+  const quizContainer = document.querySelector('.quiz-pannel') || document.querySelector('.quiz-wrap');
+  if (!quizContainer) return;
 
-  quizWrap.addEventListener('click', onQuizClick);
+  quizContainer.addEventListener('click', onQuizClick);
 
-  // Navigation clavier (flèches)
   document.addEventListener('keydown', onKeydown);
 }
 
@@ -182,9 +181,8 @@ function onQuizClick(e) {
  */
 function onAnswerClick(btn) {
   const quizId   = btn.dataset.quiz;
-  const question = btn.dataset.question; // 'necessity' ou 'precision'
+  const question = btn.dataset.question;
 
-  // Déselectionner les autres boutons du même groupe de questions
   const group = btn.closest('.answer-group');
   if (group) {
     group.querySelectorAll('.answer-btn').forEach(b => {
@@ -194,15 +192,14 @@ function onAnswerClick(btn) {
 
   btn.classList.add('is-selected');
 
-  // Afficher/masquer la question de précision selon la réponse à la nécessité
-  if (question === 'necessity') {
-    togglePrecisionBlock(quizId, btn.dataset.correct === 'true');
-  }
-
-  // Réinitialiser l'état de vérification (l'utilisateur change sa réponse)
-  resetVerificationState(quizId);
+  // Afficher la précision si le bouton cliqué est "Oui" (data-value="oui")
+  // indépendamment de si c'est la bonne réponse ou non
+if (question === 'necessity') {
+  togglePrecisionBlock(quizId, btn.textContent.trim().toLowerCase() === 'oui');
 }
 
+  resetVerificationState(quizId);
+}
 
 // --------------------------------------------------------------------------
 // Affichage conditionnel du bloc "Précision"

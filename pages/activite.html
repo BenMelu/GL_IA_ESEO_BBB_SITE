@@ -35,7 +35,7 @@
          .quiz-nav [data-nav] data-nav="prev|next"
        ══════════════════════════════════════════════════════════════════════ -->
   <div class="subpage is-active" id="a1">
-    <div class="quiz-wrap">
+    <div class="page-section">
 
       <!-- En-tête -->
       <div class="badge badge--magenta">
@@ -50,283 +50,308 @@
         utiliser une IA, et quel niveau de précision est requis.
       </p>
 
-      <!-- ── Slide 1 : Prix d'une maison ──────────────────────────────── -->
-      <div class="quiz-slide is-active" id="qs-1">
+      <div class="divider"></div>
 
-        <p class="quiz-slide__case-title">Premier cas</p>
-        <p class="quiz-slide__description">
-          À partir d'une trentaine de critères bien définis (la surface habitable,
-          le nombre de chambres, l'emplacement, etc.), on souhaite prédire le prix
-          d'une maison.
-        </p>
+      <div class="quiz-pannel">
+        <!-- ── Slide 1 : Prix d'une maison ──────────────────────────────── -->
+        <div class="quiz-slide is-active" id="qs-1">
 
-        <!-- Question : nécessité -->
-        <div class="quiz-question">
-          <p class="quiz-question__label">Nécessité de l'IA</p>
-          <div class="answer-group">
-            <button class="answer-btn"
-                    data-quiz="1" data-question="necessity" data-correct="true">
-              Oui
-            </button>
-            <button class="answer-btn"
-                    data-quiz="1" data-question="necessity" data-correct="false">
-              Non
-            </button>
-          </div>
-        </div>
+          <h2 class="t-orbitron t-h2 t-magenta"><em>Premier cas</em></h2>
+          <p class="quiz-slide__description">
+            À partir d'une trentaine de critères bien définis (la surface habitable,
+            le nombre de chambres, l'emplacement, etc.), on souhaite prédire le prix
+            d'une maison.
+          </p>
 
-        <!-- Question : précision (conditionnelle — visible si nécessité = Oui) -->
-        <div class="quiz-precision" id="qp-1">
+          <!-- Question : nécessité -->
           <div class="quiz-question">
-            <p class="quiz-question__label quiz-question__label--precision">
-              Précision nécessaire
-            </p>
+            <p class="quiz-question__label"><strong>Nécessité de l'IA</strong></p>
             <div class="answer-group">
               <button class="answer-btn"
-                      data-quiz="1" data-question="precision" data-correct="false">
-                Moyenne
+                      data-quiz="1" data-question="necessity" data-correct="true">
+                Oui
               </button>
               <button class="answer-btn"
-                      data-quiz="1" data-question="precision" data-correct="true">
-                Élevée
-              </button>
-              <button class="answer-btn"
-                      data-quiz="1" data-question="precision" data-correct="false">
-                Très élevée
+                      data-quiz="1" data-question="necessity" data-correct="false">
+                Non
               </button>
             </div>
           </div>
-        </div>
 
-        <button class="verify-btn" data-quiz="1">
-          <i class="ti ti-check" aria-hidden="true"></i>
-          Vérifier
-        </button>
-
-        <div class="quiz-answer" id="qa-1">
-          <strong>→ Oui</strong>, l'utilisation de l'IA est intéressante : sans elle, il faudrait
-          calculer manuellement l'influence de chaque critère sur le prix — tâche fastidieuse.
-          L'IA va reconnaître les tendances automatiquement pour une estimation plus précise.
-          C'est un <strong>modèle de régression</strong> (le résultat est un nombre).
-          La précision demandée est <strong>élevée</strong> mais pas très élevée :
-          une estimation à quelques milliers d'euros près suffit généralement.
-        </div>
-
-        <!-- Navigation entre slides -->
-        <div class="quiz-nav">
-          <span class="quiz-nav__counter">1 / 4</span>
-          <div class="quiz-nav__buttons">
-            <button class="btn btn--ghost" data-nav="prev" aria-label="Cas précédent">
-              <i class="ti ti-arrow-left" aria-hidden="true"></i>
-            </button>
-            <button class="btn" data-nav="next" aria-label="Cas suivant">
-              <i class="ti ti-arrow-right" aria-hidden="true"></i>
-            </button>
+          <!-- Question : précision (conditionnelle — visible si nécessité = Oui) -->
+          <div class="quiz-precision" id="qp-1">
+            <div class="quiz-question">
+              <p class="quiz-question__label quiz-question__label--precision">
+                <strong>Précision nécessaire</strong>
+              </p>
+              <div class="answer-group">
+                <button class="answer-btn"
+                        data-quiz="1" data-question="precision" data-correct="false">
+                  Moyenne
+                </button>
+                <button class="answer-btn"
+                        data-quiz="1" data-question="precision" data-correct="true">
+                  Élevée
+                </button>
+                <button class="answer-btn"
+                        data-quiz="1" data-question="precision" data-correct="false">
+                  Très élevée
+                </button>
+              </div>
+            </div>
           </div>
-        </div>
 
-      </div>
-      <!-- /qs-1 -->
+          <button class="verify-btn" data-quiz="1">
+            <i class="ti ti-check" aria-hidden="true"></i>
+            Vérifier
+          </button>
 
-
-      <!-- ── Slide 2 : Calcul du carré ────────────────────────────────── -->
-      <div class="quiz-slide" id="qs-2">
-
-        <p class="quiz-slide__case-title">Deuxième cas</p>
-        <p class="quiz-slide__description">
-          Calculer le carré de plusieurs nombres entiers.
-        </p>
-
-        <div class="quiz-question">
-          <p class="quiz-question__label">Nécessité de l'IA</p>
-          <div class="answer-group">
-            <button class="answer-btn"
-                    data-quiz="2" data-question="necessity" data-correct="false">
-              Oui
-            </button>
-            <button class="answer-btn"
-                    data-quiz="2" data-question="necessity" data-correct="true">
-              Non
-            </button>
+          <div class="quiz-answer" id="qa-1">
+            <strong>→ Oui</strong>, l'utilisation de l'IA est intéressante : sans elle, il faudrait
+            calculer manuellement l'influence de chaque critère sur le prix — tâche fastidieuse.
+            L'IA va reconnaître les tendances automatiquement pour une estimation plus précise.
+            C'est un <strong>modèle de régression</strong> (le résultat est un nombre).
+            La précision demandée est <strong>élevée</strong> mais pas très élevée :
+            une estimation à quelques milliers d'euros près suffit généralement.
           </div>
-        </div>
 
-        <!-- Pas de question de précision pour ce cas (réponse = Non) -->
-
-        <button class="verify-btn" data-quiz="2">
-          <i class="ti ti-check" aria-hidden="true"></i>
-          Vérifier
-        </button>
-
-        <div class="quiz-answer" id="qa-2">
-          <strong>→ Non</strong>, l'utilisation de l'IA n'est pas nécessaire ici.
-          La fonction carré n'est pas linéaire : il faudrait énormément de données pour que
-          le modèle fonctionne correctement, alors qu'une simple calculatrice y arrive
-          parfaitement en consommant beaucoup moins de ressources.
-        </div>
-
-        <div class="quiz-nav">
-          <span class="quiz-nav__counter">2 / 4</span>
-          <div class="quiz-nav__buttons">
-            <button class="btn btn--ghost" data-nav="prev" aria-label="Cas précédent">
-              <i class="ti ti-arrow-left" aria-hidden="true"></i>
-            </button>
-            <button class="btn" data-nav="next" aria-label="Cas suivant">
-              <i class="ti ti-arrow-right" aria-hidden="true"></i>
-            </button>
-          </div>
-        </div>
-
-      </div>
-      <!-- /qs-2 -->
-
-
-      <!-- ── Slide 3 : Détection cancer ───────────────────────────────── -->
-      <div class="quiz-slide" id="qs-3">
-
-        <p class="quiz-slide__case-title">Troisième cas</p>
-        <p class="quiz-slide__description">
-          Détecter un cancer du sein grâce à des radiographies.
-        </p>
-
-        <div class="quiz-question">
-          <p class="quiz-question__label">Nécessité de l'IA</p>
-          <div class="answer-group">
-            <button class="answer-btn"
-                    data-quiz="3" data-question="necessity" data-correct="true">
-              Oui
-            </button>
-            <button class="answer-btn"
-                    data-quiz="3" data-question="necessity" data-correct="false">
-              Non
-            </button>
-          </div>
-        </div>
-
-        <div class="quiz-precision" id="qp-3">
-          <div class="quiz-question">
-            <p class="quiz-question__label quiz-question__label--precision">
-              Précision nécessaire
-            </p>
-            <div class="answer-group">
-              <button class="answer-btn"
-                      data-quiz="3" data-question="precision" data-correct="false">
-                Moyenne
+          <!-- Navigation entre slides -->
+          <div class="quiz-nav">
+            <span class="quiz-nav__counter">1 / 4</span>
+            <div class="quiz-nav__buttons">
+              <button class="btn btn--ghost" data-nav="prev" aria-label="Cas précédent">
+                <i class="ti ti-arrow-left" aria-hidden="true"></i>
               </button>
-              <button class="answer-btn"
-                      data-quiz="3" data-question="precision" data-correct="false">
-                Élevée
-              </button>
-              <button class="answer-btn"
-                      data-quiz="3" data-question="precision" data-correct="true">
-                Très élevée
+              <button class="btn" data-nav="next" aria-label="Cas suivant">
+                <i class="ti ti-arrow-right" aria-hidden="true"></i>
               </button>
             </div>
           </div>
+
         </div>
-
-        <button class="verify-btn" data-quiz="3">
-          <i class="ti ti-check" aria-hidden="true"></i>
-          Vérifier
-        </button>
-
-        <div class="quiz-answer" id="qa-3">
-          <strong>→ Oui</strong>, l'IA peut très bien repérer des anomalies aussi petites que
-          des tumeurs sur des radiographies. C'est un problème de <strong>Computer Vision</strong>.
-          Pour ce modèle, la précision doit être <strong>très élevée</strong> : un faux négatif
-          (tumeur non détectée) peut avoir des conséquences fatales.
-        </div>
-
-        <div class="quiz-nav">
-          <span class="quiz-nav__counter">3 / 4</span>
-          <div class="quiz-nav__buttons">
-            <button class="btn btn--ghost" data-nav="prev" aria-label="Cas précédent">
-              <i class="ti ti-arrow-left" aria-hidden="true"></i>
-            </button>
-            <button class="btn" data-nav="next" aria-label="Cas suivant">
-              <i class="ti ti-arrow-right" aria-hidden="true"></i>
-            </button>
-          </div>
-        </div>
-
-      </div>
-      <!-- /qs-3 -->
+        <!-- /qs-1 -->
 
 
-      <!-- ── Slide 4 : Traduction panneau ─────────────────────────────── -->
-      <div class="quiz-slide" id="qs-4">
+        <!-- ── Slide 2 : Calcul du carré ────────────────────────────────── -->
+        <div class="quiz-slide" id="qs-2">
 
-        <p class="quiz-slide__case-title">Quatrième cas</p>
-        <p class="quiz-slide__description">
-          Vous êtes dans un pays scandinave et vous ne connaissez pas la langue.
-          Vous voulez savoir ce qu'il y a d'écrit sur un panneau — mais il fait très froid.
-        </p>
+          <h2 class="t-orbitron t-h2 t-purple"><em>Deuxième cas</em></h2>
+          <p class="quiz-slide__description">
+            Calculer le carré de plusieurs nombres entiers.
+          </p>
 
-        <div class="quiz-question">
-          <p class="quiz-question__label">Nécessité de l'IA</p>
-          <div class="answer-group">
-            <button class="answer-btn"
-                    data-quiz="4" data-question="necessity" data-correct="true">
-              Oui
-            </button>
-            <button class="answer-btn"
-                    data-quiz="4" data-question="necessity" data-correct="false">
-              Non
-            </button>
-          </div>
-        </div>
-
-        <div class="quiz-precision" id="qp-4">
           <div class="quiz-question">
-            <p class="quiz-question__label quiz-question__label--precision">
-              Précision nécessaire
-            </p>
+            <p class="quiz-question__label"><strong>Nécessité de l'IA</strong></p>
             <div class="answer-group">
               <button class="answer-btn"
-                      data-quiz="4" data-question="precision" data-correct="false">
-                Moyenne
+                      data-quiz="2" data-question="necessity" data-correct="false">
+                Oui
               </button>
               <button class="answer-btn"
-                      data-quiz="4" data-question="precision" data-correct="true">
-                Élevée
-              </button>
-              <button class="answer-btn"
-                      data-quiz="4" data-question="precision" data-correct="false">
-                Très élevée
+                      data-quiz="2" data-question="necessity" data-correct="true">
+                Non
               </button>
             </div>
           </div>
-        </div>
 
-        <button class="verify-btn" data-quiz="4">
-          <i class="ti ti-check" aria-hidden="true"></i>
-          Vérifier
-        </button>
-
-        <div class="quiz-answer" id="qa-4">
-          <strong>→ Oui</strong>, vous pourriez recopier le texte dans Google Traduction, mais
-          il fait froid — une IA qui traduit automatiquement depuis une photo est bien plus pratique.
-          Cette IA combinerait <strong>Computer Vision</strong> (lire le texte sur l'image) et
-          <strong>LLM</strong> (traduire le texte). La précision doit être <strong>élevée</strong>
-          car une mauvaise traduction pourrait changer complètement le sens du panneau.
-        </div>
-
-        <div class="quiz-nav">
-          <span class="quiz-nav__counter">4 / 4</span>
-          <div class="quiz-nav__buttons">
-            <button class="btn btn--ghost" data-nav="prev" aria-label="Cas précédent">
-              <i class="ti ti-arrow-left" aria-hidden="true"></i>
-            </button>
-            <!-- Dernier slide : bouton suivant désactivé -->
-            <button class="btn btn--ghost" data-nav="next"
-                    aria-label="Pas de cas suivant" disabled style="opacity:.3;cursor:default">
-              <i class="ti ti-arrow-right" aria-hidden="true"></i>
-            </button>
+          <!-- Pas de question de précision pour ce cas (réponse = Non) -->
+          <div class="quiz-precision" id="qp-2">
+            <div class="quiz-question">
+              <p class="quiz-question__label quiz-question__label--precision">
+                <strong>Précision nécessaire</strong>
+              </p>
+              <div class="answer-group">
+                <button class="answer-btn"
+                        data-quiz="2" data-question="precision" data-correct="false">
+                  Moyenne
+                </button>
+                <button class="answer-btn"
+                        data-quiz="2" data-question="precision" data-correct="false">
+                  Élevée
+                </button>
+                <button class="answer-btn"
+                        data-quiz="2" data-question="precision" data-correct="false">
+                  Très élevée
+                </button>
+              </div>
+            </div>
           </div>
-        </div>
 
+          <button class="verify-btn" data-quiz="2">
+            <i class="ti ti-check" aria-hidden="true"></i>
+            Vérifier
+          </button>
+
+          <div class="quiz-answer" id="qa-2">
+            <strong>→ Non</strong>, l'utilisation de l'IA n'est pas nécessaire ici.
+            La fonction carré n'est pas linéaire : il faudrait énormément de données pour que
+            le modèle fonctionne correctement, alors qu'une simple calculatrice y arrive
+            parfaitement en consommant beaucoup moins de ressources.
+          </div>
+
+          <div class="quiz-nav">
+            <span class="quiz-nav__counter">2 / 4</span>
+            <div class="quiz-nav__buttons">
+              <button class="btn btn--ghost" data-nav="prev" aria-label="Cas précédent">
+                <i class="ti ti-arrow-left" aria-hidden="true"></i>
+              </button>
+              <button class="btn" data-nav="next" aria-label="Cas suivant">
+                <i class="ti ti-arrow-right" aria-hidden="true"></i>
+              </button>
+            </div>
+          </div>
+
+        </div>
+        <!-- /qs-2 -->
+
+
+        <!-- ── Slide 3 : Détection cancer ───────────────────────────────── -->
+        <div class="quiz-slide" id="qs-3">
+
+          <h2 class="t-orbitron t-h2 t-cyan"><em>Troisième cas</em></h2>
+          <p class="quiz-slide__description">
+            Détecter un cancer du sein grâce à des radiographies.
+          </p>
+
+          <div class="quiz-question">
+            <p class="quiz-question__label"><strong>Nécessité de l'IA</strong></p>
+            <div class="answer-group">
+              <button class="answer-btn"
+                      data-quiz="3" data-question="necessity" data-correct="true">
+                Oui
+              </button>
+              <button class="answer-btn"
+                      data-quiz="3" data-question="necessity" data-correct="false">
+                Non
+              </button>
+            </div>
+          </div>
+
+          <div class="quiz-precision" id="qp-3">
+            <div class="quiz-question">
+              <p class="quiz-question__label quiz-question__label--precision">
+                <strong>Précision nécessaire</strong>
+              </p>
+              <div class="answer-group">
+                <button class="answer-btn"
+                        data-quiz="3" data-question="precision" data-correct="false">
+                  Moyenne
+                </button>
+                <button class="answer-btn"
+                        data-quiz="3" data-question="precision" data-correct="false">
+                  Élevée
+                </button>
+                <button class="answer-btn"
+                        data-quiz="3" data-question="precision" data-correct="true">
+                  Très élevée
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <button class="verify-btn" data-quiz="3">
+            <i class="ti ti-check" aria-hidden="true"></i>
+            Vérifier
+          </button>
+
+          <div class="quiz-answer" id="qa-3">
+            <strong>→ Oui</strong>, l'IA peut très bien repérer des anomalies aussi petites que
+            des tumeurs sur des radiographies. C'est un problème de <strong>Computer Vision</strong>.
+            Pour ce modèle, la précision doit être <strong>très élevée</strong> : un faux négatif
+            (tumeur non détectée) peut avoir des conséquences fatales.
+          </div>
+
+          <div class="quiz-nav">
+            <span class="quiz-nav__counter">3 / 4</span>
+            <div class="quiz-nav__buttons">
+              <button class="btn btn--ghost" data-nav="prev" aria-label="Cas précédent">
+                <i class="ti ti-arrow-left" aria-hidden="true"></i>
+              </button>
+              <button class="btn" data-nav="next" aria-label="Cas suivant">
+                <i class="ti ti-arrow-right" aria-hidden="true"></i>
+              </button>
+            </div>
+          </div>
+
+        </div>
+        <!-- /qs-3 -->
+
+
+        <!-- ── Slide 4 : Traduction panneau ─────────────────────────────── -->
+        <div class="quiz-slide" id="qs-4">
+
+          <h2 class="t-orbitron t-h2 t-magenta"><em>Quatrième cas</em></h2>
+          <p class="quiz-slide__description">
+            Vous êtes dans un pays scandinave et vous ne connaissez pas la langue.
+            Vous voulez savoir ce qu'il y a d'écrit sur un panneau — mais il fait très froid.
+          </p>
+
+          <div class="quiz-question">
+            <p class="quiz-question__label"><strong>Nécessité de l'IA</strong></p>
+            <div class="answer-group">
+              <button class="answer-btn"
+                      data-quiz="4" data-question="necessity" data-correct="true">
+                Oui
+              </button>
+              <button class="answer-btn"
+                      data-quiz="4" data-question="necessity" data-correct="false">
+                Non
+              </button>
+            </div>
+          </div>
+
+          <div class="quiz-precision" id="qp-4">
+            <div class="quiz-question">
+              <p class="quiz-question__label quiz-question__label--precision">
+                <strong>Précision nécessaire</strong>
+              </p>
+              <div class="answer-group">
+                <button class="answer-btn"
+                        data-quiz="4" data-question="precision" data-correct="false">
+                  Moyenne
+                </button>
+                <button class="answer-btn"
+                        data-quiz="4" data-question="precision" data-correct="true">
+                  Élevée
+                </button>
+                <button class="answer-btn"
+                        data-quiz="4" data-question="precision" data-correct="false">
+                  Très élevée
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <button class="verify-btn" data-quiz="4">
+            <i class="ti ti-check" aria-hidden="true"></i>
+            Vérifier
+          </button>
+
+          <div class="quiz-answer" id="qa-4">
+            <strong>→ Oui</strong>, vous pourriez recopier le texte dans Google Traduction, mais
+            il fait froid — une IA qui traduit automatiquement depuis une photo est bien plus pratique.
+            Cette IA combinerait <strong>Computer Vision</strong> (lire le texte sur l'image) et
+            <strong>LLM</strong> (traduire le texte). La précision doit être <strong>élevée</strong>
+            car une mauvaise traduction pourrait changer complètement le sens du panneau.
+          </div>
+
+          <div class="quiz-nav">
+            <span class="quiz-nav__counter">4 / 4</span>
+            <div class="quiz-nav__buttons">
+              <button class="btn btn--ghost" data-nav="prev" aria-label="Cas précédent">
+                <i class="ti ti-arrow-left" aria-hidden="true"></i>
+              </button>
+              <!-- Dernier slide : bouton suivant désactivé -->
+              <button class="btn btn--ghost" data-nav="next"
+                      aria-label="Pas de cas suivant" disabled style="opacity:.3;cursor:default">
+                <i class="ti ti-arrow-right" aria-hidden="true"></i>
+              </button>
+            </div>
+          </div>
+
+        </div>
+        <!-- /qs-4 -->
       </div>
-      <!-- /qs-4 -->
 
     </div>
     <!-- /quiz-wrap -->
