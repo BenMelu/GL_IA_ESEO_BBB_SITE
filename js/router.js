@@ -185,8 +185,17 @@ function initProposNav() {
 
   container.querySelectorAll('[data-nav-page]').forEach(card => {
     card.addEventListener('click', () => {
-      const targetPage = card.dataset.navPage;
-      if (targetPage) navigateTo(targetPage);
+      const targetPage   = card.dataset.navPage;
+      const targetSubtab = card.dataset.navSubtab;
+      if (!targetPage) return;
+
+      // Naviguer vers la page, puis activer le sous-onglet si précisé
+      navigateTo(targetPage).then(() => {
+        if (targetSubtab) {
+          const btn = document.querySelector(`.subtabs-bar__btn[data-subtab="${targetSubtab}"]`);
+          if (btn) btn.click();
+        }
+      });
     });
   });
 }

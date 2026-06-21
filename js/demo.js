@@ -44,12 +44,10 @@ export function initDemo() {
 // --------------------------------------------------------------------------
 // D1 — Titanic (formulaire de régression)
 // --------------------------------------------------------------------------
-
 function initDemoD1() {
   const form = document.getElementById('form-titanic');
   if (!form) return;
 
-  // Bloquer la touche "e" dans les champs numériques (évite "1e5" etc.)
   form.querySelectorAll('input[type="number"]').forEach(input => {
     input.addEventListener('keydown', e => {
       if (e.key === 'e' || e.key === 'E') e.preventDefault();
@@ -60,7 +58,12 @@ function initDemoD1() {
     e.preventDefault();
     if (!validateTitanicForm(form)) return;
 
+    // Désactiver le bouton pendant la requête
+    const submitBtn = form.querySelector('button[type="submit"]');
+    if (submitBtn) submitBtn.disabled = true;
+
     setStatus('d1', 'loading', 'Calcul en cours…');
+    showLoader('d1');
 
     try {
       const response = await fetch(`${API_BASE_URL}/process?ml=1`, {
@@ -77,6 +80,9 @@ function initDemoD1() {
     } catch (err) {
       console.error('[demo/D1] Erreur serveur :', err);
       setStatus('d1', 'error', 'Impossible de joindre le serveur.');
+    } finally {
+      hideLoader('d1');
+      if (submitBtn) submitBtn.disabled = false;
     }
   });
 }
@@ -240,6 +246,21 @@ function initImageDemo(config) {
  * @param {object} config
  */
 function handleFileSelected(file, config) {
+
+  // -- Validation extension --
+  const allowedTypes = ['image/png', 'image/jpeg', 'image/jpg'];
+  if (!allowedTypes.includes(file.type)) {
+    showError(config.errorId, 'Format non supporté — utilisez PNG, JPG ou JPEG.');
+    return;
+  }
+
+  // -- Validation taille (10 Mo max) --
+  const MAX_SIZE = 10 * 1024 * 1024; // 10 Mo en octets
+  if (file.size > MAX_SIZE) {
+    showError(config.errorId, `Fichier trop lourd (${(file.size / 1024 / 1024).toFixed(1)} Mo) — 10 Mo maximum.`);
+    return;
+  }
+
   // Stocker le fichier en mémoire
   selectedFiles[config.demoId] = file;
 

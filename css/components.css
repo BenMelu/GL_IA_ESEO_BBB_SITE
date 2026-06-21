@@ -532,6 +532,10 @@
   font-size: var(--box-text);
 }
 
+.activity-item[data-nav-page] {
+  cursor: pointer;
+}
+
 /* Cartes de navigation rapide */
 .hero__quick-nav {
   max-width: 100%;
