@@ -180,6 +180,8 @@ function initDemoD3() {
  *
  * @param {object} config - Identifiants des éléments DOM et paramètre API
  */
+const selectedFiles = {};
+
 function initImageDemo(config) {
   const fileInput = document.getElementById(config.fileInputId);
   const dropZone  = document.getElementById(config.dropZoneId);
@@ -187,16 +189,28 @@ function initImageDemo(config) {
 
   if (!fileInput || !dropZone || !sendBtn) return;
 
-  // -- Sélection via clic sur la zone de drop --
-  dropZone.addEventListener('click', () => fileInput.click());
+  dropZone.addEventListener('click', () => {
+    // Recréer un input temporaire si l'original a été supprimé
+    let input = document.getElementById(config.fileInputId);
+    if (!input) {
+      input = document.createElement('input');
+      input.type = 'file';
+      input.accept = 'image/*';
+      input.id = config.fileInputId;
+      input.className = 'upload-zone__input';
+      input.addEventListener('change', () => {
+        const file = input.files[0];
+        if (file) handleFileSelected(file, config);
+      });
+    }
+    input.click();
+  });
 
-  // -- Sélection via l'input natif --
   fileInput.addEventListener('change', () => {
     const file = fileInput.files[0];
     if (file) handleFileSelected(file, config);
   });
 
-  // -- Drag & Drop --
   dropZone.addEventListener('dragover', e => {
     e.preventDefault();
     dropZone.classList.add('is-dragging');
@@ -215,7 +229,6 @@ function initImageDemo(config) {
     }
   });
 
-  // -- Bouton d'envoi --
   sendBtn.addEventListener('click', () => sendImageToApi(config));
 }
 
@@ -227,24 +240,21 @@ function initImageDemo(config) {
  * @param {object} config
  */
 function handleFileSelected(file, config) {
-  const filenameEl = document.getElementById(config.filenameId);
-  if (filenameEl) {
-    filenameEl.textContent = `📎 ${file.name}`;
-    filenameEl.classList.add('is-visible');
-  }
+  // Stocker le fichier en mémoire
+  selectedFiles[config.demoId] = file;
 
   const sendBtn = document.getElementById(config.sendBtnId);
   if (sendBtn) sendBtn.disabled = false;
 
-  // Prévisualiser directement dans la zone de drop
+  // Prévisualiser dans la zone de drop (remplace son contenu)
   const reader = new FileReader();
   reader.onload = ev => {
     const dropZone = document.getElementById(config.dropZoneId);
     if (dropZone) {
       dropZone.innerHTML = `
-        <img class="preview-box__image" src="${ev.target.result}" alt="Aperçu de l'image sélectionnée" style="margin: 0 auto;">
+        <img class="preview-box__image" src="${ev.target.result}" alt="Aperçu" style="margin:0 auto;">
         <p class="upload-zone__sub u-mt-sm">
-          <i class="ti ti-file-check" style="vertical-align:middle; margin-right:4px;"></i>${file.name}
+          <i class="ti ti-file-check" style="vertical-align:middle;margin-right:4px;"></i>${file.name}
         </p>
       `;
     }
@@ -255,19 +265,21 @@ function handleFileSelected(file, config) {
   clearError(config.errorId);
 }
 
+
 /**
  * Envoie l'image sélectionnée au serveur et affiche le résultat.
  *
  * @param {object} config
  */
 async function sendImageToApi(config) {
-  const fileInput = document.getElementById(config.fileInputId);
-  const file = fileInput?.files[0];
+  // Récupérer depuis le stockage mémoire plutôt que depuis le DOM
+  const file = selectedFiles[config.demoId];
 
   if (!file) {
     showError(config.errorId, 'Veuillez téléverser une image.');
     return;
   }
+
 
   // État de chargement
   const sendBtn = document.getElementById(config.sendBtnId);
