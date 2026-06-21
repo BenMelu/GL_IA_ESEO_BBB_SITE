@@ -12,7 +12,7 @@ import joblib
 
 
 app = Flask(__name__)
-CORS(app,expose_headers=["X-Process-Texts"]) # autorise le frontend à appeler cette API
+CORS(app, expose_headers=["X-Process-Texts"], resources={r"/*": {"origins": "*"}}) # autorise le frontend à appeler cette API
 
 
 PATH=os.path.dirname(os.path.realpath(__file__))
@@ -49,7 +49,7 @@ def process_image(img: np.ndarray,multiclass: bool) -> tuple[np.ndarray, str]:
 
 def process_form(df: pd.DataFrame):
     X_pred=df.astype('float64',False)
-    scaler = joblib.load("back/scalerTita.save")
+    scaler = joblib.load("scalerTita.save")
     X_pred_norm = scaler.transform(X_pred)
     pred=modelT.predict(X_pred_norm)
     texts={

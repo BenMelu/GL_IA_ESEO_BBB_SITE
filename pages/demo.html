@@ -3,6 +3,18 @@
      Page "Démonstrations" — 3 sous-onglets : Titanic, Chats/Chiens, Maths
      Injectée dans #page-container par router.js
      La logique JS est dans js/demo.js (initialisé par router.js)
+
+     IDs attendus par demo.js :
+       D1 : form#form-titanic, #survival-result, #survival-value
+            status : #d1-status-dot, #d1-status-text
+       D2 : #d2-dropzone, #d2-file, #d2-filename, #d2-send, #d2-error
+            #d2-preview, #d2-loader, #d2-result, #d2-entity,
+            #d2-conf-value, #d2-conf-bar
+            status : #d2-status-dot, #d2-status-text
+       D3 : #d3-dropzone, #d3-file, #d3-filename, #d3-send, #d3-error
+            #d3-preview, #d3-loader, #d3-result, #d3-entity,
+            #d3-conf-value, #d3-conf-bar
+            status : #d3-status-dot, #d3-status-text
      ========================================================================== -->
 
 <div class="page is-active" id="page-demo">
@@ -10,15 +22,16 @@
   <!-- ── Barre de sous-onglets ────────────────────────────────────────────── -->
   <nav class="subtabs-bar" aria-label="Sous-sections Démonstrations">
     <div class="subtabs-bar__inner">
-      <button class="subtabs-bar__btn is-active"  data-subtab="d1">Survivant du Titanic</button>
-      <button class="subtabs-bar__btn"            data-subtab="d2">Entre chats et chiens</button>
-      <button class="subtabs-bar__btn"            data-subtab="d3">La base des mathématiques</button>
+      <button class="subtabs-bar__btn is-active" data-subtab="d1">Survivant du Titanic</button>
+      <button class="subtabs-bar__btn"           data-subtab="d2">Entre chats et chiens</button>
+      <button class="subtabs-bar__btn"           data-subtab="d3">La base des mathématiques</button>
     </div>
   </nav>
 
 
   <!-- ══════════════════════════════════════════════════════════════════════
        D1 — Survivant du Titanic (régression)
+       API : POST /process?ml=1 → FormData → JSON { tauxSurvie }
        ══════════════════════════════════════════════════════════════════════ -->
   <div class="subpage is-active" id="d1">
     <div class="page-section">
@@ -44,7 +57,9 @@
         <span id="d1-status-text">Modèle prêt — remplissez le formulaire ci-dessous</span>
       </div>
 
-      <!-- Formulaire -->
+      <!-- Formulaire — les attributs name doivent correspondre exactement
+           aux colonnes du DataFrame attendu par app.py :
+           Pclass, Sex, Age, SibSp, Parch, Fare, Embarked, LWeight -->
       <form id="form-titanic" novalidate>
 
         <!-- Classe de voyage -->
@@ -168,33 +183,15 @@
       </form>
       <!-- /form-titanic -->
 
-      <!-- Bloc de résultat (affiché après réponse du serveur) -->
-      <div class="result-card" id="d1-result" aria-live="polite">
-
-        <div class="result-card__header result-card__header--d1">
-          <i class="ti ti-activity" aria-hidden="true"></i>
-          Votre taux de survie estimé
+      <!-- Bloc résultat D1
+           demo.js cherche : #survival-result (classList.add is-lit)
+                             #survival-value  (textContent = tauxSurvie) -->
+      <div class="survival-result" id="survival-result" aria-live="polite">
+        <div class="survival-result__label">Votre taux de survie estimé</div>
+        <div>
+          <span class="survival-result__value" id="survival-value">—</span>
+          <span class="survival-result__unit"> %</span>
         </div>
-
-        <div class="result-card__body result-card__body--d1">
-          <div class="confidence">
-            <p class="confidence__value" id="d2-conf-value">— %</p>
-          </div>
-        </div>
-
-        <div class="confidence-bar">
-          <div class="confidence-bar__track">
-            <div class="confidence-bar__fill" id="d2-conf-bar"></div>
-          </div>
-          <div class="confidence-bar__marks" aria-hidden="true">
-            <span class="confidence-bar__mark">0 %</span>
-            <span class="confidence-bar__mark">25 %</span>
-            <span class="confidence-bar__mark">50 %</span>
-            <span class="confidence-bar__mark">75 %</span>
-            <span class="confidence-bar__mark">100 %</span>
-          </div>
-        </div>
-
       </div>
 
     </div>
@@ -205,6 +202,8 @@
 
   <!-- ══════════════════════════════════════════════════════════════════════
        D2 — Entre chats et chiens (classification biclasse)
+       API : POST /process?ml=2 → image → blob PNG + header X-Process-Texts
+             X-Process-Texts : { "classe": "chat"|"chien", "precision": "XX.XX" }
        ══════════════════════════════════════════════════════════════════════ -->
   <div class="subpage" id="d2">
     <div class="page-section">
@@ -233,7 +232,7 @@
       <!-- Grille upload / preview -->
       <div class="grid-2 u-mt-lg">
 
-        <!-- Colonne gauche : upload + preview gauche -->
+        <!-- Colonne gauche : upload -->
         <div class="cyber-card">
           <div class="cyber-card__head">
             <div class="cyber-card__label">
@@ -245,8 +244,9 @@
             <span class="cyber-card__tag">INPUT</span>
           </div>
 
+          <!-- Zone de drop — l'image sélectionnée s'affiche ici (géré par demo.js) -->
           <div class="upload-zone" id="d2-dropzone" role="button"
-              tabindex="0" aria-label="Zone de dépôt d'image">
+               tabindex="0" aria-label="Zone de dépôt d'image — cliquez ou glissez une image">
             <div class="upload-zone__ring">
               <i class="ti ti-photo" aria-hidden="true"></i>
             </div>
@@ -255,7 +255,7 @@
             <p class="upload-zone__sub">PNG, JPG — max 10 Mo</p>
             <span class="upload-zone__filename" id="d2-filename" aria-live="polite"></span>
             <input class="upload-zone__input" type="file" id="d2-file"
-                  accept="image/*" aria-label="Sélectionner un fichier image">
+                   accept="image/*" aria-label="Sélectionner un fichier image">
           </div>
 
           <button class="btn btn--primary btn--full u-mt-md"
@@ -266,8 +266,9 @@
 
           <span class="demo-error" id="d2-error" role="alert"></span>
         </div>
+        <!-- /colonne upload -->
 
-        <!-- Colonne droite : résultat du modèle -->
+        <!-- Colonne droite : image retournée par le serveur après analyse -->
         <div class="cyber-card">
           <div class="cyber-card__head">
             <div class="cyber-card__label">
@@ -288,17 +289,20 @@
             </div>
           </div>
         </div>
+        <!-- /colonne preview -->
+
       </div>
       <!-- /grid-2 -->
 
-      <!-- Loader -->
+      <!-- Loader (affiché pendant la requête) -->
       <div class="loader" id="d2-loader" aria-label="Analyse en cours" aria-live="polite">
         <span class="loader__dot"></span>
         <span class="loader__dot"></span>
         <span class="loader__dot"></span>
       </div>
 
-      <!-- Carte de résultat -->
+      <!-- Carte résultat D2
+           demo.js cherche : #d2-result (is-lit), #d2-entity, #d2-conf-value, #d2-conf-bar -->
       <div class="result-card" id="d2-result" aria-live="polite">
 
         <div class="result-card__header">
@@ -331,7 +335,7 @@
         </div>
 
       </div>
-      <!-- /result-card -->
+      <!-- /result-card D2 -->
 
     </div>
     <!-- /page-section -->
@@ -341,6 +345,8 @@
 
   <!-- ══════════════════════════════════════════════════════════════════════
        D3 — La base des mathématiques (classification multiclasse)
+       API : POST /process?ml=3 → image → blob PNG + header X-Process-Texts
+             X-Process-Texts : { "classe": "0"-"9", "precision": "XX.XX" }
        ══════════════════════════════════════════════════════════════════════ -->
   <div class="subpage" id="d3">
     <div class="page-section">
@@ -360,18 +366,17 @@
         une lettre ou un dessin pour voir comment l'IA réagit hors de son domaine.
       </p>
 
-      <!-- Barre de statut -->
+      <!-- Barre de statut (status-bar__dot--ok-purple pour la variante violette) -->
       <div class="status-bar" role="status" aria-live="polite">
-        <span class="status-bar__dot status-bar__dot--ok" id="d3-status-dot"></span>
+        <span class="status-bar__dot status-bar__dot--ok-purple" id="d3-status-dot"></span>
         <span id="d3-status-text">Modèle prêt — choisissez une image de chiffre manuscrit</span>
       </div>
 
       <!-- Grille upload / preview -->
       <div class="grid-2 u-mt-lg">
 
-                <!-- Colonne gauche : upload + preview gauche -->
+        <!-- Colonne gauche : upload -->
         <div class="cyber-card cyber-card--purple">
-
           <div class="cyber-card__head">
             <div class="cyber-card__label">
               <span class="cyber-card__label-icon">
@@ -383,7 +388,7 @@
           </div>
 
           <div class="upload-zone upload-zone--purple" id="d3-dropzone" role="button"
-              tabindex="0" aria-label="Zone de dépôt d'image">
+               tabindex="0" aria-label="Zone de dépôt — cliquez ou glissez une photo de chiffre">
             <div class="upload-zone__ring upload-zone__ring--purple">
               <i class="ti ti-photo" aria-hidden="true"></i>
             </div>
@@ -392,7 +397,7 @@
             <p class="upload-zone__sub">PNG, JPG — max 10 Mo</p>
             <span class="upload-zone__filename" id="d3-filename" aria-live="polite"></span>
             <input class="upload-zone__input" type="file" id="d3-file"
-                  accept="image/*" aria-label="Sélectionner un fichier image">
+                   accept="image/*" aria-label="Sélectionner un fichier image">
           </div>
 
           <button class="btn btn--primary btn--full u-mt-md"
@@ -403,8 +408,9 @@
 
           <span class="demo-error" id="d3-error" role="alert"></span>
         </div>
+        <!-- /colonne upload -->
 
-        <!-- Colonne droite : résultat du modèle -->
+        <!-- Colonne droite : image retournée par le serveur après analyse -->
         <div class="cyber-card cyber-card--purple">
           <div class="cyber-card__head">
             <div class="cyber-card__label">
@@ -416,7 +422,8 @@
             <span class="cyber-card__tag">PREVIEW</span>
           </div>
 
-          <div class="preview-box preview-box--purple" id="d2-preview">
+          <!-- id="d3-preview" (et non d2-preview — bug corrigé) -->
+          <div class="preview-box preview-box--purple" id="d3-preview">
             <div class="preview-box__scanline preview-box__scanline--purple" aria-hidden="true"></div>
             <div class="preview-box__placeholder">
               <i class="ti ti-cpu" aria-hidden="true"></i>
@@ -425,6 +432,8 @@
             </div>
           </div>
         </div>
+        <!-- /colonne preview -->
+
       </div>
       <!-- /grid-2 -->
 
@@ -435,8 +444,9 @@
         <span class="loader__dot"></span>
       </div>
 
-      <!-- Carte de résultat (variante purple) -->
-      <div class="result-card" id="d3-result" aria-live="polite">
+      <!-- Carte résultat D3 (variante purple)
+           demo.js cherche : #d3-result (is-lit), #d3-entity, #d3-conf-value, #d3-conf-bar -->
+      <div class="result-card result-card--purple" id="d3-result" aria-live="polite">
 
         <div class="result-card__header">
           <i class="ti ti-123" aria-hidden="true"></i>
@@ -468,7 +478,7 @@
         </div>
 
       </div>
-      <!-- /result-card -->
+      <!-- /result-card D3 -->
 
     </div>
     <!-- /page-section -->

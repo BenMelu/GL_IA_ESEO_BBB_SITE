@@ -8,6 +8,7 @@
  *  - Mettre à jour l'URL (hash) et les boutons de navigation actifs
  *  - Mémoriser les pages déjà chargées pour éviter les requêtes inutiles
  *  - Appeler les initialiseurs de modules après chaque chargement de page
+ *  - Gérer les clics sur les cartes data-nav-page (page propos.html)
  *
  * Pages disponibles (dossier /pages/) :
  *  - propos.html   → Page d'accueil / À propos
@@ -59,38 +60,48 @@ let currentPage = null;
 /**
  * Charge et affiche une page.
  *
- * @param {string} pageId - Identifiant de la page (clé de PAGES)
+ * @param {string}  pageId    - Identifiant de la page (clé de PAGES)
  * @param {boolean} [pushState=true] - Mettre à jour le hash de l'URL
  */
 async function navigateTo(pageId, pushState = true) {
   if (!PAGES[pageId]) {
+    console.warn(`[router] Page inconnue : "${pageId}". Redirection vers "${DEFAULT_PAGE}".`);
     pageId = DEFAULT_PAGE;
   }
 
+  // Éviter de recharger la page déjà affichée
   if (pageId === currentPage) return;
 
+  // 1. Charger le HTML (depuis le cache ou via fetch)
   const html = await loadPage(pageId);
   if (!html) return;
 
   const container = document.getElementById('page-container');
 
-  // Masquer pendant le chargement
-  container.style.visibility = 'hidden';
+  // 2. Désactiver les animations le temps que initTabs règle les sous-onglets
+  //    (évite le flash du premier sous-onglet avant activation du bon)
+  container.classList.add('no-animate');
 
+  // 3. Injecter dans le conteneur principal
   container.innerHTML = html;
+
+  // 4. Mettre à jour les boutons de navigation principale
   updateNavButtons(pageId);
 
+  // 5. Mettre à jour le hash URL
   if (pushState) {
     history.replaceState(null, '', `#${pageId}`);
   }
 
+  // 6. Remonter en haut de la page
   window.scrollTo({ top: 0, behavior: 'smooth' });
 
-  // Initialiser les modules (dont initTabs qui règle les sous-onglets)
+  // 7. Initialiser les modules (dont initTabs qui active le bon sous-onglet)
   initPageModules(pageId);
 
-  // Révéler une fois tout prêt
-  container.style.visibility = 'visible';
+  // 8. Forcer un reflow puis réactiver les animations
+  container.offsetHeight;
+  container.classList.remove('no-animate');
 
   currentPage = pageId;
 }
@@ -150,7 +161,34 @@ function initPageModules(pageId) {
     case 'activite':
       initQuiz();
       break;
+    case 'propos':
+      initProposNav();
+      break;
   }
+}
+
+
+// --------------------------------------------------------------------------
+// Navigation depuis les cartes de propos.html
+// --------------------------------------------------------------------------
+
+/**
+ * Attache les listeners de clic sur les cartes [data-nav-page].
+ * Ces cartes sont présentes dans propos.html et permettent de naviguer
+ * vers info, demo ou activite en cliquant sur les trois cartes d'accueil.
+ *
+ * Appelé par initPageModules après chaque chargement de propos.html.
+ */
+function initProposNav() {
+  const container = document.getElementById('page-container');
+  if (!container) return;
+
+  container.querySelectorAll('[data-nav-page]').forEach(card => {
+    card.addEventListener('click', () => {
+      const targetPage = card.dataset.navPage;
+      if (targetPage) navigateTo(targetPage);
+    });
+  });
 }
 
 
@@ -178,7 +216,7 @@ function onHashChange() {
  * À appeler une seule fois, au chargement de la page (DOMContentLoaded).
  */
 export function initRouter() {
-  // Délégation de clic sur les boutons de navigation
+  // Délégation de clic sur les boutons de navigation principale
   document.querySelectorAll('.main-nav__btn').forEach(btn => {
     btn.addEventListener('click', () => {
       navigateTo(btn.dataset.page);
