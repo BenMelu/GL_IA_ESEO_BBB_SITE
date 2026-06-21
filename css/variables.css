@@ -1,154 +1,221 @@
-/* --------------------------------------------------------------------------
-   DESIGN TOKENS (CSS VARIABLES)
-   -------------------------------------------------------------------------- */
+/* ==========================================================================
+   VARIABLES.CSS
+   Design tokens — toutes les variables CSS du projet.
+
+   Le thème sombre est activé de deux façons :
+     1. Par le JS (themes.js) qui pose data-theme="dark" sur <html>
+     2. Par la préférence système (prefers-color-scheme: dark) en fallback
+
+   Les deux blocs de thème sombre sont identiques volontairement.
+   ========================================================================== */
+
 
 /* --------------------------------------------------------------------------
-   1. Text variables
+   1. VARIABLES GLOBALES (indépendantes du thème)
+   Typographie, géométrie, espacement, transitions
    -------------------------------------------------------------------------- */
 
 :root {
-    --title-lg-text:        80px;
-    --title-md-text:        40px;
-    --subtitle-text:        30px;
-    --index-text:           13px;
-    --box-title-text:       20px;
-    --box-title-text-maj:   16px;
-    --box-text:             18px;
-    --box-text-maj:         13px;
-    --tab-text:             13px;
-    --subtab-text:          15px;
-    --text:                 20px;
-    --footer-text:          15px;
 
-    
-    /* Strong */
-    --normal:               300;
-    --strong-first:         700;
-    --strong-second:        1000;
+  /* -- Tailles de texte -- */
+  --title-lg-text:      80px;
+  --title-md-text:      40px;
+  --subtitle-text:      30px;
+  --index-text:         13px;
+  --box-title-text:     20px;
+  --box-title-text-maj: 16px;
+  --box-text:           18px;
+  --box-text-maj:       13px;
+  --tab-text:           13px;
+  --subtab-text:        15px;
+  --text:               20px;
+  --footer-text:        15px;
 
-    --color-none: none;
+  /* -- Graisse de texte -- */
+  --normal:             300;
+  --strong-first:       700;
+  --strong-second:      1000;
 
-    --color-white:                   #ffffff;
+  /* -- Géométrie -- */
+  --radius-sm:          6px;
+  --radius-md:          10px;
+  --radius-lg:          16px;
+  --header-height:      68px;
 
-    /* -- Géométrie -- */
-    --radius-sm:      6px;
-    --radius-md:      10px;
-    --radius-lg:      16px;
-    --header-height:  68px;
+  /* -- Espacement -- */
+  --space-xs:           4px;
+  --space-sm:           8px;
+  --space-md:           16px;
+  --space-lg:           24px;
+  --space-xl:           40px;
+  --space-2xl:          64px;
 
-    /* -- Espacement -- */
-    --space-xs:       4px;
-    --space-sm:       8px;
-    --space-md:       16px;
-    --space-lg:       24px;
-    --space-xl:       40px;
-    --space-2xl:      64px;
+  /* -- Transitions -- */
+  --transition-fast:    0.18s ease;
+  --transition-normal:  0.28s ease;
+  --transition-slow:    0.5s ease;
 
-    /* -- Transitions -- */
-    --transition-fast:   0.18s ease;
-    --transition-normal: 0.28s ease;
-    --transition-slow:   0.5s ease;
+  /* -- Utilitaires -- */
+  --color-none:         none;
+  --color-white:        #ffffff;
 }
 
 
-
 /* --------------------------------------------------------------------------
-   1. Color themes
+   2. THÈME CLAIR (défaut)
    -------------------------------------------------------------------------- */
 
-
 :root {
+
+  /* -- Couleurs principales -- */
+  --color-cyan:         #2fbff0;
+  --color-magenta:      #e6007a;
+  --color-purple:       #6a2cff;
+  --color-green-ok:     #1fdc7a;
+
+  /* Canaux RGB pour rgba() dynamique */
+  --rgb-cyan:           47, 191, 240;
+  --rgb-magenta:        230, 0, 122;
+  --rgb-purple:         106, 44, 255;
+
+  /* -- Fonds -- */
+  --color-bg:                 #fcfcfa;
+  --color-bg-header:          none;
+  --color-bg-subtabs-bar:     none;
+  --color-bg-panel:           rgba(5, 14, 35, 0.88);
+  --color-bg-card:            rgba(47, 191, 240, 0.06);
+  --color-bg-card-m:          rgba(255, 31, 142, 0.03);
+  --color-bg-card-p:          rgba(123, 47, 255, 0.03);
+
+  /* -- Textes -- */
+  --color-text:               #000000;
+  --color-text-light-title:   #000000;
+  --color-text-dark-title:    #2fbff0;
+  --color-text-muted:         #333333;
+  --color-text-faint:         #3a5878;
+  --color-text-attention:     #ff4d4d;
+
+  /* -- Bordures -- */
+  --color-border-bottom:      none;
+  --color-border-cyan:        rgba(47, 191, 240, 0.35);
+  --color-border-magenta:     rgba(230, 0, 122, 0.35);
+  --color-border-purple:      rgba(106, 44, 255, 0.35);
+
+  /* -- Glows (box-shadow) -- */
+  --glow-cyan:    0 0 10px rgba(62, 184, 240, 0.5);
+  --glow-magenta: 0 0 22px rgba(255, 31, 142, 0.3);
+  --glow-purple:  0 0 22px rgba(123, 47, 255, 0.3);
+}
+
+
+/* --------------------------------------------------------------------------
+   3. THÈME SOMBRE — activé par JS via data-theme="dark" sur <html>
+   -------------------------------------------------------------------------- */
+
+[data-theme="dark"] {
+
+  /* -- Couleurs principales -- */
+  --color-cyan:         #2fbff0;
+  --color-magenta:      #ff1f8e;
+  --color-purple:       #8b3dff;
+  --color-green-ok:     #2dff8e;
+
+  /* Canaux RGB pour rgba() dynamique */
+  --rgb-cyan:           41, 182, 255;
+  --rgb-magenta:        255, 31, 142;
+  --rgb-purple:         139, 61, 255;
+
+  /* -- Fonds -- */
+  --color-bg:                 #0b1020;
+  --color-bg-header:          none;
+  --color-bg-subtabs-bar:     none;
+  --color-bg-panel:           #131b2f;
+  --color-bg-card:            rgba(41, 182, 255, 0.08);
+  --color-bg-card-m:          rgba(255, 31, 142, 0.08);
+  --color-bg-card-p:          rgba(139, 61, 255, 0.08);
+
+  /* -- Textes -- */
+  --color-text:               #f4f7fb;
+  --color-text-light-title:   #ffffff;
+  --color-text-dark-title:    #6dc8ff;
+  --color-text-muted:         #b9c3d4;
+  --color-text-faint:         #8a98b1;
+  --color-text-attention:     #ff6b6b;
+
+  /* -- Bordures -- */
+  --color-border-bottom:      none;
+  --color-border-cyan:        rgba(41, 182, 255, 0.35);
+  --color-border-magenta:     rgba(255, 31, 142, 0.35);
+  --color-border-purple:      rgba(139, 61, 255, 0.35);
+
+  /* -- Glows (box-shadow) -- */
+  --glow-cyan:
+    0 0 8px  rgba(41, 182, 255, 0.35),
+    0 0 20px rgba(41, 182, 255, 0.15);
+
+  --glow-magenta:
+    0 0 8px  rgba(255, 31, 142, 0.35),
+    0 0 20px rgba(255, 31, 142, 0.15);
+
+  --glow-purple:
+    0 0 8px  rgba(139, 61, 255, 0.35),
+    0 0 20px rgba(139, 61, 255, 0.15);
+}
+
+
+/* --------------------------------------------------------------------------
+   4. THÈME SOMBRE — fallback préférence système (si JS non exécuté)
+   Bloc identique au précédent, déclenché par prefers-color-scheme.
+   -------------------------------------------------------------------------- */
+
+@media (prefers-color-scheme: dark) {
+  :root {
 
     /* -- Couleurs principales -- */
     --color-cyan:         #2fbff0;
-    --color-magenta:      #e6007a;
-    --color-purple:       #6a2cff;
-    --color-green-ok:     #1fdc7a;
+    --color-magenta:      #ff1f8e;
+    --color-purple:       #8b3dff;
+    --color-green-ok:     #2dff8e;
 
     /* Canaux RGB pour rgba() dynamique */
-    --rgb-cyan:           47, 191, 240;
-    --rgb-magenta:        230, 0, 122;
-    --rgb-purple:         106, 44, 255;
+    --rgb-cyan:           41, 182, 255;
+    --rgb-magenta:        255, 31, 142;
+    --rgb-purple:         139, 61, 255;
 
     /* -- Fonds -- */
-    --color-bg:               #fcfcfa;
-    --color-bg-header:        none;
-    --color-bg-subtabs-bar:   none;
-    --color-bg-panel:         rgba(5, 14, 35, 0.88);
-    --color-bg-card:          rgba(47, 191, 240, 0.06);
-    --color-bg-card-m:        rgba(255, 31, 142, 0.03);
-    --color-bg-card-p:        rgba(123, 47, 255, 0.03);
+    --color-bg:                 #0b1020;
+    --color-bg-header:          none;
+    --color-bg-subtabs-bar:     none;
+    --color-bg-panel:           #131b2f;
+    --color-bg-card:            rgba(41, 182, 255, 0.08);
+    --color-bg-card-m:          rgba(255, 31, 142, 0.08);
+    --color-bg-card-p:          rgba(139, 61, 255, 0.08);
 
     /* -- Textes -- */
-    --color-text:                    #000;
-    --color-text-light-title:        #000;
-    --color-text-dark-title:         #2fbff0;
-    --color-text-muted:              #333;
-    --color-text-faint:              #3a5878;
-    --color-text-attention:          #ff4d4d;
+    --color-text:               #f4f7fb;
+    --color-text-light-title:   #ffffff;
+    --color-text-dark-title:    #6dc8ff;
+    --color-text-muted:         #b9c3d4;
+    --color-text-faint:         #8a98b1;
+    --color-text-attention:     #ff6b6b;
 
     /* -- Bordures -- */
-    --color-border-bottom:    none;
-    --color-border-cyan:    rgba(47, 191, 240, 0.35);
-    --color-border-magenta: rgba(230, 0, 122, 0.35);
-    --color-border-purple:  rgba(106, 44, 255, 0.35);
-
+    --color-border-bottom:      none;
+    --color-border-cyan:        rgba(41, 182, 255, 0.35);
+    --color-border-magenta:     rgba(255, 31, 142, 0.35);
+    --color-border-purple:      rgba(139, 61, 255, 0.35);
 
     /* -- Glows (box-shadow) -- */
-    --glow-cyan:    0 0 10px rgba(62,184,240,0.5); /* 0 0 22px rgba(0, 229, 255, 0.3); */
-    --glow-magenta: 0 0 22px rgba(255, 31, 142, 0.3);
-    --glow-purple:  0 0 22px rgba(123, 47, 255, 0.3);
+    --glow-cyan:
+      0 0 8px  rgba(41, 182, 255, 0.35),
+      0 0 20px rgba(41, 182, 255, 0.15);
 
-}
-@media (prefers-color-scheme: dark) {
-    :root {
+    --glow-magenta:
+      0 0 8px  rgba(255, 31, 142, 0.35),
+      0 0 20px rgba(255, 31, 142, 0.15);
 
-        /* -- Couleurs principales -- */
-        --color-cyan:         #2fbff0;
-        --color-magenta:      #ff1f8e;
-        --color-purple:       #8b3dff;
-        --color-green-ok:     #2dff8e;
-
-        /* Canaux RGB pour rgba() dynamique */
-        --rgb-cyan:           41, 182, 255;
-        --rgb-magenta:        255, 31, 142;
-        --rgb-purple:         139, 61, 255;
-
-        /* -- Fonds -- */
-        --color-bg:               #0b1020;
-        --color-bg-header:        none;
-        --color-bg-subtabs-bar:   none;
-        --color-bg-panel:         #131b2f;
-        --color-bg-card:          rgba(41, 182, 255, 0.08);
-        --color-bg-card-m:        rgba(255, 31, 142, 0.08);
-        --color-bg-card-p:        rgba(139, 61, 255, 0.08);
-
-        /* -- Textes -- */
-        --color-text:                    #f4f7fb;
-        --color-text-light-title:        #ffffff;
-        --color-text-dark-title:         #6dc8ff;
-        --color-text-muted:              #b9c3d4;
-        --color-text-faint:              #8a98b1;
-        --color-text-attention:          #ff6b6b;
-
-        /* -- Bordures -- */
-        --color-border-bottom:           none;
-        --color-border-cyan:             rgba(41,182,255,0.35);
-        --color-border-magenta:          rgba(255,31,142,0.35);
-        --color-border-purple:           rgba(139,61,255,0.35);
-
-        /* -- Glows (box-shadow) -- */
-        --glow-cyan:
-            0 0 8px rgba(41,182,255,0.35),
-            0 0 20px rgba(41,182,255,0.15);
-
-        --glow-magenta:
-            0 0 8px rgba(255,31,142,0.35),
-            0 0 20px rgba(255,31,142,0.15);
-
-        --glow-purple:
-            0 0 8px rgba(139,61,255,0.35),
-            0 0 20px rgba(139,61,255,0.15);
-
-    }
+    --glow-purple:
+      0 0 8px  rgba(139, 61, 255, 0.35),
+      0 0 20px rgba(139, 61, 255, 0.15);
+  }
 }
