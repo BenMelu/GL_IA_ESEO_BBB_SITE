@@ -329,6 +329,7 @@ async function sendImageToApi(config) {
 
     // Le serveur renvoie les métadonnées dans un header personnalisé
     const jsonHeader = response.headers.get('X-Process-Texts');
+    console.log('[debug] X-Process-Texts :', jsonHeader); // ← ajouter
     const texts = jsonHeader ? JSON.parse(jsonHeader) : {};
 
     // Mettre à jour l'aperçu avec l'image annotée renvoyée par le serveur
