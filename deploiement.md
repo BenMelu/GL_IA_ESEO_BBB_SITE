@@ -178,12 +178,12 @@ Depuis ton terminal **Windows** (PowerShell), utiliser `scp` :
 
 ```powershell
 # Transférer le frontend (depuis le dossier eseia/)
-scp -r * user@ADRESSE_IP_VM:/var/www/eseia/
+scp -i C:\Users\gcoup\.ssh\id_ed25519_eseiadeploy -r * vagrant@192.168.1.125:/var/www/eseia/
 
 # Transférer le backend (depuis le dossier back/)
-scp app.py user@ADRESSE_IP_VM:/opt/eseia/
-scp *.keras user@ADRESSE_IP_VM:/opt/eseia/
-scp *.save user@ADRESSE_IP_VM:/opt/eseia/
+scp -i C:\Users\gcoup\.ssh\id_ed25519_eseiadeploy app.py vagrant@192.168.1.125:/opt/eseia/
+scp -i C:\Users\gcoup\.ssh\id_ed25519_eseiadeploy *.keras vagrant@192.168.1.125:/opt/eseia/
+scp -i C:\Users\gcoup\.ssh\id_ed25519_eseiadeploy *.save vagrant@192.168.1.125:/opt/eseia/
 ```
 
 Remplacer `user` par ton nom d'utilisateur sur la VM
