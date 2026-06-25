@@ -18,6 +18,8 @@ Vagrant.configure("2") do |config|
       vb.name = "vm_website_IA"
       vb.memory = 2048
       vb.cpus = 2
+      vb.customize ["modifyvm", :id, "--nested-hw-virt", "on"]
+      vb.customize ["modifyvm", :id, "--cpu-profile", "host"]
     end
 
     # Provisionnement route par défaut

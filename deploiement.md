@@ -179,6 +179,7 @@ Depuis ton terminal **Windows** (PowerShell), utiliser `scp` :
 ```powershell
 # Transférer le frontend (depuis le dossier eseia/)
 scp -i C:\Users\gcoup\.ssh\id_ed25519_eseiadeploy -r * vagrant@192.168.1.125:/var/www/eseia/
+scp -i C:\Users\gcoup\.ssh\id_ed25519_eseiadeploy -r index.html vagrant@192.168.1.125:/var/www/eseia/
 
 # Transférer le backend (depuis le dossier back/)
 scp -i C:\Users\gcoup\.ssh\id_ed25519_eseiadeploy app.py vagrant@192.168.1.125:/opt/eseia/
@@ -226,7 +227,7 @@ Installer les dépendances Python :
 ```bash
 pip install --upgrade pip
 
-pip install \
+pip install --no-cache-dir \
     flask \
     flask-cors \
     gunicorn \
