@@ -298,3 +298,40 @@
   background: rgba(var(--rgb-cyan), 0.08);
   box-shadow: var(--glow-cyan);
 }
+
+/* --------------------------------------------------------------------------
+   SPLASH SCREEN — Écran de chargement initial
+   -------------------------------------------------------------------------- */
+
+#splash-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: var(--color-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 1s ease, visibility 1s ease;
+}
+
+#splash-screen.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.splash__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-lg);
+}
+
+.splash__logo {
+  width: 500px;
+  animation: splash-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes splash-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.7; transform: scale(0.96); }
+}

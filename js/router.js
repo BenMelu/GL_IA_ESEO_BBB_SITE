@@ -241,3 +241,14 @@ export function initRouter() {
 
 // Export pour usage dans d'autres modules (ex : liens inter-pages)
 export { navigateTo };
+
+// Masquer le splash screen à la fin du premier chargement
+if (!currentPage) {
+  const splash = document.getElementById('splash-screen');
+  if (splash) {
+    // Attendre 2s puis fade de 1s
+    setTimeout(() => {
+      splash.classList.add('is-hidden');
+    }, 2000);
+  }
+}
